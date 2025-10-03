@@ -1,0 +1,141 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Optimizer.OptimizerDataView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:log="using:OsEngine.Views.Logging"
+    xmlns:vm="using:OsEngine.ViewModels.Optimizer"
+    x:DataType="vm:OptimizerViewModel">
+
+    <Grid>
+        <NumericUpDown
+            Name="TextBoxStartPortfolio"
+            Width="214"
+            Height="28"
+            Margin="12,131,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Minimum="0"
+            ShowButtonSpinner="False"
+            Value="{Binding StartDeposit, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+        <Label
+            Name="Label13"
+            Margin="12,106,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Start Deposit" />
+        <Label
+            Name="CommissionTypeLabel"
+            Margin="12,164,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Commission Type" />
+        <ComboBox
+            Name="CommissionTypeComboBox"
+            Width="110"
+            Height="28"
+            Margin="12,190,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding CommissionTypes}"
+            SelectedItem="{Binding CommissionType}" />
+        <Label
+            Name="CommissionValueLabel"
+            Margin="125,164,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Commission Value" />
+        <NumericUpDown
+            Name="CommissionValueTextBox"
+            Width="101"
+            Height="28"
+            Margin="125,190,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ShowButtonSpinner="False"
+            Value="{Binding CommissionValue, Mode=TwoWay}" />
+        <log:LogsView Margin="10,224,10,10" />
+        <!--  <WindowsFormsHost  -->
+        <!--  Name="HostLog"  -->
+        <!--  Margin="10,224,10,10"  -->
+        <!--  Foreground="Black" />  -->
+        <Rectangle
+            Name="RectangleTimeFramesAndSecurities"
+            Height="164"
+            Margin="231,0,10,0"
+            VerticalAlignment="Top" />
+        <!--  <WindowsFormsHost  -->
+        <!--  Name="HostTabsSimple"  -->
+        <!--  Height="156"  -->
+        <!--  Margin="247,26,5,0"  -->
+        <!--  VerticalAlignment="Top"  -->
+        <!--  Foreground="Black" />  -->
+        <Label
+            Name="LabelTabsEndTimeFrames"
+            Margin="247,1,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Sources" />
+        <Rectangle
+            Name="RectangleServerData"
+            Width="206"
+            Height="55"
+            Margin="10,1,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <Button
+            Name="ButtonServerDialog"
+            Width="214"
+            Height="39"
+            Margin="12,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Data Server Settings" />
+        <!--  Click="ButtonServerDialog_Click"  -->
+        <Rectangle
+            Name="RectangleStrategyName"
+            Width="206"
+            Height="58"
+            Margin="10,48,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <Label
+            Name="Label12"
+            Margin="12,48,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Optimization strategy" />
+        <Button
+            Name="ButtonStrategySelect"
+            Width="69"
+            Margin="156,53,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Select" />
+        <!--  Click="ButtonStrategySelect_Click"  -->
+        <TextBox
+            Name="TextBoxStrategyName"
+            Width="139"
+            Height="37"
+            Margin="12,71,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            IsReadOnly="True"
+            TextWrapping="Wrap" />
+        <Button
+            Name="ButtonPositionSupport"
+            Width="195"
+            Margin="231,190,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Position support" />
+        <!--  Click="ButtonPositionSupport_Click"  -->
+        <Button
+            Name="ButtonStrategyReload"
+            Width="69"
+            Margin="156,83,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Reload" />
+        <!--  Click="ButtonStrategyReload_Click"  -->
+    </Grid>
+</UserControl>

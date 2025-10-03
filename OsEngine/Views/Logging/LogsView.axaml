@@ -1,0 +1,68 @@
+<UserControl
+    x:Class="OsEngine.Views.Logging.LogsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:m="using:OsEngine.Models.Logging"
+    xmlns:vm="using:OsEngine.ViewModels.Logging"
+    x:DataType="vm:LogViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <vm:LogViewModel />
+    </UserControl.DataContext>
+
+    <DataGrid
+        CanUserSortColumns="False"
+        CanUserReorderColumns="False"
+        CanUserResizeColumns="False"
+        ItemsSource="{Binding Logs.LogMessages}">
+        <DataGrid.Styles>
+            <Style Selector="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+            </Style>
+            <Style Selector="ContentPresenter">
+                <Setter Property="Grid.ColumnSpan" Value="2" />
+            </Style>
+            <Style Selector="DataGridColumnHeader">
+                <Setter Property="Padding" Value="10,0,10,0" />
+            </Style>
+        </DataGrid.Styles>
+
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <!-- TODO:-->
+                <MenuItem Header="Message Server"
+                    IsEnabled="{Binding Logs.MessageSender,Converter={x:Static ObjectConverters.IsNotNull}}"
+                    Command=""/>
+                <MenuItem Header="Show file"
+                    Command="{Binding ShowInFileManager}"/>
+                <MenuItem Header="Show errors log window"
+                    Command="{Binding ShowErrorLog}" />
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+
+        <DataGrid.Columns>
+            <DataGridTextColumn
+                Width="Auto"
+                Header="Time"
+                Binding="{Binding Time}"
+                IsReadOnly="True" />
+
+            <DataGridTextColumn
+                Width="Auto"
+                Header="Type"
+                Binding="{Binding Type}"
+                IsReadOnly="True" />
+
+            <DataGridTextColumn
+                Width="*"
+                Header="Message"
+                Binding="{Binding Message}"
+                IsReadOnly="True" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

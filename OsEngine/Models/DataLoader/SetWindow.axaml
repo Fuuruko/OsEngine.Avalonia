@@ -1,0 +1,491 @@
+<Window
+    x:Class="OsEngine.Views.Data.SetsWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:OsEngine.ViewModels.Data"
+    Title="Сет данных"
+    Width="565"
+    Height="425"
+    x:DataType="vm:OsDataViewModel"
+    CanResize="False"
+    Icon="/Assets/OsLogo.ico"
+    Topmost="False"
+    WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="5" ColumnDefinitions="*,*">
+
+        <Grid Grid.Column="0" RowDefinitions="Auto,*">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <TextBox
+                    Grid.Row="0"
+                    Width="133"
+                    Height="23"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    TextWrapping="Wrap"
+                    Watermark="Enter Set Name" />
+
+                <ComboBox
+                    Name="ComboBoxSource"
+                    Grid.Row="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    PlaceholderText="Choose Server" />
+            </StackPanel>
+
+            <DataGrid Grid.Row="2" Margin="0,5">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="*" Header="Name" />
+                    <DataGridTextColumn Width="Auto" Header="Name Code" />
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid
+                Width="200"
+                Height="300"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                ColumnDefinitions="*,*">
+
+                <StackPanel Grid.Column="0" Spacing="-3">
+                    <CheckBox
+                        Name="CheckBoxTf1SecondIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="1 sec" />
+
+                    <CheckBox
+                        Name="CheckBoxTf2SecondIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="2 sec" />
+
+                    <CheckBox
+                        Name="CheckBoxTf5SecondIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="5 sec" />
+
+                    <CheckBox
+                        Name="CheckBoxTf10SecondIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="10 sec" />
+
+                    <CheckBox
+                        Name="CheckBoxTf15SecondIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="15 sec" />
+
+                    <CheckBox
+                        Name="CheckBoxTf20SecondIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="20 sec" />
+
+                    <CheckBox
+                        Name="CheckBoxTf30SecondIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="30 sec" />
+
+                    <CheckBox
+                        Name="CheckBoxTf1MinuteIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="1 min" />
+
+                    <CheckBox
+                        Name="CheckBoxTf2MinuteIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="2 min" />
+
+                    <CheckBox
+                        Name="CheckBoxTfMarketDepthIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="market depth" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Spacing="-3">
+                    <CheckBox
+                        Name="CheckBoxTf5MinuteIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="5 min" />
+
+                    <CheckBox
+                        Name="CheckBoxTf10MinuteIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="10 min" />
+
+                    <CheckBox
+                        Name="CheckBoxTf15MinuteIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="15 min" />
+
+                    <CheckBox
+                        Name="CheckBoxTf30MinuteIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="30 min" />
+
+                    <CheckBox
+                        Name="CheckBoxTf1HourIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="1 hour" />
+
+                    <CheckBox
+                        Name="CheckBoxTf2HourIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="2 hour" />
+
+                    <CheckBox
+                        Name="CheckBoxTf4HourIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="4 hour" />
+
+                    <CheckBox
+                        Name="CheckBoxTfDayIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="day" />
+
+                    <CheckBox
+                        Name="CheckBoxTfTickIsOn"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="trades" />
+
+                    <ComboBox
+                        Name="ComboBoxMarketDepthDepth"
+                        Width="75"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+</Window>
+
+
+<!---->
+<!-- <Grid> -->
+<!-- <Rectangle -->
+<!-- Height="234" -->
+<!-- Margin="5,5,5,0" -->
+<!-- VerticalAlignment="Top" /> -->
+<!---->
+<!-- <TextBox -->
+<!-- Name="TextBoxFolderName" -->
+<!-- Width="133" -->
+<!-- Height="23" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- TextWrapping="Wrap" /> -->
+<!---->
+<!-- <Label -->
+<!-- Name="Label3" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="Name" /> -->
+<!---->
+<!-- <ComboBox -->
+<!-- Name="ComboBoxSource" -->
+<!-- Width="133" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" /> -->
+<!---->
+<!-- <Label -->
+<!-- Name="Label4" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="Source" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf1SecondIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="1 sec" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf2SecondIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="2 sec" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf5SecondIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="5 sec" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf10SecondIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="10 sec" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf15SecondIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="15 sec" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf20SecondIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="20 sec" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf30SecondIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="30 sec" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf1MinuteIsOn" -->
+<!-- Margin="146,75,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="1 min" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf2MinuteIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="2 min" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf5MinuteIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="5 min" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf10MinuteIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="10 min" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf15MinuteIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="15 min" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf30MinuteIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="30 min" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf1HourIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="1 hour" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf2HourIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="2 hour" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTfTickIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="trades" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTfMarketDepthIsOn" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="market depth" /> -->
+<!---->
+<!-- <WindowsFormsHost -->
+<!--     Name="HostSecurities" -->
+<!--     Height="190" -->
+<!--     Margin="358,46,7,0" -->
+<!--     VerticalAlignment="Top" /> -->
+<!---->
+<!-- Height="190" -->
+<!-- <DataGrid -->
+<!-- Margin="358,46,7,0" -->
+<!-- VerticalAlignment="Top" > -->
+<!---->
+<!-- <DataGrid.Columns> -->
+<!---->
+<!-- <DataGridTextColumn Header="Name" Width="*"/> -->
+<!-- <DataGridTextColumn Header="Name Code" Width="*"/> -->
+<!---->
+<!-- </DataGrid.Columns> -->
+<!---->
+<!-- </DataGrid> -->
+<!---->
+<!-- <Label -->
+<!-- Name="Label16" -->
+<!-- Margin="358,16,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="Securities" /> -->
+<!---->
+<!-- <Rectangle Margin="5,244,5,10" /> -->
+<!---->
+<!-- <DatePicker -->
+<!-- Name="DatePickerTimeStart" -->
+<!-- Width="133" -->
+<!-- Margin="98,253,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" /> -->
+<!---->
+<!-- <DatePicker -->
+<!-- Name="DatePickerTimeEnd" -->
+<!-- Width="133" -->
+<!-- Margin="98,290,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" /> -->
+<!---->
+<!-- <Label -->
+<!-- Name="Label18" -->
+<!-- Margin="25,257,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="Start" /> -->
+<!---->
+<!-- <Label -->
+<!-- Name="Label19" -->
+<!-- Margin="25,294,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="End" /> -->
+<!---->
+<!-- <ComboBox -->
+<!-- Name="ComboBoxRegime" -->
+<!-- Width="171" -->
+<!-- Margin="0,253,30,0" -->
+<!-- HorizontalAlignment="Right" -->
+<!-- VerticalAlignment="Top" /> -->
+<!---->
+<!-- <Label -->
+<!-- Name="Label20" -->
+<!-- Margin="305,253,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="Regime" /> -->
+<!---->
+<!-- <Button -->
+<!-- Name="ButtonAddSecurity" -->
+<!-- Width="30" -->
+<!-- Height="28" -->
+<!-- Margin="0,13,62,0" -->
+<!-- HorizontalAlignment="Right" -->
+<!-- VerticalAlignment="Top" -->
+<!-- HorizontalContentAlignment="Center" -->
+<!-- VerticalContentAlignment="Center" -->
+<!-- Content="+" -->
+<!-- FontSize="15" -->
+<!-- Command="{Binding AddSecurities}" -->
+<!-- FontWeight="Bold" /> -->
+<!-- FontFamily="Stencil" -->
+<!---->
+<!-- <Button -->
+<!-- Name="ButtonDelSecurity" -->
+<!-- Width="30" -->
+<!-- Height="30" -->
+<!-- Margin="0,13,10,0" -->
+<!-- HorizontalAlignment="Right" -->
+<!-- VerticalAlignment="Top" -->
+<!-- HorizontalContentAlignment="Center" -->
+<!-- VerticalContentAlignment="Center" -->
+<!-- Content="-" -->
+<!-- FontFamily="Stencil" -->
+<!-- FontSize="15" -->
+<!-- FontWeight="Bold" /> -->
+<!---->
+<!-- Click="ButtonDelSecurity_Click" -->
+<!-- <ComboBox -->
+<!-- Name="ComboBoxMarketDepthDepth" -->
+<!-- Width="83" -->
+<!-- Height="20" -->
+<!-- Margin="269,190,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" /> -->
+<!---->
+<!-- <Label -->
+<!-- Name="Label17" -->
+<!-- Margin="215,187,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="Depth" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxNeedToUpDate" -->
+<!-- Margin="305,298,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="Auto update" /> -->
+<!---->
+<!-- <Button -->
+<!-- Name="ButtonAccept" -->
+<!-- Width="191" -->
+<!-- Margin="0,0,10,29" -->
+<!-- HorizontalAlignment="Right" -->
+<!-- VerticalAlignment="Bottom" -->
+<!-- Content="Accept" /> -->
+<!-- Click="ButtonAccept_Click" -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTf4HourIsOn" -->
+<!-- Margin="258,96,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="4 hour" /> -->
+<!---->
+<!-- <CheckBox -->
+<!-- Name="CheckBoxTfDayIsOn" -->
+<!-- Margin="258,117,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Content="day" /> -->
+<!---->
+<!-- <Rectangle -->
+<!-- Name="StopUsePanelOne" -->
+<!-- Width="339" -->
+<!-- Height="155" -->
+<!-- Margin="17,75,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Opacity="0.5" -->
+<!-- Stroke="Black" -->
+<!-- StrokeThickness="0" /> -->
+<!---->
+<!-- <Rectangle -->
+<!-- Name="StopUsePanelTwo" -->
+<!-- Width="125" -->
+<!-- Height="26" -->
+<!-- Margin="297,298,0,0" -->
+<!-- HorizontalAlignment="Left" -->
+<!-- VerticalAlignment="Top" -->
+<!-- Opacity="0.5" -->
+<!-- Stroke="Black" -->
+<!-- StrokeThickness="0" /> -->
+<!-- </Grid> -->

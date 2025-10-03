@@ -1,0 +1,158 @@
+<Window
+    x:Class="OsEngine.Views.Utils.SettingsWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OsEngine.PrimeSettings"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:OsEngine.ViewModels.Utils"
+    Title="Configuration"
+    Width="380"
+    Height="480"
+    x:DataType="vm:SettingsViewModel"
+    CanResize="False"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <!--  Style="{StaticResource WindowStyleNoResize}"  -->
+    <Design.DataContext>
+        <vm:SettingsViewModel />
+    </Design.DataContext>
+
+    <StackPanel
+        Spacing="5"
+        Orientation="Vertical">
+        <UniformGrid
+            Margin="0,10,0,0"
+            Rows="5"
+            Columns="2"
+            Height="130"
+            VerticalAlignment="Top"
+            Width="300">
+            <UniformGrid.Styles>
+                <Style Selector="ComboBox">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="Width" Value="150" />
+                    <Setter Property="Height" Value="23" />
+                    <Setter Property="MinHeight" Value="23" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Padding" Value="5,2,2,5" />
+                </Style>
+                <Style Selector="Label">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="Width" Value="150" />
+                    <Setter Property="Height" Value="23" />
+                    <Setter Property="MinHeight" Value="23" />
+                </Style>
+            </UniformGrid.Styles>
+            <Label
+                Name="LanguageLabel"
+                Content="Language" />
+            <ComboBox
+                Name="ComboBoxLocalization"
+                ItemsSource="{Binding Localizations}" />
+
+            <Label
+                Name="LabelTimeFormat"
+                Content="Time format" />
+            <ComboBox
+                Name="ComboBoxTimeFormat"
+                ItemsSource="{Binding TimeFormats}" />
+
+            <Label
+                Name="LabelDateFormat"
+                Content="Date format" />
+            <ComboBox
+                Name="ComboBoxDateFormat"
+                ItemsSource="{Binding DateFormats}" />
+
+            <Label
+                Name="LabelMemoryCleanUp"
+                Content="Memory clean up" />
+            <ComboBox
+                Name="ComboBoxMemoryCleanUp"
+                VerticalAlignment="Top" />
+
+            <Label
+                Name="LabelHeader"
+                Content="Bot header" />
+            <TextBox
+                Name="TextBoxBotHeader"
+                TextChanged="TextBoxBotHeader_TextChanged"
+                TextWrapping="Wrap" />
+
+        </UniformGrid>
+        <UniformGrid
+            Rows="5"
+            Columns="2"
+            Height="120"
+            Margin="5"
+            VerticalAlignment="Top"
+            Width="300">
+            <UniformGrid.Styles>
+                <Style Selector="Label">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="Width" Value="250" />
+                </Style>
+                <Style Selector="CheckBox">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="Margin" Value="0,0,5,0" />
+                    <Setter Property="Padding" Value="0" />
+                </Style>
+            </UniformGrid.Styles>
+            <Label
+                Name="ShowExtraLogWindowLabel"
+                Content="Show emergency log window" />
+            <CheckBox
+                Name="CheckBoxExtraLogWindow"
+                Click="CheckBoxExtraLogWindow_Click" />
+
+            <Label
+                Name="ExtraLogSound"
+                Content="Emergency log sound" />
+            <CheckBox
+                Name="CheckBoxExtraLogSound"
+                Click="CheckBoxExtraLogSound_Click" />
+
+            <Label
+                Name="TransactionSoundLabel"
+                Content="Transaction sound" />
+            <CheckBox
+                Name="CheckBoxTransactionSound"
+                Click="CheckBoxTransactionSound_Click" />
+
+            <Label
+                Name="LabelRebootTradeUiLigth"
+                Content="Reboot Ligth on error" />
+            <CheckBox
+                Name="CheckBoxRebootTradeUiLigth"
+                Click="RebootTradeUiLight_Click" />
+
+            <Label
+                Name="LabelReportCriticalErrors"
+                Content="Report critical errors" />
+            <CheckBox
+                Name="CheckBoxReportCriticalErrors"
+                Click="CheckBoxReportCriticalErrors_Click" />
+        </UniformGrid>
+        <Border
+            BorderThickness="2"
+            CornerRadius="3"
+            BorderBrush="Gray"
+            Width="360">
+            <TextBlock
+                Name="TextBoxMessageToUsers"
+                Width="350"
+                Height="90"
+                FontSize="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Text="Our company has made the translation of this program due to its capabilities. We apologize for any inconvenience this may cause. &#xD;&#xA;Support our common Open Source project and it will become better."
+                TextWrapping="Wrap" />
+        </Border>
+    </StackPanel>
+</Window>

@@ -1,0 +1,261 @@
+<Window
+    x:Class="OsEngine.Views.Market.Connectors.ConnectorCandlesWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:OsEngine.ViewModels.Terminal"
+    xmlns:conv="using:OsEngine.Converters"
+    x:DataType="vm:BotViewModel"
+    Title="Data flow connection"
+    Width="450.43"
+    Height="726"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    WindowStartupLocation="CenterScreen">
+    <!-- Style="{StaticResource WindowStyleNoResize}" -->
+    <Window.Resources>
+        <conv:NameAttributeToStringConverter x:Key="NameAttributeToStringConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Rectangle Margin="5,197,5,-0.2" />
+
+
+        <Rectangle
+            Height="131"
+            Margin="5,61,5,0"
+            VerticalAlignment="Top" />
+
+
+        <Rectangle
+            Height="51"
+            Margin="5,5,5,0"
+            VerticalAlignment="Top" />
+
+        <Label
+            Name="Label1"
+            Margin="41,39,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Server" />
+        <ComboBox
+            Name="ComboBoxTypeServer"
+            Width="184"
+            IsEnabled="{Binding !IsTester}"
+            Margin="206,39,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+
+        <Label
+            Name="Label3"
+            Margin="41,84,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Portfolio for operations" />
+        <ComboBox
+            Name="ComboBoxPortfolio"
+            Width="184"
+            Margin="206,84,0,0"
+            IsEnabled="{Binding !IsTester}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+
+        <Label
+            Name="Label6"
+            Margin="29,231,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Classes displayed" />
+        <ComboBox
+            Name="ComboBoxClass"
+            Width="163"
+            Margin="141,231,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+
+        <CheckBox
+            Name="CheckBoxIsEmulator"
+            Margin="41,142,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Execute trades in the emulator" />
+
+        <Button
+            Name="ButtonAccept"
+            Width="130"
+            Margin="0,0,18.8,9.8"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Content="Accept" />
+        <!-- Click="ButtonAccept_Click" -->
+        <Label
+            Name="Label2"
+            Margin="10,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="General settings"
+            FontSize="18"
+            FontWeight="Bold" />
+        <Label
+            Name="Label5"
+            Margin="10,197,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Security"
+            FontSize="18"
+            FontWeight="Bold" />
+        <StackPanel
+            Margin="41,120,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Spacing="5"
+            Orientation="Horizontal" >
+            <!-- <ToggleButton Name="Commission" Content="Commission" /> -->
+            <Label Content="Commission" VerticalContentAlignment="Center" />
+            <NumericUpDown Margin="70,0,0,0" Width="190" 
+                ShowButtonSpinner="False"/>
+            <!-- IsEnabled="{Binding #Commission.IsChecked}" -->
+            <ToggleButton
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                ToolTip.Tip="Fixed / Percent"
+                Content="%" />
+            <!-- IsEnabled="{Binding #Commission.IsChecked}" -->
+        </StackPanel>
+        <!-- <Label -->
+        <!--     Name="LabelCommissionType" -->
+        <!--     Margin="41,135,0,0" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Top" -->
+        <!--     Content="Commission type" /> -->
+        <!-- <ComboBox -->
+        <!--     Name="ComboBoxCommissionType" -->
+        <!--     Width="184" -->
+        <!--     Margin="206,135,0,0" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Top" /> -->
+        <!-- <Label -->
+        <!--     Name="LabelCommissionValue" -->
+        <!--     Margin="41,163,0,0" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Top" -->
+        <!--     Content="Commission value" /> -->
+        <!-- <TextBox -->
+        <!--     Name="TextBoxCommissionValue" -->
+        <!--     Width="184" -->
+        <!--     Margin="206,163,0,0" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Top" /> -->
+        <!-- <WindowsFormsHost -->
+        <!--     Name="SecurityTable" -->
+        <!--     Width="418" -->
+        <!--     Height="156" -->
+        <!--     Margin="12,259,0,0" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Top" /> -->
+        <TextBox
+            Name="TextBoxSearchSecurity"
+            Width="120"
+            Margin="310,231,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="search..."
+            TextWrapping="Wrap" />
+        <Grid
+            Name="GridCandleType"
+            Width="413"
+            Margin="12,426,0,35"
+            HorizontalAlignment="Left">
+
+            <Label
+                Name="Label8"
+                Margin="8,39,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="From what we collect candles" />
+            <ComboBox
+                Name="ComboBoxCandleMarketDataType"
+                Width="184"
+                Margin="213,39,0,0"
+                HorizontalAlignment="Left"
+                ItemsSource="{x:Static vm:BotViewModel.CandleMarketDataTypes}"
+                VerticalAlignment="Top" />
+            <Label
+                Name="Label9"
+                Margin="8,87,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Candle type" />
+            <ComboBox
+                Name="ComboBoxCandleCreateMethodType"
+                Width="184"
+                Margin="213,87,0,0"
+                HorizontalAlignment="Left"
+                ItemsSource="{x:Static vm:BotViewModel.CandleTypes}"
+                SelectedItem="{Binding CandleType}"
+                VerticalAlignment="Top" >
+                <!-- ItemTemplate="{Binding conv:NameAttributeToStringConverter}" -->
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource NameAttributeToStringConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <!-- ItemTemplate="{StaticResource NameAttributeToStringConverter}" -->
+            <!-- ItemTemplate="" -->
+            <CheckBox
+                Name="CheckBoxSaveTradeArrayInCandle"
+                Margin="87,64,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Save trades array in Candle" />
+            <Label
+                Name="LabelCandleType"
+                Margin="2,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Candle type"
+                FontSize="18"
+                FontWeight="Bold" />
+            <!-- <WindowsFormsHost Name="HostCandleSeriesParameters" Margin="50,123,50,0" /> -->
+        </Grid>
+        <Button
+            Name="ButtonRightInSearchResults"
+            Width="23"
+            Height="20"
+            Margin="407,211,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="&gt;" />
+        <Button
+            Name="ButtonLeftInSearchResults"
+            Width="23"
+            Height="20"
+            Margin="310,211,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="&lt;" />
+        <Label
+            Name="LabelCurrentResultShow"
+            Height="20"
+            Margin="346,211,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="1" />
+        <Label
+            Name="LabelCommasResultShow"
+            Height="20"
+            Margin="361,211,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="...." />
+        <Label
+            Name="LabelCountResultsShow"
+            Height="20"
+            Margin="380,211,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="8" />
+
+
+    </Grid>
+</Window>

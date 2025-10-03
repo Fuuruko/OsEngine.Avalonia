@@ -1,0 +1,184 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Optimizer.OptimizerPhazesView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+    xmlns:vm="using:OsEngine.ViewModels.Optimizer"
+    x:DataType="vm:OptimizerViewModel">
+
+    <Grid Name="GridFazes">
+        <Button
+            Name="ButtonCreateOptimizeFazes"
+            Width="256"
+            Height="42"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding CreatePhazesCommand}"
+            Content="Create optimization scheme" />
+
+        <DataGrid
+            Width="723"
+            Margin="10,72,0,10"
+            HorizontalAlignment="Left"
+            Background="Black"
+            CanUserSortColumns="False"
+            GridLinesVisibility="All"
+            ItemsSource="{Binding Phazes}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Binding="{Binding Num}"
+                    Header="Step"
+                    IsReadOnly="True" />
+
+                <DataGridTextColumn
+                    Width="Auto"
+                    Binding="{Binding Type}"
+                    Header="Type"
+                    IsReadOnly="True" />
+
+                <!--  <DataGridTextColumn  -->
+                <!--  Width="*"  -->
+                <!--  Binding="{Binding StartTime}"  -->
+                <!--  Header="Start" />  -->
+
+                <DataGridTemplateColumn Header="Start">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CalendarDatePicker
+                                BorderThickness="0"
+                                FontFamily="DejaVu Sans Mono"
+                                SelectedDate="{Binding StartTime}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <!--  Width="*"  -->
+                            <CalendarDatePicker
+                                BorderThickness="0"
+                                FontFamily="DejaVu Sans Mono"
+                                SelectedDate="{Binding StartTime}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="End">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CalendarDatePicker
+                                BorderThickness="0"
+                                FontFamily="DejaVu Sans Mono"
+                                SelectedDate="{Binding EndTime}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <CalendarDatePicker
+                                BorderThickness="0"
+                                FontFamily="DejaVu Sans Mono"
+                                SelectedDate="{Binding EndTime}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <!--    -->
+                <!--  <DataGridTextColumn  -->
+                <!--  Width="*"  -->
+                <!--  Binding="{Binding EndTime}"  -->
+                <!--  Header="End" />  -->
+
+                <DataGridTextColumn
+                    Width="Auto"
+                    Binding="{Binding Days}"
+                    Header="Days"
+                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <CalendarDatePicker
+            Name="DatePickerStart"
+            Width="140"
+            Margin="284,27,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            SelectedDate="{Binding StartTime}"
+            Watermark="dd.MM.yyyy" />
+
+        <CalendarDatePicker
+            Name="DatePickerEnd"
+            Width="140"
+            Margin="430,27,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            SelectedDate="{Binding EndTime}"
+            Watermark="dd.MM.yyyy" />
+
+        <Label
+            Name="Label20"
+            Margin="377,4,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Test period" />
+
+        <NumericUpDown
+            Width="144"
+            Height="23"
+            Margin="0,29,10,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            FormatString="0"
+            Maximum="100"
+            Minimum="0"
+            Value="{Binding PercentOnFiltration, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+
+        <Label
+            Name="Label21"
+            Margin="0,4,10,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="% of time OutOfSample" />
+
+        <NumericUpDown
+            Width="144"
+            Height="23"
+            Margin="0,29,181,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            FormatString="0"
+            Minimum="1"
+            Value="{Binding IterationCount, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+
+        <Label
+            Name="Label23"
+            Margin="0,4,204,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="Iteration count" />
+
+        <CheckBox
+            Name="CheckBoxLastInSample"
+            Margin="579,29,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Last inSample"
+            IsChecked="{Binding LastInSample}" />
+        <!--  <WindowsFormsHost  -->
+        <!--  Name="HostWalkForwardPeriods"  -->
+        <!--  Margin="738,72,10,10"  -->
+        <!--  Foreground="Black" />  -->
+        <!--  <lvc:CartesianChart Margin="738,72,10,10"  -->
+        <!--  BorderThickness="2"  -->
+        <!--    -->
+        <!--  Foreground="Black">  -->
+        <!-- <lvc:CartesianChart.Series> -->
+        <!--  <lvc:  -->
+        <!--  <lc:ColumnSeries Values="{Binding Data, Converter={StaticResource ValueConverter}}"  -->
+        <!--  DataLabels="True"  -->
+        <!--  Title="Series Title" />  -->
+        <!-- </lvc:CartesianChart.Series> -->
+        <!-- <lvc:CartesianChart.AxisX> -->
+        <!--     <lc:Axis Title="Categories" Labels="{Binding Data, Converter={StaticResource CategoryConverter}}" /> -->
+        <!-- </lvc:CartesianChart.AxisX> -->
+        <!-- </lvc:CartesianChart> -->
+    </Grid>
+</UserControl>

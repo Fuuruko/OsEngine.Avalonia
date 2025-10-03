@@ -1,0 +1,195 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Terminal.StatisticsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+    xmlns:vm="using:OsEngine.ViewModels.Terminal">
+
+    <Grid RowSpacing="10" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="100" Width="Auto" />
+            <ColumnDefinition MinWidth="100" Width="Auto" />
+            <ColumnDefinition MinWidth="100" Width="Auto" />
+            <ColumnDefinition MinWidth="100" Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.Styles>
+            <Style Selector="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </Grid.Styles>
+
+        <TextBlock
+            Grid.Column="0"
+            FontWeight="Bold"
+            Text="Description" />
+        <TextBlock
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="All" />
+        <TextBlock
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="Long" />
+        <TextBlock
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="Short" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Pure PnL" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="" />
+
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Pure PnL %" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="" />
+
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Deals" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="" />
+
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="Avgerage Holding Time" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="" />
+
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="Sharpe Ratio" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="" />
+
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="0"
+            Text="Profit Factor" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="" />
+
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="0"
+            Text="Recovery" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="1"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="2"
+            FontWeight="Bold"
+            Text="" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="3"
+            FontWeight="Bold"
+            Text="" />
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,182 @@
+<Window
+    x:Class="OsEngine.Views.Optimizer.OptimizerWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:log="using:OsEngine.Controls"
+    xmlns:view="using:OsEngine.Views.Optimizer"
+    xmlns:vm="using:OsEngine.ViewModels.Optimizer"
+    Title="Optimizer"
+    Width="1110"
+    Height="700"
+    MinWidth="1110"
+    MinHeight="500"
+    x:DataType="vm:OptimizerViewModel"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="CenterScreen">
+    <!--  DataContext="vm"  -->
+    <Window.DataContext>
+        <vm:OptimizerViewModel />
+    </Window.DataContext>
+
+    <Grid Name="GridPrime">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="119*" />
+            <RowDefinition Height="437*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Rectangle Margin="5,5,5,5" />
+
+            <!--  Height="Auto"  -->
+            <Button
+                Name="ButtonGo"
+                Width="148"
+                MinHeight="40"
+                Margin="0,82,24,19"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="Go!"
+                FontSize="14" />
+            <!--  Click="ButtonGo_Click"  -->
+
+            <ProgressBar
+                Name="ProgressBarPrime"
+                Height="20"
+                Margin="70,10,24,0"
+                VerticalAlignment="Top" />
+
+            <Label
+                Name="Label7"
+                Width="229"
+                Height="19"
+                Margin="10,5,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Progress"
+                FontSize="12"
+                Foreground="AliceBlue" />
+
+            <Grid
+                Name="GridThreadsProgress"
+                MinHeight="10"
+                Margin="10,29,326,10" />
+
+            <ComboBox
+                Name="ComboBoxThreadsCount"
+                Width="135"
+                Height="21"
+                Margin="0,0,186,19"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                ItemsSource="{Binding Threads}"
+                SelectedIndex="{Binding ThreadsNum}" />
+
+            <Label
+                Name="Label8"
+                Margin="0,0,224,41"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Content="Threads" />
+            <!-- <Button -->
+            <!--     Name="ButtonResults" -->
+            <!--     Width="148" -->
+            <!--     Margin="0,52,24,0" -->
+            <!--     HorizontalAlignment="Right" -->
+            <!--     VerticalAlignment="Top" -->
+            <!--     Content="Results" /> -->
+            <!--  Click="ButtonResults_Click"  -->
+            <Label
+                Name="LabelTimeToEnd"
+                Width="229"
+                Height="19"
+                Margin="10,24,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Time to end"
+                FontSize="12"
+                Foreground="AliceBlue" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <TabControl Name="TabControlPrime" Margin="10,-15,10,10">
+                <TabItem
+                    Name="TabItemControl"
+                    Width="120"
+                    FontSize="14"
+                    Header="Control">
+                    <view:OptimizerDataView />
+                </TabItem>
+                <TabItem
+                    Name="TabItemParameters"
+                    Width="120"
+                    FontSize="14"
+                    Header="Parameters">
+                    <view:OptimizerParametersView />
+                </TabItem>
+                <TabItem
+                    Name="TabItemFazes"
+                    Width="120"
+                    FontSize="14"
+                    Header="Fazes">
+                    <view:OptimizerPhazesView />
+                </TabItem>
+                <TabItem
+                    Name="TabItemFilters"
+                    Width="120"
+                    FontSize="14"
+                    Header="Filters">
+                    <view:OptimizerFiltersView />
+                </TabItem>
+                <TabItem
+                    Name="TabItemResults"
+                    Width="120"
+                    FontSize="14"
+                    Header="Results">
+                    <view:OptimizerResultsView />
+                </TabItem>
+
+            </TabControl>
+            <!-- <Rectangle -->
+            <!--     Grid.Row="1" -->
+            <!--     Width="20" -->
+            <!--     Height="174" -->
+            <!--     Margin="1,0,0,0" -->
+            <!--     HorizontalAlignment="Left" -->
+            <!--     VerticalAlignment="Bottom" -->
+            <!--     Fill="#FCEE21" -->
+            <!--     RenderTransformOrigin="0.5,0.5" -->
+            <!--     Stroke="Black" -->
+            <!--     StrokeThickness="0"> -->
+            <!--     <Rectangle.RenderTransform> -->
+            <!--         <TransformGroup> -->
+            <!--             <ScaleTransform /> -->
+            <!--             <SkewTransform AngleY="-44" /> -->
+            <!--             <RotateTransform /> -->
+            <!--             <TranslateTransform Y="-12.012" /> -->
+            <!--         </TransformGroup> -->
+            <!--     </Rectangle.RenderTransform> -->
+            <!-- </Rectangle> -->
+            <!-- <Label -->
+            <!--     Name="LabelOsa" -->
+            <!--     Grid.Row="1" -->
+            <!--     Width="80" -->
+            <!--     Height="28" -->
+            <!--     Margin="-29,0,0,85" -->
+            <!--     HorizontalAlignment="Left" -->
+            <!--     VerticalAlignment="Bottom" -->
+            <!--     Content="O-S-A.NET" -->
+            <!--     FontSize="14" -->
+            <!--     FontWeight="Bold" -->
+            <!--     Foreground="Black" -->
+            <!--     RenderTransformOrigin="0.5,0.5"> -->
+            <!--     <Label.RenderTransform> -->
+            <!--         <TransformGroup> -->
+            <!--             <ScaleTransform /> -->
+            <!--             <SkewTransform /> -->
+            <!--             <RotateTransform Angle="-90" /> -->
+            <!--             <TranslateTransform /> -->
+            <!--         </TransformGroup> -->
+            <!--     </Label.RenderTransform> -->
+            <!-- </Label> -->
+        </Grid>
+    </Grid>
+</Window>

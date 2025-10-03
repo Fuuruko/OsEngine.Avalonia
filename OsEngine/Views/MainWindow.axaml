@@ -1,0 +1,191 @@
+<Window
+    x:Class="OsEngine.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    Title="Main menu"
+    Width="625"
+    Height="415"
+    CanResize="False"
+    WindowStartupLocation="CenterScreen">
+  <!-- Style="{StaticResource WindowStyleNoResize}" -->
+    <Grid>
+        <Rectangle
+            Height="205"
+            Margin="429,7,10,0"
+            VerticalAlignment="Top" />
+        <Rectangle
+            Height="205"
+            Margin="222,7,202,0"
+            VerticalAlignment="Top" />
+        <Rectangle
+            Height="205"
+            Margin="10,7,409,0"
+            VerticalAlignment="Top" />
+        <Button
+            Name="ButtonRobot"
+            Width="146"
+            Height="28"
+            Margin="448,138,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonRobotCandleOne_Click"
+            Content="Bot Station" />
+        <Button
+            Name="ButtonTester"
+            Width="91"
+            Height="28"
+            Margin="228,105,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonTesterCandleOne_Click"
+            Content="Tester" />
+        <Button
+            Name="ButtonData"
+            Width="146"
+            Height="28"
+            Margin="37,105,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonData_Click"
+            Content="Data" />
+        <Button
+            Name="ButtonCandleConverter"
+            Width="145"
+            Margin="37,172,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="CandleConverter_Click"
+            Content="Candle Converter" />
+        <Button
+            Name="ButtonConverter"
+            Width="146"
+            Height="28"
+            Margin="37,138,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonConverter_Click"
+            Content="Converter" />
+        <Button
+            Name="ButtonOptimizer"
+            Width="146"
+            Height="28"
+            Margin="246,138,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonOptimizer_Click"
+            Content="Optimizer" />
+        <Label
+            Name="BlockDataLabel"
+            Width="202"
+            Height="36"
+            Margin="12,64,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Work with data"
+            FontSize="28"
+            Foreground="#FFA7A8AA" />
+        <Label
+            Name="BlockTestingLabel"
+            Width="197"
+            Height="36"
+            Margin="223,64,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Testing"
+            FontSize="28"
+            Foreground="#FFA7A8AA" />
+        <Label
+            Name="BlockTradingLabel"
+            Width="182"
+            Height="36"
+            Margin="430,64,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            Content="Trading"
+            FontSize="28"
+            Foreground="#FFA7A8AA" />
+        <Image
+            Name="ImageData"
+            Width="60"
+            Height="60"
+            Margin="292,7,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Source="/Assets/MainWIndow/test.png" />
+        <Image
+            Name="ImageTests"
+            Width="68"
+            Height="68"
+            Margin="76,7,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+      Source="/Assets/MainWIndow/data.png" />
+        <Image
+            Name="ImageTrading"
+            Width="85"
+            Height="85"
+            Margin="484,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+      Source="/Assets/MainWIndow/Trading.png" />
+        <Rectangle Margin="10,220,10,10" />
+        <Button
+            Name="ButtonSettings"
+            Margin="268,231,0,0"
+            Width="100"
+            CornerRadius="50"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonSettings_Click">
+            <icons:MaterialIcon Kind="Gear" Width="32" Height="32" HorizontalAlignment="Left"/>
+        <!--     <Image -->
+        <!--         Name="ImageGear" -->
+        <!--         Width="24" -->
+        <!--         Height="24" -->
+        <!--         HorizontalAlignment="Left" -->
+        <!-- Source="/Assets/MainWIndow/gear.png" /> -->
+        </Button>
+        <Button
+            Name="ButtonTesterLight"
+            Width="91"
+            Height="28"
+            Margin="324,105,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonTesterLight_Click"
+            Content="Tester Light" />
+        <Button
+            Name="ButtonRobotLight"
+            Width="146"
+            Height="28"
+            Margin="448,171,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonRobotLight_Click"
+            Content="Bot Station Light" />
+        <Image
+            Name="ImageAlor"
+            Height="113"
+            Margin="11,264,11,0"
+            VerticalAlignment="Top"
+            Source="/Assets/MainWIndow/alor1.png" />
+        <Image
+            Name="ImageAlor2"
+            Height="113"
+            Margin="11,264,11,0"
+            VerticalAlignment="Top"
+            Source="/Assets/MainWIndow/alor2.png" />
+        <!-- <Image -->
+        <!--     Name="ImagePadlock" -->
+        <!--     Width="60" -->
+        <!--     Height="60" -->
+        <!--     Margin="292,7,0,0" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Top" -->
+        <!--     Source="/Assets/padlockClosed.png" /> -->
+    </Grid>
+</Window>

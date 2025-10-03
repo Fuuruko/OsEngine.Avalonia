@@ -1,0 +1,450 @@
+<Window
+    x:Class="OsEngine.Views.OsData.OsDataView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OsEngine.OsData"
+    xmlns:log="using:OsEngine.Controls.LogDataGrid"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:OsEngine.ViewModels.Data"
+    Title="DataLoader"
+    Width="1200"
+    Height="700"
+    MinWidth="1070"
+    MinHeight="500"
+    x:DataType="vm:OsDataViewModel"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <StreamGeometry x:Key="settings">M5.647 14.153c0 1.028.833 1.862 1.862 1.862h.983a1.861 1.861 0 0 0 1.861-1.862c0-.512.592-.797.993-.478a1.861 1.861 0 0 0 2.616-.295l.613-.768a1.861 1.861 0 0 0-.295-2.616.611.611 0 0 1 .245-1.075 1.862 1.862 0 0 0 1.4-2.229l-.218-.958a1.862 1.862 0 0 0-2.23-1.4.611.611 0 0 1-.686-.862 1.862 1.862 0 0 0-.87-2.485l-.886-.426a1.861 1.861 0 0 0-2.484.869.611.611 0 0 1-1.101 0A1.861 1.861 0 0 0 4.965.56L4.08.988a1.861 1.861 0 0 0-.87 2.485.611.611 0 0 1-.686.861 1.861 1.861 0 0 0-2.23 1.4l-.218.96a1.86 1.86 0 0 0 1.4 2.228c.5.114.646.755.245 1.075a1.861 1.861 0 0 0-.295 2.616l.613.768a1.861 1.861 0 0 0 2.616.295c.4-.32.993-.034.993.478Zm1.862.612a.611.611 0 0 1-.612-.612c0-1.56-1.803-2.428-3.022-1.455a.612.612 0 0 1-.86-.097l-.612-.769a.611.611 0 0 1 .097-.859c1.219-.972.774-2.923-.747-3.27a.611.611 0 0 1-.46-.732l.22-.959a.611.611 0 0 1 .731-.46c1.52.347 2.768-1.217 2.092-2.622a.611.611 0 0 1 .286-.816l.886-.427a.611.611 0 0 1 .815.285C7 3.377 9 3.377 9.677 1.972a.611.611 0 0 1 .816-.285l.886.427a.612.612 0 0 1 .285.816c-.676 1.405.571 2.97 2.092 2.622a.61.61 0 0 1 .732.46l.219.959a.611.611 0 0 1-.46.732c-1.52.347-1.966 2.298-.746 3.27.264.21.307.595.096.86l-.612.768a.611.611 0 0 1-.86.097c-1.22-.973-3.022-.104-3.022 1.455a.611.611 0 0 1-.611.612h-.983ZM8 9.75a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM5 8a3 3 0 1 0 6 0 3 3 0 0 0-6 0Z</StreamGeometry>
+        <StreamGeometry x:Key="link">M34,14 C39.5228475,14 44,18.4771525 44,24 C44,29.4292399 39.6733292,33.8479317 34.2799048,33.9961582 L34,34 L28.25,34 C27.5596441,34 27,33.4403559 27,32.75 C27,32.1027913 27.4918747,31.5704661 28.1221948,31.5064536 L28.25,31.5 L34,31.5 C38.1421356,31.5 41.5,28.1421356 41.5,24 C41.5,19.9390827 38.2725256,16.6319825 34.2427311,16.5038536 L34,16.5 L28.25,16.5 C27.5596441,16.5 27,15.9403559 27,15.25 C27,14.6027913 27.4918747,14.0704661 28.1221948,14.0064536 L28.25,14 L34,14 Z M19.75,14 C20.4403559,14 21,14.5596441 21,15.25 C21,15.8972087 20.5081253,16.4295339 19.8778052,16.4935464 L19.75,16.5 L14,16.5 C9.85786438,16.5 6.5,19.8578644 6.5,24 C6.5,28.0609173 9.72747441,31.3680175 13.7572689,31.4961464 L14,31.5 L19.75,31.5 C20.4403559,31.5 21,32.0596441 21,32.75 C21,33.3972087 20.5081253,33.9295339 19.8778052,33.9935464 L19.75,34 L14,34 C8.4771525,34 4,29.5228475 4,24 C4,18.5707601 8.32667079,14.1520683 13.7200952,14.0038418 L14,14 L19.75,14 Z M13,22.75 L35,22.75 C35.6903559,22.75 36.25,23.3096441 36.25,24 C36.25,24.6472087 35.7581253,25.1795339 35.1278052,25.2435464 L35,25.25 L13,25.25 C12.3096441,25.25 11.75,24.6903559 11.75,24 C11.75,23.3527913 12.2418747,22.8204661 12.8721948,22.7564536 L13,22.75 L35,22.75 L13,22.75 Z</StreamGeometry>
+
+    </Window.Resources>
+
+    <Grid Name="GridPrime">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="190" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.RowSpan="2"
+            Width="305"
+            Margin="0,5,5,172"
+            HorizontalAlignment="Right">
+            <Rectangle />
+            <Label
+                Name="Label4"
+                Height="31"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Source"
+                FontSize="18"
+                FontWeight="ExtraBlack" />
+            <Button
+                Height="31"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Content="Add new server"
+                Command="{Binding ShowFeedServers}"
+                FontSize="18"
+                FontWeight="ExtraBlack" />
+            <!--  <Button  -->
+            <!--  Margin="100,0,0,0"  -->
+            <!--  HorizontalAlignment="Left"  -->
+            <!--  VerticalAlignment="Top"  -->
+            <!--  Command="{Binding OpenServerSettings}"  -->
+            <!--  Content="Settings" />  -->
+            <!--  <WindowsFormsHost  -->
+            <!--  Name="HostSource"  -->
+            <!--  Height="155"  -->
+            <!--  Margin="5,31,5,0"  -->
+            <!--  VerticalAlignment="Top" />  -->
+            <ItemsControl Margin="5,31,5,0" ItemsSource="{Binding Sources}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,Auto">
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="20,0,0,0"
+                                Text="{Binding Name}" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                Spacing="5">
+                                <ToggleButton
+                                    Width="32"
+                                    Height="32"
+                                    Padding="5"
+                                    HorizontalContentAlignment="Center"
+                                    CornerRadius="50">
+                                    <ToggleButton.Styles>
+                                        <Style Selector="ToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+                                            <Setter Property="Background" Value="Green" />
+                                        </Style>
+                                        <Style Selector="ToggleButton:unchecked /template/ ContentPresenter#PART_ContentPresenter">
+                                            <Setter Property="Background" Value="Red" />
+                                        </Style>
+                                        <!-- <Style Selector="ToggleButton:checked:pressed /template/ ContentPresenter#PART_ContentPresenter"> -->
+                                        <!--     <Setter Property="Background" Value="#ffa40000"/> -->
+                                        <!-- </Style> -->
+                                        <!-- <Style Selector="ToggleButton:unchecked /template/ ContentPresenter#PART_ContentPresenter"> -->
+                                        <!--     <Setter Property="Background" Value="Red"/> -->
+                                        <!-- </Style> -->
+                                    </ToggleButton.Styles>
+                                    <!--  <Image  -->
+                                    <!--  Source="avares://OsEngine/Assets/link.png" />  -->
+                                    <PathIcon Data="{StaticResource link}" />
+                                </ToggleButton>
+
+                                <Button
+                                    Padding="5"
+                                    Command="{Binding $parent[Window].DataContext.OpenServerSettings}"
+                                    CommandParameter="{Binding}"
+                                    Content="Settings"
+                                    FontSize=""
+                                    CornerRadius="50">
+                                    <PathIcon Data="{StaticResource settings}" />
+                                </Button>
+                                <Button
+                                    Padding="5"
+                                    Width="32"
+                                    Height="32"
+                                    Command="{Binding $parent[Window].DataContext.DeleteServer}"
+                                    CommandParameter="{Binding}"
+                                    Content="❌"
+                                    HorizontalContentAlignment="Center"
+                                    CornerRadius="50">
+                                    <!-- <PathIcon Data="{StaticResource settings}" /> -->
+                                    <Button.Styles >
+                                        <Style Selector="AccessText">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                        </Style>
+                                    </Button.Styles>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+            <!--  <DataGrid  -->
+            <!--  Name="HostSource"  -->
+            <!--  Height="155"  -->
+            <!--  ItemsSource="{Binding Sources}"  -->
+            <!--  Margin="5,31,5,0"  -->
+            <!--  VerticalAlignment="Top">  -->
+            <!--     <DataGrid.Styles> -->
+            <!--         <Style Selector="TextBlock"> -->
+            <!--             <Setter Property="TextWrapping" Value="Wrap"/> -->
+            <!--             <Setter Property="VerticalAlignment" Value="Top" /> -->
+            <!--             <Setter Property="HorizontalAlignment" Value="Left" /> -->
+            <!--             <Setter Property="Background" Value="Gray" /> -->
+            <!--         </Style> -->
+            <!--     </DataGrid.Styles> -->
+            <!--     <DataGrid.Columns> -->
+            <!--  <DataGridTextColumn  -->
+            <!--  Width="2*"  -->
+            <!--  Binding="{Binding Name}"  -->
+            <!--  Header="Source"  -->
+            <!--  IsReadOnly="True" />  -->
+            <!--  <DataGridTextColumn  -->
+            <!--  Width="*"  -->
+            <!--  Binding="{Binding Status}"  -->
+            <!--  Header="State"  -->
+            <!--  IsReadOnly="True" />  -->
+            <!--     </DataGrid.Columns> -->
+            <!-- </DataGrid> -->
+            <Label
+                Name="Label24"
+                Margin="10,188,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Sets"
+                FontSize="18"
+                FontWeight="ExtraBlack" />
+            <!--  <WindowsFormsHost  -->
+            <!--  Name="HostSet"  -->
+            <!--  Width="293"  -->
+            <!--  Margin="0,246,7,5"  -->
+            <!--  HorizontalAlignment="Right"  -->
+            <!--  FontWeight="Bold" />  -->
+            <DataGrid
+                Name="HostSet"
+                Width="293"
+                Margin="0,220,7,5"
+                HorizontalAlignment="Right"
+                FontWeight="Bold"
+                ItemsSource="{Binding Sets}">
+                <DataGrid.Styles>
+                    <Style Selector="TextBlock">
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                        <Setter Property="VerticalAlignment" Value="Top" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                        <!-- <Setter Property="Background" Value="Left" /> -->
+                    </Style>
+                </DataGrid.Styles>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="2*"
+                        Binding="{Binding Name}"
+                        Header="Name"
+                        IsReadOnly="True" />
+                    <DataGridCheckBoxColumn
+                        Width="*"
+                        Binding="{Binding IsEnabled}"
+                        Header="State" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button
+                Name="NewDataSetButton"
+                Margin="149,188,10,0"
+                VerticalAlignment="Top"
+                Click="NewDataSetButton_Click"
+                Command="{Binding AddNewSet}"
+                Content="Add new data set" />
+
+        </Grid>
+
+        <Grid
+            x:Name="GreedChartPanel"
+            Grid.Row="0"
+            Margin="0,0,315,0">
+
+            <Rectangle x:Name="RectChart" />
+            <!-- <WindowsFormsHost x:Name="ChartHostPanel" Margin="2,30,2,2" /> -->
+            <DataGrid
+                Name="ChartHostPanel"
+                Margin="2,30,2,2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                CanUserSortColumns="False"
+                ColumnHeaderHeight="15">
+                <DataGrid.Styles>
+                    <Style Selector="TextBlock">
+                        <!-- <Setter Property="TextWrapping" Value="Wrap"/> -->
+                        <Setter Property="VerticalAlignment" Value="Top" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <!-- <Setter Property="Background" Value="Left" /> -->
+                    </Style>
+                    <Style Selector="Path">
+                        <Setter Property="Width" Value="0" />
+                        <!-- <Setter Property="HorizontalAlignment" Value="Stretch" /> -->
+                    </Style>
+                </DataGrid.Styles>
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        Header="№"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Header="Security"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Header="Class"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Header="Exchange"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Header="Start"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Header="End"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Header="Timeframe"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Header="Status"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Header="Load %"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Header="Objects"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Header=""
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Header=""
+                        IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label
+                Name="LabelSetName"
+                Width="94"
+                Margin="2,2,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Set Name:"
+                FontSize="16" />
+            <Label
+                Name="LabelSetNameValue"
+                Width="160"
+                Margin="96,2,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Value"
+                FontSize="13" />
+            <Label
+                Name="LabelStartTimeStr"
+                Width="86"
+                Margin="236,2,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Start: "
+                FontSize="16" />
+            <Label
+                x:Name="LabelTimeStartValue"
+                Width="106"
+                Margin="298,3,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="value"
+                FontSize="13" />
+            <Label
+                x:Name="LabelTimeEndStr"
+                Width="80"
+                Margin="409,2,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="End: "
+                FontSize="16" />
+            <ProgressBar
+                Name="ProgressBarLoadProgress"
+                Height="24"
+                Margin="580,2,0,0"
+                VerticalAlignment="Top" />
+            <Label
+                x:Name="LabelTimeEndValue"
+                Width="69"
+                Margin="464,2,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Value"
+                FontSize="13" />
+
+        </Grid>
+
+        <Grid
+            x:Name="GreedLog"
+            Grid.Row="1"
+            Height="167"
+            Margin="0,0,0,5"
+            VerticalAlignment="Bottom">
+
+            <TabControl
+                x:Name="TabControlPrime"
+                Margin="22,-20,5,5"
+                BorderThickness="0"
+                Foreground="Black">
+                <TabItem
+                    Name="Label26"
+                    Width="140"
+                    Foreground="Black"
+                    Header="Log">
+                    <Grid>
+                        <!-- <WindowsFormsHost x:Name="HostLog" /> -->
+                        <!--  <vm:  -->
+                        <DataGrid Name="HostLog" ItemsSource="{Binding Logs.LogMessages}">
+
+                            <DataGrid.Styles>
+                                <Style Selector="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                </Style>
+                            </DataGrid.Styles>
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Time}"
+                                    Header="Time"
+                                    IsReadOnly="True" />
+
+                                <DataGridTextColumn
+                                    Width="Auto"
+                                    Binding="{Binding Type}"
+                                    Header="Type"
+                                    IsReadOnly="True" />
+
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding Message}"
+                                    Header="Message"
+                                    IsReadOnly="True" />
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <!--  <Rectangle  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Width="20"  -->
+        <!--  Height="174"  -->
+        <!--  Margin="0,0,0,-2"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  VerticalAlignment="Bottom"  -->
+        <!--  Fill="#FCEE21"  -->
+        <!--  RenderTransformOrigin="0.5,0.5"  -->
+        <!--  Stroke="Black"  -->
+        <!--  StrokeThickness="0">  -->
+        <!--     <Rectangle.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform AngleY="-44" /> -->
+        <!--             <RotateTransform /> -->
+        <!--             <TranslateTransform Y="-12.012" /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Rectangle.RenderTransform> -->
+        <!-- </Rectangle> -->
+        <!--  <Label  -->
+        <!--  x:Name="LabelOsa"  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Width="80"  -->
+        <!--  Height="28"  -->
+        <!--  Margin="-30,0,0,85"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  VerticalAlignment="Bottom"  -->
+        <!--  Content="O-S-A.NET"  -->
+        <!--  FontSize="14"  -->
+        <!--  FontWeight="Bold"  -->
+        <!--  Foreground="Black"  -->
+        <!--  RenderTransformOrigin="0.5,0.5">  -->
+        <!--     <Label.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform /> -->
+        <!--             <RotateTransform Angle="-90" /> -->
+        <!--             <TranslateTransform /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Label.RenderTransform> -->
+        <!-- </Label> -->
+
+    </Grid>
+</Window>

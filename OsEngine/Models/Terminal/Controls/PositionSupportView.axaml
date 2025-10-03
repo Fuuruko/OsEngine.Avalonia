@@ -1,0 +1,354 @@
+<Window
+    x:Class="OsEngine.Views.Terminal.PositionSupportView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Position Tracking Settings"
+    Width="610"
+    Height="390"
+    CanResize="False"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="CenterScreen">
+
+    <Grid
+        Margin="5"
+        RowSpacing="5"
+        ColumnSpacing="5"
+        ColumnDefinitions="*,*"
+        RowDefinitions="*,2*">
+
+        <Grid.Styles>
+            <Styles>
+                <Style Selector="Label">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style Selector="TextBox">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style Selector="CheckBox">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style Selector="ComboBox">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </Styles>
+        </Grid.Styles>
+
+        <UniformGrid
+            Background="#222"
+            Grid.Row="0"
+            Grid.Column="0"
+            Columns="2"
+            Rows="3">
+
+            <Label
+                Name="LabelStop"
+                Height="29"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Stop"
+                FontWeight="Bold" />
+
+            <CheckBox
+                Name="CheckBoxStopIsOn"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="On/Off" />
+
+            <Label
+                Name="LabelFromEntryToStop"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="From entry to stop"
+                Foreground="#FFE2E3E8"
+                OpacityMask="#FFDEB1B1"
+                RenderTransformOrigin="-0.132,0.346" />
+
+            <TextBox
+                Name="TextBoxStopPercentLength"
+                Width="120"
+                Height="23"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                TextWrapping="Wrap" />
+
+            <Label
+                Name="LabelSlippage2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Slippage"
+                Foreground="#FFE2E3E8"
+                OpacityMask="#FFDEB1B1"
+                RenderTransformOrigin="-0.132,0.346" />
+
+
+            <TextBox
+                Name="TextBoxSlippageStop"
+                Width="120"
+                Height="23"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                TextWrapping="Wrap" />
+
+        </UniformGrid>
+
+        <UniformGrid
+            Background="#222"
+            Grid.Row="0"
+            Grid.Column="1"
+            Columns="2"
+            Rows="3">
+
+            <Label
+                Name="LabelProfit"
+                Height="29"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Profit"
+                FontWeight="Bold" />
+
+            <CheckBox
+                Name="CheckBoxProfitIsOn"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="On/Off" />
+
+            <Label
+                Name="LabelFromEntryToProfit"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="From entry to profit"
+                Foreground="#FFE2E3E8"
+                OpacityMask="#FFDEB1B1" />
+
+            <TextBox
+                Name="TextBoxProfitPercentLength"
+                Height="23"
+                VerticalAlignment="Top"
+                TextWrapping="Wrap" />
+
+            <Label
+                Name="LabelSlippage1"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Slippage"
+                Foreground="#FFE2E3E8"
+                OpacityMask="#FFDEB1B1" />
+
+            <TextBox
+                Name="TextBoxSlippageProfit"
+                Height="23"
+                VerticalAlignment="Top"
+                TextWrapping="Wrap" />
+
+
+        </UniformGrid>
+
+        <Grid
+            Background="#222"
+            Grid.Row="1"
+            Grid.Column="0"
+            RowDefinitions="Auto,*,Auto,*">
+
+            <Label
+                Name="LabelPositionClosing"
+                Grid.Row="0"
+                Width="142"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Position closing"
+                FontWeight="Bold" />
+
+            <UniformGrid
+                Grid.Row="1"
+                Columns="2"
+                Rows="2">
+
+                <CheckBox
+                    Name="CheckBoxSecondToCloseIsOn"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Seconds to close" />
+
+                <TextBox
+                    Name="TextBoxSecondToClose"
+                    Width="120"
+                    Height="23"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    TextWrapping="Wrap" />
+
+
+
+                <CheckBox
+                    Name="CheckBoxSetbackToCloseIsOn"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Max price rollback" />
+
+                <TextBox
+                    Name="TextBoxSetbackToClose"
+                    Width="120"
+                    Height="23"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    TextWrapping="Wrap" />
+
+            </UniformGrid>
+
+            <Label
+                Name="LabelCloseOrderReject"
+                Grid.Row="2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Close order reject"
+                FontWeight="Bold" />
+
+            <UniformGrid
+                Grid.Row="3"
+                Columns="2"
+                Rows="2">
+                <CheckBox
+                    Name="CheckBoxDoubleExitIsOnIsOn"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Reaction" />
+                <!--  Checked="CheckBox_Checked"  -->
+
+                <ComboBox
+                    Name="ComboBoxTypeDoubleExitOrder"
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" />
+
+                <Label
+                    Name="LabelSlippage3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Slippage"
+                    Foreground="#FFDFE1E6"
+                    OpacityMask="#FFDEB1B1"
+                    RenderTransformOrigin="-0.132,0.346" />
+
+                <TextBox
+                    Name="TextBoxSlippageDoubleExit"
+                    Width="120"
+                    Height="23"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    TextWrapping="Wrap" />
+
+            </UniformGrid>
+
+
+        </Grid>
+
+        <Grid
+            Background="#222"
+            Grid.Row="1"
+            Grid.Column="1"
+            RowDefinitions="Auto,*,Auto">
+            <Label
+                Name="LabelPositionOpening"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Position opening"
+                FontWeight="Bold" />
+
+            <UniformGrid
+                Grid.Row="1"
+                Columns="2"
+                Rows="4">
+
+                <CheckBox
+                    Name="CheckBoxSecondToOpenIsOn"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Seconds to open" />
+
+
+
+                <TextBox
+                    Name="TextBoxSecondToOpen"
+                    Height="23"
+                    VerticalAlignment="Top"
+                    TextWrapping="Wrap" />
+
+                <CheckBox
+                    Name="CheckBoxSetbackToOpenIsOn"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Max price rollback" />
+
+                <TextBox
+                    Name="TextBoxSetbackToOpen"
+                    Height="23"
+                    VerticalAlignment="Top"
+                    TextWrapping="Wrap" />
+
+                <Label
+                    Name="LabelValuesType"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Values type"
+                    Foreground="#FFE2E3E8"
+                    OpacityMask="#FFDEB1B1" />
+
+                <ComboBox
+                    Name="ComboBoxValuesType"
+                    Width="134"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" />
+
+                <Label
+                    Name="LabelOrdersTypeTime"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Orders type time"
+                    Foreground="#FFE2E3E8"
+                    OpacityMask="#FFDEB1B1" />
+
+                <ComboBox
+                    Name="ComboBoxOrdersTypeTime"
+                    Width="134"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" />
+
+            </UniformGrid>
+
+            <Button
+                Name="ButtonAccept"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                Content="Accept" />
+            <!--  Click="ButtonAccept_Click"  -->
+        </Grid>
+        <!--    -->
+        <!--  <Rectangle  -->
+        <!--  Width="285"  -->
+        <!--  Margin="5,129,0,5"  -->
+        <!--  HorizontalAlignment="Left" />  -->
+        <!--    -->
+        <!--  <Rectangle  -->
+        <!--  Width="285"  -->
+        <!--  Height="119"  -->
+        <!--  Margin="5,5,0,0"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  VerticalAlignment="Top" />  -->
+        <!--    -->
+        <!--    -->
+        <!--  <Rectangle  -->
+        <!--  Height="119"  -->
+        <!--  Margin="295,5,5,0"  -->
+        <!--  VerticalAlignment="Top" />  -->
+        <!--    -->
+        <!--    -->
+        <!-- <Rectangle Margin="295,129,5,94" StrokeThickness="0" /> -->
+        <!--    -->
+        <!--    -->
+        <!--    -->
+        <!-- <Rectangle Margin="295,237,5,58" StrokeThickness="0" /> -->
+        <!--    -->
+
+    </Grid>
+</Window>

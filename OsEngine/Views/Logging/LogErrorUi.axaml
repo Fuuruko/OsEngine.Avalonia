@@ -1,0 +1,64 @@
+<Window
+    x:Class="OsEngine.Views.Logging.LogErrorUi"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:OsEngine.ViewModels.Logging"
+    Title="Emergency log"
+    Width="770"
+    Height="350"
+    Icon="/Assets/OsLogo.ico"
+    Topmost="False"
+    x:DataType="vm:LogViewModel"
+    WindowStartupLocation="CenterScreen">
+    <!-- xmlns:log="using:OsEngine.Controls" -->
+
+    <Window.DataContext>
+        <vm:LogViewModel />
+    </Window.DataContext>
+
+    <Grid Margin="0,0,0,0">
+
+        <Rectangle Margin="3,3,3,3" />
+
+        <DataGrid
+            Margin="5,5,5,35"
+            ItemsSource="{x:Static vm:LogViewModel.ErrorMessages}">
+            <DataGrid.Styles>
+                <Style Selector="TextBlock">
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                </Style>
+            </DataGrid.Styles>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Time"
+                    Binding="{Binding Time}"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Type"
+                    Binding="{Binding Type}"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="*"
+                    Header="Message"
+                    Binding="{Binding Message}"
+                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button
+            Name="ButtonClear"
+            Width="307"
+            Margin="0,0,10,5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ClearErrorLog}"
+            CommandParameter="{Binding $parent[Window]}"
+            Content="Clear" />
+
+    </Grid>
+</Window>

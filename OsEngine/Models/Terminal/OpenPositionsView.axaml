@@ -1,0 +1,46 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Terminal.OpenPositionsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataGrid Background="Black" GridLinesVisibility="All">
+
+        <!-- <DataGrid.Styles> -->
+        <!--     <Style Selector="TextBlock" -->
+        <!-- </DataGrid.Styles> -->
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Width="Auto" Header="№" />
+            <DataGridTextColumn Header="Open Time" />
+            <DataGridTextColumn Header="Close Time" />
+            <!--  NOTE: Does Bot name in this context relevant? Only if we have several bot?  -->
+            <DataGridTextColumn Header="Bot" />
+            <DataGridTextColumn Header="Security" />
+            <DataGridTextColumn Header="Dir." />
+            <DataGridTextColumn Header="State" />
+            <DataGridTextColumn Header="Vol." />
+            <DataGridTextColumn Header="Now" />
+            <DataGridTextColumn Header="Wait" />
+            <DataGridTextColumn Header="Open Price" />
+            <DataGridTextColumn Header="Close Price" />
+            <DataGridTextColumn Header="Stop Activation" />
+            <DataGridTextColumn Header="Stop Price" />
+            <DataGridTextColumn Header="Profit Activation" />
+            <DataGridTextColumn Header="Profit Price" />
+            <DataGridTextColumn Header="Signal Type Open" />
+            <DataGridTextColumn Header="Signal Type Close" />
+        </DataGrid.Columns>
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Close All Market" />
+                <MenuItem Header="New Position" />
+                <!-- NOTE: What Delete Position do and how is different from Close Selected?-->
+                <MenuItem Header="Delete Position" />
+                <MenuItem Header="Close Selected" />
+                <MenuItem Header="Swap Stop Order" />
+                <MenuItem Header="Swap Profit Order" />
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+    </DataGrid>
+
+</UserControl>

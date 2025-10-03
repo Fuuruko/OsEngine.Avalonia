@@ -1,0 +1,85 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Terminal.ChartView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="using:OsEngine.Models.Terminal.Chart"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+    xmlns:vm="using:OsEngine.ViewModels.Terminal"
+    x:DataType="vm:ChartViewModel">
+
+    <UserControl.DataContext>
+        <vm:ChartViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <conv:IsLastAreaConverter x:Key="IsLastAreaConverter" />
+    </UserControl.Resources>
+
+    <Grid Name="ChartGrid">
+
+        <ItemsControl ItemsSource="{Binding ChartAreas}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="TEST" />
+                        <!-- XAxes="{Binding $parent.DataContext.XAxes}"  -->
+                        <!-- YAxes="{Binding $parent.DataContext.YAxes}"  -->
+
+                        <!-- <lvc:CartesianChart /> -->
+                        <!-- Height="250" -->
+                        <lvc:CartesianChart
+                            Name="CartesianChart"
+                            Grid.Row="0"
+                            FindingStrategy="ExactMatch"
+                            TooltipPosition="Center"
+                            Series="{Binding Series}"
+                            XAxes="{Binding XAxes}"
+                            YAxes="{Binding YAxes}"
+                            ZoomMode="X">
+                            <lvc:CartesianChart.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Drawing a chart" />
+                                    <MenuItem Header="Create indicator" />
+                                    <MenuItem Header="Edit indicator" />
+                                    <MenuItem Header="Delete indicator" />
+                                </ContextMenu>
+                            </lvc:CartesianChart.ContextMenu>
+                        </lvc:CartesianChart>
+
+                        <!--  Conditional GridSplitter  -->
+                        <GridSplitter
+                            Grid.Row="1"
+                            Height="5"
+                            HorizontalAlignment="Stretch"
+                            Background="DarkGray"
+                            />
+                        <!-- IsVisible="{Binding, Converter={StaticResource IsLastAreaConverter}, -->
+                        <!-- ConverterParameter={Binding $parent[UserControl].DataContext.ChartAreas}}"  -->
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--  <lvc:CartesianChart  -->
+        <!--  Name="CartesianChart"  -->
+        <!--  Series="{Binding MainArea.Series}"  -->
+        <!--  XAxes="{Binding XAxes}"  -->
+        <!--  YAxes="{Binding YAxes}"  -->
+        <!--  TooltipPosition="Center"  -->
+        <!--  FindingStrategy="ExactMatch"  -->
+        <!--  ZoomMode="X">  -->
+        <!--     <lvc:CartesianChart.ContextMenu> -->
+        <!--         <ContextMenu> -->
+        <!--             <MenuItem Header="Drawing a chart" /> -->
+        <!--             <MenuItem Header="Create indicator" /> -->
+        <!--             <MenuItem Header="Edit indicator" /> -->
+        <!--             <MenuItem Header="Delete indicator" /> -->
+        <!--         </ContextMenu> -->
+        <!--     </lvc:CartesianChart.ContextMenu> -->
+        <!-- </lvc:CartesianChart> -->
+    </Grid>
+</UserControl>

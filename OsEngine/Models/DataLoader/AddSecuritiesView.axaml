@@ -1,0 +1,105 @@
+<Window
+    x:Class="OsEngine.Views.Data.AddSecuritiesWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Add security"
+    Width="428"
+    Height="492"
+    CanResize="False"
+    Icon="/Assets/OsLogo.ico"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Rectangle Margin="5,5,5,37" />
+        <Label
+            Name="Label1"
+            Margin="10,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Class" />
+        <Button
+            Name="ButtonAccept"
+            Width="129"
+            Height="22"
+            Margin="0,0,5,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Content="Accept"
+            FontFamily="Calibri"
+            FontSize="13" />
+        <!--  Click="ButtonAccept_Click"  -->
+        <ComboBox
+            Name="ComboBoxClass"
+            Margin="10,28,251.4,0"
+            VerticalAlignment="Top" />
+        <!-- <WindowsFormsHost Name="HostSecurity" Margin="10,56,10.4,42.4" /> -->
+
+        <DataGrid Margin="10,56,10.4,42.4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" />
+                <DataGridTextColumn Header="Name Code" />
+                <DataGridCheckBoxColumn Header="Download" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label
+            Name="LabelSearchString"
+            Width="145"
+            Margin="10,218,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="" />
+        <CheckBox
+            Name="CheckBoxSelectAllCheckBox"
+            Margin="0,28,10.4,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="Select all" />
+        <TextBox
+            Name="TextBoxSearchSecurity"
+            Width="133"
+            Margin="0,28,110.4,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Text="Search..."
+            TextWrapping="Wrap" />
+        <Button
+            Name="ButtonRightInSearchResults"
+            Width="23"
+            Height="20"
+            Margin="292,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="&gt;" />
+        <Button
+            Name="ButtonLeftInSearchResults"
+            Width="23"
+            Height="20"
+            Margin="182,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="&lt;" />
+        <Label
+            Name="LabelCurrentResultShow"
+            Height="20"
+            Margin="225,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="1" />
+        <Label
+            Name="LabelCommasResultShow"
+            Height="20"
+            Margin="240,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="...." />
+        <Label
+            Name="LabelCountResultsShow"
+            Height="20"
+            Margin="259,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="8" />
+    </Grid>
+</Window>

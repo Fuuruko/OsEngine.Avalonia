@@ -1,0 +1,69 @@
+<Window
+    x:Class="OsEngine.Views.Indicators.IndicatorParametersWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OsEngine.Indicators"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Indicator settings"
+    Width="417.961"
+    Height="335.18"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <Rectangle Margin="5,5,5,37" />
+
+        <Button
+            Name="ButtonAccept"
+            Width="138"
+            Margin="0,0,10,7"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="ButtonAccept_Click"
+            Content="Accept" />
+
+        <Button
+            Name="ButtonAccept"
+            Width="138"
+            Margin="0,0,10,7"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="ButtonAccept_Click"
+            Content="OK" />
+
+        <TabControl Margin="0,0,0,37">
+
+            <TabItem Name="TabItemParam" Header="Parameters">
+                <!-- <Grid Background="#FFE5E5E5"> -->
+                <!--     <WindowsFormsHost Name="HostParameters" Margin="0,0,0,0" /> -->
+                <!-- </Grid> -->
+            </TabItem>
+
+            <TabItem Name="TabItemVisual" Header="Style">
+                <!-- <Grid Background="#FFE5E5E5"> -->
+                <!--     <WindowsFormsHost Name="HostVisual" /> -->
+                <!-- </Grid> -->
+            </TabItem>
+
+            <TabItem Name="TabItemIncludeInd" Header="Include Indicators">
+                <!-- <Grid Background="#FFE5E5E5"> -->
+                <!--     <WindowsFormsHost Name="HostIndicators" /> -->
+                <!-- </Grid> -->
+            </TabItem>
+
+        </TabControl>
+
+        <Button
+            Name="ButtonDefault"
+            Width="138"
+            Margin="10,0,0,7"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Click="ButtonDefault_Click"
+            Content="Default" />
+
+    </Grid>
+</Window>

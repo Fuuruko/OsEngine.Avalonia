@@ -1,0 +1,569 @@
+<Window
+    x:Class="OsEngine.Views.Market.Servers.Tester.TesterWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:rs="using:RangeSlider.Avalonia.Controls"
+    xmlns:vm="using:OsEngine.ViewModels.Market.Servers.Tester"
+    xmlns:conv="using:OsEngine.Converters"
+    Title="Exchange emulator"
+    Width="815"
+    Height="492"
+    MinWidth="770"
+    MinHeight="120"
+    x:DataType="vm:TesterViewModel"
+    CanResize="False"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="CenterScreen">
+    <!--  Style="{StaticResource WindowStyleNoResize}"  -->
+
+    <Window.Resources>
+        <conv:NameAttributeToStringConverter x:Key="NameAttributeToStringConverter" />
+
+        <StreamGeometry x:Key="play">
+            M8,5.14V19.14L19,12.14L8,5.14Z
+        </StreamGeometry>
+
+        <StreamGeometry x:Key="pause">
+            M14,19H18V5H14M6,19H10V5H6V19Z
+        </StreamGeometry>
+
+        <StreamGeometry x:Key="skip_next">
+            M16,18H18V6H16M6,18L14.5,12L6,6V18Z
+        </StreamGeometry>
+
+        <StreamGeometry x:Key="skip_full">
+            M4,5V19L11,12M18,5V19H20V5M11,5V19L18,12
+        </StreamGeometry>
+
+        <StreamGeometry x:Key="fast_forward">
+            M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z
+        </StreamGeometry>
+
+        <StreamGeometry x:Key="stop">
+            M3,3V21H21V3
+        </StreamGeometry>
+
+        <StreamGeometry x:Key="folder_upload">
+            M20,6A2,2 0 0,1 22,8V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4H10L12,6H20M10.75,13H14V17H16V13H19.25L15,8.75
+        </StreamGeometry>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="1" Margin="5" />
+
+
+
+        <Button
+            Name="ButtonSynchronizer"
+            Grid.Row="0"
+            Grid.Column="0"
+            Width="129"
+            Margin="5,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="More settings"
+            FontSize="14" />
+        <!--  Click="ButtonSynchronizer_Click"  -->
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+
+            <Button
+                Grid.Row="0"
+                Width="32"
+                Height="32"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding ToggleStartPause}"
+                FontSize="14">
+                <StackPanel>
+                    <!-- IsVisible="{Binding TesterServer.Regime, Converter={x:Static conv:RegimeToBoolConverter.IsActive}}" -->
+                    <PathIcon
+                        Data="{StaticResource play}"
+                        />
+                    <!-- <PathIcon -->
+                    <!--     Data="{StaticResource pause}" -->
+                    <!--     IsVisible="{Binding TesterServer.Regime, Converter={x:Static conv:RegimeToBoolConverter.IsPause}}" /> -->
+                    <!-- <PathIcon Data="{StaticResource pause}" IsEnabled="False"/> -->
+                </StackPanel>
+            </Button>
+            <!--  Content="Start test"  -->
+            <!--  Click="buttonStartTest_Click"  -->
+
+            <Button
+                Name="ButtonPausePlay"
+                Grid.Row="0"
+                Width="32"
+                Height="32"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Command="{Binding PauseTesting}"
+                FontSize="14">
+                <PathIcon Data="{StaticResource pause}" />
+            </Button>
+
+            <Button
+                Grid.Row="0"
+                Width="32"
+                Height="32"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontSize="14">
+                <PathIcon Data="{StaticResource stop}" />
+            </Button>
+            <!--  Click="buttonPausePlay_Click"  -->
+
+            <Button
+                Name="ButtonFast"
+                Width="32"
+                Height="32"
+                VerticalAlignment="Top"
+                FontSize="14">
+                <PathIcon Data="{StaticResource fast_forward}" />
+            </Button>
+
+            <Button
+                Name="ButtonNextCandle"
+                Grid.Row="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontSize="14">
+                <PathIcon Data="{StaticResource skip_next}" />
+            </Button>
+            <!--  Click="buttonNextCandle_Click"  -->
+
+            <Button
+                Name="Skip"
+                Grid.Row="0"
+                Width="32"
+                Height="32"
+                VerticalAlignment="Top"
+                FontSize="14">
+                <PathIcon Data="{StaticResource skip_full}" />
+            </Button>
+            <!--  Click="buttonFast_Click"  -->
+
+        </StackPanel>
+        <!--  Click="buttonPausePlay_Click"  -->
+        <ProgressBar
+            Name="ProgressBar"
+            Grid.Row="0"
+            Grid.Column="0"
+            Height="9"
+            Margin="5,35,5,0"
+            VerticalAlignment="Top"
+            Minimum="0" />
+        <Label
+            Name="Label21"
+            Grid.Row="0"
+            Width="138"
+            Margin="0,6,112,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="Connection state "
+            FontFamily="Calibri"
+            FontSize="16"
+            FontWeight="Bold" />
+        <Label
+            Name="LabelStatus"
+            Grid.Row="0"
+            Width="102"
+            Margin="0,6,5,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="Disconnect"
+            FontSize="16"
+            FontWeight="Bold" />
+        <TabControl
+            Grid.Row="1"
+            Margin="10,21,12,10"
+            SelectedIndex="1">
+            <TabItem
+                Name="Label29"
+                FontSize="14"
+                Header=" Broadcast data ">
+                <Grid>
+                    <!--  <WindowsFormsHost  -->
+                    <!--  Name="HostSecurities"  -->
+                    <!--  Margin="0,148,0,0"  -->
+                    <!--  Foreground="Black" />  -->
+                    <DataGrid
+                        Margin="0,148,0,0" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Path"/>
+                            <DataGridTextColumn Header="Security"/>
+                            <DataGridTextColumn Header="TimeFrame"/>
+                            <DataGridTextColumn Header="Price Step"/>
+                            <DataGridTextColumn Header="Start Time"/>
+                            <DataGridTextColumn Header="End Time"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ComboBox
+                        Name="ComboBoxSets"
+                        Width="255"
+                        Margin="366,5,0,0"
+                        PlaceholderText="No Sets / No Folders"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
+                    <Label
+                        Name="Label28"
+                        Margin="324,5,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Sets" />
+                    <ComboBox
+                        Name="ComboBoxDataType"
+                        Width="220"
+                        Margin="109,0,0,0"
+                        SelectedItem="{Binding TesterDataType}"
+                        ItemsSource="{x:Static vm:TesterViewModel.TesterDataTypes}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Converter={x:Static conv:Converters.NameAttributeToString}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                     <!-- ItemsSource="{Binding Source={x:Static vm:TesterViewModel.TesterDataTypes}}" -->
+                    <Label
+                        Name="Label25"
+                        Margin="9,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Translation type" />
+                    <Button
+                        Margin="627,4,10,0"
+                        VerticalAlignment="Top"
+                        Command="{Binding SetFolder}"
+                        CommandParameter="{Binding $parent[Window]}"
+                        Content="Find in folder"
+                        ToolTip.Tip="Set folder">
+                        <!--  NOTE: Error with placement for some reason. Send feedback to developers  -->
+                        <!--  ToolTip.Placement="TopEdgeAlignedRight"  -->
+                        <PathIcon Data="{StaticResource folder_upload}" />
+                    </Button>
+                    <!--  Click="ButtonSetDataFromPath_Click"  -->
+                    <!-- <TextBox -->
+                    <!--     Name="TextBoxDataPath" -->
+                    <!--     Margin="324,35,9,0" -->
+                    <!--     VerticalAlignment="Top" -->
+                    <!--     TextWrapping="Wrap" /> -->
+                    <!-- <ComboBox -->
+                    <!--     Name="ComboBoxDataSourceType" -->
+                    <!--     Width="197" -->
+                    <!--     Margin="96,5,0,0" -->
+                    <!--     HorizontalAlignment="Left" -->
+                    <!--     VerticalAlignment="Top" /> -->
+                    <!-- <Label -->
+                    <!--     Name="Label24" -->
+                    <!--     Margin="9,5,0,0" -->
+                    <!--     HorizontalAlignment="Left" -->
+                    <!--     VerticalAlignment="Top" -->
+                    <!--     Content="Source" /> -->
+                    <rs:RangeSlider Margin="268,65,10,0" MoveWholeRange="True" />
+                    <!--  <Slider  -->
+                    <!--  Name="SliderFrom"  -->
+                    <!--  Height="22"  -->
+                    <!--  Margin="268,65,10,0"  -->
+                    <!--  VerticalAlignment="Top" />  -->
+                    <!--  <Slider  -->
+                    <!--  Name="SliderTo"  -->
+                    <!--  Height="22"  -->
+                    <!--  Margin="268,95,12,0"  -->
+                    <!--  VerticalAlignment="Top"  -->
+                    <!--  RenderTransformOrigin="0.5,0.5">  -->
+                    <!--     <Slider.RenderTransform> -->
+                    <!--         <TransformGroup> -->
+                    <!--             <ScaleTransform /> -->
+                    <!--             <SkewTransform /> -->
+                    <!--             <RotateTransform Angle="-179.79" /> -->
+                    <!--             <TranslateTransform /> -->
+                    <!--         </TransformGroup> -->
+                    <!--     </Slider.RenderTransform> -->
+                    <!-- </Slider> -->
+
+                    <TextBox
+                        Name="TextBoxFrom"
+                        Width="167"
+                        Margin="96,65,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        Name="TextBoxTo"
+                        Width="167"
+                        Margin="96,95,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+                    <Label
+                        Name="LabelFrom"
+                        Margin="9,65,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="From"
+                        FontFamily="Calibri" />
+                    <Label
+                        Name="LabelTo"
+                        Width="24"
+                        Margin="9,95,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="To"
+                        FontFamily="Calibri" />
+                    <!-- <CheckBox -->
+                    <!--     Name="CheckBoxRemoveTrades" -->
+                    <!--     Margin="10,123,0,0" -->
+                    <!--     HorizontalAlignment="Left" -->
+                    <!--     VerticalAlignment="Top" -->
+                    <!--     Content="Remove trades from memory" /> -->
+                </Grid>
+            </TabItem>
+            <TabItem
+                Name="Label30"
+                FontSize="14"
+                Header=" Performance settings ">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Name="GridOrdersSettings">
+                        <TextBox
+                            Name="TextBoxSlippageSimpleOrder"
+                            Width="96"
+                            Height="23"
+                            Margin="135,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            TextWrapping="Wrap" />
+                        <NumericUpDown
+                            Width="96"
+                            Height="23"
+                            Margin="135,0,0,0"
+                            Minimum="0"
+                            HorizontalAlignment="Left"
+                            ShowButtonSpinner="False"
+                            Value="{Binding TesterServer.SlippageToSimpleOrder}"
+                            VerticalAlignment="Center"/>
+                        <Label
+                            Name="Label32"
+                            Width="193"
+                            Height="23"
+                            Margin="38,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Limit slippage"
+                            FontSize="14" />
+                        <!--  <CheckBox  -->
+                        <!--  Name="CheckBoxSlippageLimitOff"  -->
+                        <!--  Width="121"  -->
+                        <!--  Height="23"  -->
+                        <!--  Margin="38,0,0,0"  -->
+                        <!--  HorizontalAlignment="Left"  -->
+                        <!--  VerticalAlignment="Center"  -->
+                        <!--  Content="Disabled" />  -->
+                        <!--  Checked="CheckBoxSlippageLimitOff_Checked"  -->
+                        <CheckBox
+                            Name="CheckBoxSlippageLimitOn"
+                            Width="92"
+                            Height="23"
+                            Margin="38,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="In steps" />
+                        <!--  Checked="CheckBoxSlippageLimitOn_Checked"  -->
+                        <TextBox
+                            Name="TextBoxSlippageStop"
+                            Width="102"
+                            Height="23"
+                            Margin="390,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            TextWrapping="Wrap" />
+                        <NumericUpDown
+                            Width="102"
+                            Height="23"
+                            Margin="390,0,0,0"
+                            Minimum="0"
+                            ShowButtonSpinner="False"
+                            Value="{Binding TesterServer.SlippageToStopOrder}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"/>
+                        <Label
+                            Name="Label33"
+                            Width="208"
+                            Height="23"
+                            Margin="284,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Stop slippage"
+                            FontSize="14" />
+                        <!--  <CheckBox  -->
+                        <!--  Name="CheckBoxSlippageStopOff"  -->
+                        <!--  Width="104"  -->
+                        <!--  Height="24"  -->
+                        <!--  Margin="284,0,0,0"  -->
+                        <!--  HorizontalAlignment="Left"  -->
+                        <!--  VerticalAlignment="Center"  -->
+                        <!--  Content="Disabled" />  -->
+                        <!--  Checked="CheckBoxSlippageStopOff_Checked"  -->
+                        <CheckBox
+                            Name="CheckBoxSlippageStopOn"
+                            Width="101"
+                            Height="23"
+                            Margin="284,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="In steps" />
+                        <!--  Checked="CheckBoxSlippageStopOn_Checked"  -->
+                        <Label
+                            Name="Label34"
+                            Width="193"
+                            Height="23"
+                            Margin="544,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Order execution"
+                            FontSize="14" />
+                        <ComboBox
+                            Name="ComboBoxOrderActivationType"
+                            Width="111"
+                            Height="23"
+                            Margin="626,0,0,0"
+                            ItemsSource="{x:Static vm:TesterViewModel.OrderExecutionTypes}"
+                            SelectedItem="{Binding OrderExecutionType}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center" />
+                        <Label
+                            Name="LabelOrderActivationType"
+                            Width="82"
+                            Height="24"
+                            Margin="544,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Activation" />
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="0,-20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <!-- <WindowsFormsHost Name="HostClearing" Margin="0,26,5,0" /> -->
+                        <!--  <WindowsFormsHost  -->
+                        <!--  Name="HostNonTradePeriods"  -->
+                        <!--  Grid.Column="1"  -->
+                        <!--  Margin="5,26,0,0" />  -->
+
+                        <Label
+                            Name="LabelClearing"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Orders clearing system" />
+
+                        <!-- ItemsSource="{Binding TesterServer.ClearingTimes}" -->
+                        <DataGrid
+                            Grid.Column="0"
+                            ItemsSource="{Binding OrderClearings}"
+                            Margin="0,26,5,0" >
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Clearing Time"/>
+
+                                <DataGridTextColumn Header="Is Enabled"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Label
+                            Name="LabelNonTradePeriod"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Non-trading periods" />
+
+                        <!-- ItemsSource="{Binding TesterServer.ClearingTimes}" -->
+                        <DataGrid
+                            Grid.Column="1"
+                            ItemsSource="{Binding NonTradePeriods}"
+                            Margin="0,26,0,0" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Start Date"/>
+                                <DataGridTextColumn Header="End Date"/>
+                                <DataGridTextColumn Header="Is Enabled"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem
+                Name="Label31"
+                FontSize="14"
+                Header=" Portfolio ">
+                <Grid>
+                    <!-- <WindowsFormsHost Name="HostPortfolio" Margin="0,32,0,0" /> -->
+                    <Label
+                        Name="Label40"
+                        Width="129"
+                        Margin="266,4,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Initial deposit" />
+                    <NumericUpDown
+                        Width="141"
+                        Margin="400,4,0,0"
+                        Minimum="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Value="{Binding StartDeposit}" />
+                    <!--  TextWrapping="Wrap"  -->
+                    <CheckBox
+                        Name="CheckBoxOnOffMarketPortfolio"
+                        Margin="10,4,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Enable portfolio calculation" />
+                    <!--  Click="CheckBoxOnOffMarketPortfolio_Checked"  -->
+                </Grid>
+            </TabItem>
+            <TabItem
+                Name="Label23"
+                FontSize="14"
+                Header=" Logging ">
+                <Grid>
+                    <!--  <WindowsFormsHost  -->
+                    <!--  Name="Host"  -->
+                    <!--  Margin="0,10,0,0"  -->
+                    <!--  Foreground="Black" />  -->
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button
+            Name="ButtonGoTo"
+            Grid.Row="0"
+            Width="90"
+            Margin="0,49,5,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="&gt;&gt;go to"
+            FontSize="14" />
+        <!--  Click="ButtonGoTo_Click"  -->
+        <Button
+            Name="ButtonNextPos"
+            Grid.Row="0"
+            Width="90"
+            Margin="0,49,99,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="&gt;&gt;next pos"
+            FontSize="14" />
+        <!--  Click="ButtonNextPos_Click"  -->
+    </Grid>
+</Window>

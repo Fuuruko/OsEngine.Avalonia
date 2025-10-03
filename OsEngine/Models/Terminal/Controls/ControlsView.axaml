@@ -1,0 +1,152 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Terminal.ControlsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:OsEngine.ViewModels.Terminal"
+    x:DataType="vm:BotViewModel">
+
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Spacing="3">
+        <Label
+            Name="LabelGeneralSettings"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="General settings"
+            FontSize="18" />
+        <Button
+            Name="ButtonStrategySettings"
+            Width="161"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding PositionSupportCommand}"
+            Content="Position support" />
+        <!--  Click="ButtonStrategManualSettings_Click"  -->
+        <Button
+            Name="ButtonJournalCommunity"
+            Width="161"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding JournalShowCommand}"
+            Content="Journal" />
+        <!--  Click="ButtonJournalCommunity_Click"  -->
+        <Button
+            Name="ButtonStrategyParameter"
+            Width="161"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Parameters" />
+        <!--  Click="ButtonStrategParametr_Click"  -->
+        <Button
+            Name="ButtonRiskManager"
+            Width="161"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ToggleRiskManagerPopup"
+            Content="Risk manager" />
+
+        <Popup
+            Name="RiskManagerPopup"
+            Width="395"
+            Height="220"
+            IsOpen="False"
+            OverlayDismissEventPassThrough="True"
+            Placement="Left"
+            HorizontalOffset="-20"
+            PlacementTarget="ButtonRiskManager"
+            ShouldUseOverlayLayer="True"
+            TakesFocusFromNativeControl="True">
+            <!--  IsLightDismissEnabled="True"  -->
+            <!--  StaysOpen="False"  -->
+            <Border
+                Padding="10"
+                Background="#222"
+                BorderBrush="gray"
+                BorderThickness="2"
+                CornerRadius="10">
+                <Grid ColumnDefinitions="3*,2*"
+                    RowSpacing="10"
+                    VerticalAlignment="Center"
+                    RowDefinitions="Auto,Auto,Auto,Auto">
+
+                    <Button Content="X" CornerRadius="100"
+                        Height="30"
+                        Width="30"
+                        Grid.Column="1"
+                        Margin="0,-30,0,0"
+                        Click="ToggleRiskManagerPopup"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"/>
+
+
+                    <CheckBox
+                        Name="CheckBoxIsOn"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0,15"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Is on" />
+
+                    <Label
+                        Name="LabelMaxLossReactioin"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Max Loss Reaction" />
+
+                    <TextBox
+                        Name="TextBoxOpenMaxDd"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Height="23"
+                        VerticalAlignment="Top"
+                        TextWrapping="Wrap" />
+
+                    <Label
+                        Name="LabelMaxRisk"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Maximum loss per day in %" />
+                    <ComboBox
+                        Name="ComboBoxReaction"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top" />
+
+                    <Button
+                        Name="ButtonAccept"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Content="Accept" />
+                    <!--  Click="ButtonAccept_Click"  -->
+                </Grid>
+            </Border>
+        </Popup>
+        <!--  Click="ButtonRiskManager_Click"  -->
+        <Button
+            Name="ButtonRedactTab"
+            Width="161"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding ShowDataSettings}"
+            Content="Data settings" />
+        <!--  Click="ButtonRedactTab_Click"  -->
+        <Button
+            Name="ButtonStrategySettingsIndividual"
+            Width="161"
+            Height="24"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Bot trade settings" />
+        <!--  Click="ButtonStrategIndividualSettings_Click"  -->
+
+    </StackPanel>
+</UserControl>

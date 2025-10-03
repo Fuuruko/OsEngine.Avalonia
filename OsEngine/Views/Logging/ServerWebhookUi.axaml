@@ -1,0 +1,51 @@
+<Window
+    x:Class="OsEngine.Views.Logging.ServerWebhookDeliveryUi"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Title="Webhook server"
+    Width="666.887"
+    Height="254"
+    CanResize="False"
+    Icon="/Assets/OsLogo.ico"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button
+            Name="ButtonAccept"
+            Width="101"
+            Margin="0,0,5,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="buttonAccept_Click"
+            Content="Accept" />
+        <Rectangle Margin="5,5,5,37" />
+        <!--  Height="Auto"  -->
+        <TextBox
+            Name="TextBoxWebhooks"
+            Margin="105,18,19,95"
+            AcceptsReturn="True"
+            TextWrapping="Wrap" />
+
+        <TextBox
+            Name="TextBoxSlackBotToken"
+            Height="23"
+            Margin="105,158,19,0"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <Label
+            Name="Label16"
+            Width="81"
+            Margin="19,18,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Webhooks" />
+        <Label
+            Name="Label17"
+            Width="81"
+            Margin="19,158,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Slack token" />
+    </Grid>
+</Window>

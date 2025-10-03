@@ -1,0 +1,133 @@
+<Window
+    x:Class="OsEngine.Views.Data.OsDataSetDetailUi"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OsEngine.OsData"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Data Stream Detail"
+    Width="540"
+    Height="600"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <!-- <WindowsFormsHost Name="HostDataPiesDetails" Margin="0,192,0,0" /> -->
+        <Label
+            Name="LabelStatus"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Status: " />
+        <Label
+            Name="LabelExchange"
+            Margin="10,38,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Exchange: " />
+        <Label
+            Name="LabelSecurity"
+            Margin="10,66,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Security: " />
+        <Label
+            Name="LabelClass"
+            Margin="10,94,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Class: " />
+        <Label
+            Name="LabelTimeFrame"
+            Margin="10,122,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time Frame: " />
+        <Label
+            Name="LabelTimeStart"
+            Margin="279,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time Start: " />
+        <Label
+            Name="LabelTimeEnd"
+            Margin="279,38,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time End: " />
+        <Label
+            Name="LabelTimeStartReal"
+            Margin="279,66,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time Start Real: " />
+        <Label
+            Name="LabelTimeEndReal"
+            Margin="279,94,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time End Real: " />
+        <Label
+            Name="LabelStatusValue"
+            Margin="136,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="StatusVal" />
+        <Label
+            Name="LabelExchangeValue"
+            Margin="136,38,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="ExchangeVal" />
+        <Label
+            Name="LabelSecurityValue"
+            Margin="136,66,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="SecurityVal" />
+        <Label
+            Name="LabelClassValue"
+            Margin="136,94,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="ClassVal" />
+        <Label
+            Name="LabelTimeFrameValue"
+            Margin="136,122,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="TimeFrameVal" />
+        <Label
+            Name="LabelTimeStartValue"
+            Margin="417,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time Start val " />
+        <Label
+            Name="LabelTimeEndValue"
+            Margin="417,38,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time End val" />
+        <Label
+            Name="LabelTimeStartRealValue"
+            Margin="417,66,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time Start Real val" />
+        <Label
+            Name="LabelTimeEndRealValue"
+            Margin="417,94,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Time End Real val" />
+        <Label
+            Name="LabelCache"
+            Margin="0,167,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Cache data " />
+
+    </Grid>
+</Window>

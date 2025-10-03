@@ -1,0 +1,9 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Optimizer.CrossValidationView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+    x:DataType="vm:CrossValidationViewModel"
+    xmlns:vm="using:OsEngine.ViewModels.Optimizer">
+
+</UserControl>

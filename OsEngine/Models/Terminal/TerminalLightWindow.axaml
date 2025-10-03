@@ -1,0 +1,349 @@
+<Window
+    x:Class="OsEngine.Views.Terminal.TerminalLight"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:OsEngine.ViewModels.Terminal"
+    Title="Terminal Light"
+    Width="1200"
+    Height="800"
+    MinWidth="800"
+    MinHeight="700"
+    Icon="/Assets/OsLogo.ico"
+    x:DataType="vm:TerminalViewModel"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <!-- xmlns:local="clr-namespace:OsEngine.OsTrader.Gui" -->
+    <Window.DataContext>
+        <vm:TerminalViewModel />
+    </Window.DataContext>
+
+    <Grid Name="GridPrime">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="400" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Strategies}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Name"/>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Strategy"/>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Security"/>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Pos. (curr/total)"/>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Is Enabled"/>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header="Is Emulator"/>
+                <DataGridTextColumn
+                    Width="Auto"
+                    Header=""/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button />
+                                <Button />
+                                <Button />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button
+            Content="Add Bot"
+            Command="{Binding AddBotCommand}"
+            HorizontalAlignment="Right"
+            Margin="0,0,30,0"
+            Grid.Row="1" />
+
+        <Button
+            Content="Journal"
+            Margin="0,0,110,0"
+            HorizontalAlignment="Right"
+            Grid.Row="1" />
+        <!-- Command="{Binding }" -->
+
+        <Button
+            Content="Servers"
+            Margin="0,0,190,0"
+            HorizontalAlignment="Right"
+            Command="{Binding ShowTesterSettings}"
+            Grid.Row="1" />
+
+        <Grid
+            Name="GreedPozitonLogHost"
+            Grid.Row="2"
+            Margin="25,13,5,5">
+            <TabControl
+                Name="TabControlPrime"
+                Margin="0,-23,0,0"
+                BorderThickness="0">
+                <TabItem
+                    Name="TabItemAllPos"
+                    Width="140"
+                    Header="Positions">
+                    <Grid Margin="-5,-5,-5,-5">
+                        <TabControl>
+                            <TabItem
+                                Name="TabActivePos"
+                                Width="280"
+                                Height="12"
+                                Header="Active">
+                                <Grid Margin="-5,-5,-5,-5">
+                                    <!-- <WindowsFormsHost Name="HostActivePoses" Margin="0,0,0,0"/> -->
+                                </Grid>
+                            </TabItem>
+                            <TabItem
+                                Name="TabStopLimitPoses"
+                                Width="280"
+                                Height="12"
+                                Header="Stop Limit">
+                                <Grid Margin="-5,-5,-5,-5">
+                                    <!-- <WindowsFormsHost Name="HostStopLimitPoses" Margin="0,0,0,0"/> -->
+                                </Grid>
+                            </TabItem>
+                            <TabItem
+                                Name="TabHistoricalPos"
+                                Width="280"
+                                Height="12"
+                                Header="Historical">
+                                <Grid Margin="-5,-5,-5,-5">
+                                    <!-- <WindowsFormsHost Name="HostHistoricalPoses" Margin="0,0,0,0"/> -->
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    Name="TabAllOrders"
+                    Width="140"
+                    Header="Orders">
+                    <Grid Margin="-5,-5,-5,-5">
+                        <TabControl>
+                            <TabItem
+                                Name="TabActiveOrders"
+                                Width="280"
+                                Height="12"
+                                Header="Active orders">
+                                <Grid Margin="-5,-5,-5,-5">
+                                    <!-- <WindowsFormsHost Name="HostActiveOrders" Margin="0,0,0,0"/> -->
+                                </Grid>
+                            </TabItem>
+                            <TabItem
+                                Name="TabHistoricalOrders"
+                                Width="280"
+                                Height="12"
+                                Header="Historical orders">
+                                <Grid Margin="-5,-5,-5,-5">
+                                    <!-- <WindowsFormsHost Name="HostHistoricalOrders" Margin="0,0,0,0"/> -->
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    Name="TabPortfolios"
+                    Width="140"
+                    Header="Portfolio">
+                    <Grid Margin="-5,-5,-5,-5">
+                        <!-- <WindowsFormsHost Name="HostPortfolios" Foreground="Black" /> -->
+                    </Grid>
+                </TabItem>
+
+                <TabItem
+                    Name="TabItemLogPrime"
+                    Width="140"
+                    Header="Prime Log">
+                    <Grid Margin="-5,-5,-5,-5">
+                        <!-- <WindowsFormsHost Name ="HostBotLogPrime" Foreground="Black" /> -->
+                    </Grid>
+                </TabItem>
+                <!-- <TabItem -->
+                <!--     Name="TabItemControl" -->
+                <!--     Width="130" -->
+                <!--     Header="Server"> -->
+                <!--     <Grid Margin="-5,-5,-5,-5"> -->
+                <!--         <Grid.ColumnDefinitions> -->
+                <!--             <ColumnDefinition Width="380" /> -->
+                <!--             <ColumnDefinition Width="801*" /> -->
+                <!--         </Grid.ColumnDefinitions> -->
+                        <!-- <WindowsFormsHost Name="HostServers" Margin="0,24,0,22"/> -->
+                        <!-- <WindowsFormsHost Name="HostServerLog" Margin="0,0,0,26" Grid.Column="1"/> -->
+                        <!-- <TextBox -->
+                        <!--     Name="TextBoxSearchSource" -->
+                        <!--     Width="186" -->
+                        <!--     Margin="4,0,0,0" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Top" -->
+                        <!--     Text="search..." -->
+                        <!--     TextWrapping="Wrap" /> -->
+                        <!-- <Button -->
+                        <!--     Name="ButtonRightInSearchResults" -->
+                        <!--     Width="23" -->
+                        <!--     Height="20" -->
+                        <!--     Margin="317,2,0,0" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Top" -->
+                        <!--     Content="&gt;" /> -->
+                        <!-- <Button -->
+                        <!--     Name="ButtonLeftInSearchResults" -->
+                        <!--     Width="23" -->
+                        <!--     Height="20" -->
+                        <!--     Margin="212,2,0,0" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Top" -->
+                        <!--     Content="&lt;" /> -->
+                        <!-- <Label -->
+                        <!--     Name="LabelCurrentResultShow" -->
+                        <!--     Height="20" -->
+                        <!--     Margin="249,2,0,0" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Top" -->
+                        <!--     Content="1" /> -->
+                        <!-- <Label -->
+                        <!--     Name="LabelCommasResultShow" -->
+                        <!--     Height="20" -->
+                        <!--     Margin="264,2,0,0" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Top" -->
+                        <!--     Content="...." /> -->
+                        <!-- <Label -->
+                        <!--     Name="LabelCountResultsShow" -->
+                        <!--     Height="20" -->
+                        <!--     Margin="283,2,0,0" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Top" -->
+                        <!--     Content="8" /> -->
+                        <!-- <CheckBox -->
+                        <!--     Name="CheckBoxServerAutoOpen" -->
+                        <!--     Margin="5,0,0,0" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Bottom" -->
+                        <!--     Content="Deploy servers automatically" /> -->
+                        <!-- <Button -->
+                        <!--     Name="ButtonSupportTable" -->
+                        <!--     Width="133" -->
+                        <!--     Height="22" -->
+                        <!--     Margin="0,0,5,1" -->
+                        <!--     HorizontalAlignment="Right" -->
+                        <!--     VerticalAlignment="Bottom" -->
+                        <!--     Content="Support table" /> -->
+                        <!-- Click="ButtonSupportTable_Click" -->
+                        <!-- <Button -->
+                        <!--     Name="ButtonProxy" -->
+                        <!--     Grid.Column="1" -->
+                        <!--     Width="133" -->
+                        <!--     Height="22" -->
+                        <!--     Margin="3,0,0,1" -->
+                        <!--     HorizontalAlignment="Left" -->
+                        <!--     VerticalAlignment="Bottom" -->
+                        <!--     Content="Proxy" /> -->
+                        <!-- Click="ButtonProxy_Click" -->
+                <!--     </Grid> -->
+                <!-- </TabItem> -->
+
+            </TabControl>
+        </Grid>
+        <!-- <Rectangle -->
+        <!--     Grid.Row="2" -->
+        <!--     Width="20" -->
+        <!--     Height="146" -->
+        <!--     Margin="1,0,0,28" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Bottom" -->
+        <!--     Fill="#FCEE21" -->
+        <!--     RenderTransformOrigin="0.5,0.5" -->
+        <!--     Stroke="Black" -->
+        <!--     StrokeThickness="0"> -->
+        <!--     <Rectangle.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform AngleY="-44" /> -->
+        <!--             <RotateTransform /> -->
+        <!--             <TranslateTransform Y="-12.012" /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Rectangle.RenderTransform> -->
+        <!-- </Rectangle> -->
+        <!-- <Label -->
+        <!--     Name="LabelOsa" -->
+        <!--     Grid.Row="2" -->
+        <!--     Width="80" -->
+        <!--     Height="28" -->
+        <!--     Margin="-29,0,0,102" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Bottom" -->
+        <!--     Content="O-S-A.NET" -->
+        <!--     FontSize="14" -->
+        <!--     FontWeight="Bold" -->
+        <!--     Foreground="Black" -->
+        <!--     RenderTransformOrigin="0.5,0.5"> -->
+        <!--     <Label.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform /> -->
+        <!--             <RotateTransform Angle="-90" /> -->
+        <!--             <TranslateTransform /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Label.RenderTransform> -->
+        <!-- </Label> -->
+
+        <!-- <Grid -->
+        <!--     Name="GreedChartPanel" -->
+        <!--     Grid.Row="0" -->
+        <!--     Margin="0,0,0,0"> -->
+        <!--     <Grid.RowDefinitions> -->
+        <!--         <RowDefinition /> -->
+        <!--         <RowDefinition Height="10" /> -->
+        <!--     </Grid.RowDefinitions> -->
+        <!---->
+        <!--     <Grid Grid.Row="0" Margin="0,0,0,0"> -->
+                <!-- <WindowsFormsHost Name="BotsHost" Margin="0,0,0,0"/> -->
+        <!--     </Grid> -->
+        <!---->
+        <!--     <Grid Grid.Row="1" Margin="0,0,0,0"> -->
+        <!--         <Rectangle -->
+        <!--             Name="rectToMove" -->
+        <!--             Margin="722,0,0,0" -->
+        <!--             Fill="#FCEE21" -->
+        <!--             RadiusX="0" -->
+        <!--             RadiusY="0" /> -->
+        <!--     </Grid> -->
+        <!-- </Grid> -->
+
+        <!-- <Image -->
+        <!--     Name="ImagePadlock" -->
+        <!--     Grid.Row="2" -->
+        <!--     Width="25" -->
+        <!--     Height="26" -->
+        <!--     Margin="0,0,0,5" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Bottom" -->
+        <!--     /> -->
+        <!-- Source="/Assets/padlockOpened.png" -->
+
+        <!-- <Image -->
+        <!--     Name="ImagePadlockOpen" -->
+        <!--     Grid.Row="2" -->
+        <!--     Width="25" -->
+        <!--     Height="26" -->
+        <!--     Margin="0,0,0,5" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Bottom" -->
+        <!--     /> -->
+        <!-- Source="/Assets/padlockClosed.png" -->
+    </Grid>
+</Window>

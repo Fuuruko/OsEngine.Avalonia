@@ -1,0 +1,134 @@
+<Window
+    x:Class="OsEngine.Views.OsConverter.OsConverterView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Converter: trades to candles"
+    Width="620"
+    Height="410"
+    MinWidth="610"
+    MinHeight="400"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="CenterScreen">
+    <Grid Name="GridPrime">
+
+
+        <Rectangle
+            Height="85"
+            Margin="5,5,5,0"
+            VerticalAlignment="Top" />
+        <Label
+            Name="Label1"
+            Margin="26,15,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Initial data"
+            FontSize="16" />
+        <TextBox
+            Name="TextBoxSource"
+            Margin="26,46,15,0"
+            VerticalAlignment="Top"
+            IsEnabled="False"
+            TextWrapping="Wrap" />
+        <Button
+            Name="ButtonSetSource"
+            Width="181"
+            Margin="195,14,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonSetSource_Click"
+            Content="Specify" />
+        <Rectangle
+            Height="96"
+            Margin="5,95,5,0"
+            VerticalAlignment="Top" />
+        <Label
+            Name="Label2"
+            Margin="26,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Outgoing data"
+            FontSize="16" />
+        <TextBox
+            Name="TextBoxExit"
+            Margin="26,131,15,0"
+            VerticalAlignment="Top"
+            IsEnabled="False"
+            TextWrapping="Wrap" />
+        <Button
+            Name="ButtonSetExitFile"
+            Width="183"
+            Margin="195,101,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonSetExitFile_Click"
+            Content="Specify" />
+        <Grid Name="GreedLog" Margin="10,196,5,6">
+            <TabControl
+                Name="TabControlPrime"
+                Margin="10,-21,0,0"
+                Background="#FF17171B"
+                BorderThickness="0">
+                <TabItem
+                    Name="Label4"
+                    Width="140"
+                    Header="Logging">
+                    <Grid>
+                        <!-- <WindowsFormsHost Name="HostLog" /> -->
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <ComboBox
+            Name="ComboBoxTimeFrame"
+            Width="190"
+            Margin="0,103,15,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top" />
+        <Rectangle
+            Width="20"
+            Height="179"
+            Margin="0,0,0,-2"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Fill="#FCEE21"
+            RenderTransformOrigin="0.5,0.5"
+            Stroke="Black"
+            StrokeThickness="0">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform AngleY="-44" />
+                    <RotateTransform />
+                    <TranslateTransform Y="-12.012" />
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Label
+            Name="LabelOsa"
+            Width="80"
+            Height="29"
+            Margin="-30,0,0,87"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="O-S-A.NET"
+            FontWeight="Bold"
+            Foreground="Black"
+            RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform Angle="-90" />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button
+            Name="ButtonStart"
+            Margin="195,159,15,0"
+            VerticalAlignment="Top"
+            Click="ButtonStart_Click"
+            Content="Start conversion" />
+
+    </Grid>
+</Window>

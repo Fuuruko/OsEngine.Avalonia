@@ -1,0 +1,131 @@
+<Window
+    x:Class="OsEngine.Views.Terminal.AddStrategyWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OsEngine.Robots"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Add robot"
+    Width="571"
+    Height="668"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <Rectangle Margin="2,2,2,32" />
+        <TextBox
+            Name="TextBoxName"
+            Width="104"
+            Height="23"
+            Margin="111,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <Label
+            Name="LabelName"
+            Margin="12,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Name" />
+        <!-- <WindowsFormsHost Name="HostBots" Margin="2,67,2,33" /> -->
+
+        <DataGrid Margin="2,67,2,33">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Strategy"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label
+            Name="LabelLocation"
+            Margin="12,33,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Location" />
+        <ComboBox
+            Name="ComboBoxLocation"
+            Width="104"
+            Margin="111,33,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <Button
+            Name="ButtonWhyNeedName"
+            Width="25"
+            Height="23"
+            Margin="220,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="?" />
+        <!-- Click="ButtonWhyNeedName_Click" -->
+        <Button
+            Name="ButtonWhyLocation"
+            Width="25"
+            Margin="220,33,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="?" />
+        <!-- Click="ButtonWhyLocation_Click" -->
+        <TextBox
+            Name="TextBoxSearchSecurity"
+            Width="208"
+            Margin="342,33,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="search..."
+            TextWrapping="Wrap" />
+        <Button
+            Name="ButtonRightInSearchResults"
+            Width="44"
+            Margin="506,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="&gt;" />
+        <Button
+            Name="ButtonLeftInSearchResults"
+            Width="44"
+            Margin="342,6,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="&lt;" />
+        <Label
+            Name="LabelCurrentResultShow"
+            Height="20"
+            Margin="424,9,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="1" />
+        <Label
+            Name="LabelCommasResultShow"
+            Height="20"
+            Margin="439,9,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="...." />
+        <Label
+            Name="LabelCountResultsShow"
+            Margin="458,9,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="8" />
+
+        <Button
+            Name="ButtonUpdateRobots"
+            Width="279"
+            Margin="3,0,0,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Update Robots Info" />
+        <!-- Click="ButtonUpdateRobots_Click" -->
+
+        <Button
+            Name="ButtonAccept"
+            Width="280"
+            Margin="0,0,5,5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Content="Accept" />
+        <!-- Click="ButtonAccept_Click" -->
+
+    </Grid>
+</Window>

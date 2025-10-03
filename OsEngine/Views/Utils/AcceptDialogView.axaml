@@ -1,0 +1,47 @@
+<Window
+    x:Class="OsEngine.Views.Utils.AcceptDialogView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Confirmation window"
+    Width="500"
+    Height="200"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    WindowStartupLocation="CenterScreen">
+    <!-- Topmost="True" -->
+    
+    <StackPanel
+        Spacing="10"
+        Margin="10">
+        <TextBox
+            Height="140"
+            Name="Message"
+            FontSize="15"
+            FontStretch="Expanded"
+            FontWeight="Bold"
+            Text="You want to close the program. Are you sure?"
+            VerticalContentAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+
+        <UniformGrid
+            Rows="1"
+            Columns="2"
+            Width="480">
+            <Button
+                HorizontalAlignment="Stretch"
+                Name="ButtonCancel"
+                VerticalAlignment="Bottom"
+                Click="ButtonCancel_Click"
+                Content="No"
+                FontWeight="Bold" />
+            <Button
+                HorizontalAlignment="Stretch"
+                Name="ButtonAccept"
+                VerticalAlignment="Bottom"
+                Click="ButtonAccept_Click"
+                Content="Accept"
+                FontWeight="Bold" />
+        </UniformGrid>
+    </StackPanel>
+</Window>

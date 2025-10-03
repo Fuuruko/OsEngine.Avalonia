@@ -1,0 +1,136 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <!-- <Nullable>enable</Nullable> -->
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PlatformTarget>x64</PlatformTarget>
+    <ApplicationIcon>Assets\OsLogo.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+      <NoWarn>$(NoWarn);CA1416</NoWarn>
+        <NoWarn>$(NoWarn);CA0618</NoWarn>
+      <NoWarn>$(NoWarn);NU1701</NoWarn>
+      <NoWarn>$(NoWarn);NU1903</NoWarn>
+  </PropertyGroup>
+
+  <Target Name="MakeMyDir" AfterTargets="Build">
+      <MakeDir Directories="$(OutDir)Data" />
+      <MakeDir Directories="$(OutDir)Engine" />
+      <MakeDir Directories="$(OutDir)Engine/Log" />
+      <MakeDir Directories="$(OutDir)Custom" />
+      <MakeDir Directories="$(OutDir)Custom/Indicators" />
+      <MakeDir Directories="$(OutDir)Custom/Strategies" />
+      <MakeDir Directories="$(OutDir)Custom/CandleSeries" />
+  </Target>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <!-- <EmbeddedResource Include="Resources\OsEngine_logo_transpared.png" /> -->
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <!-- <ItemGroup> -->
+  <!--   <PackageReference Include="Avalonia" Version="11.3.4" /> -->
+  <!--   <PackageReference Include="Avalonia.Desktop" Version="11.3.4" /> -->
+  <!--   <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.4" /> -->
+  <!--   <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.4" /> -->
+  <!--   <PackageReference Include="Avalonia.Diagnostics" Version="11.3.4"> -->
+  <!--     <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets> -->
+  <!--     <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets> -->
+  <!--   </PackageReference> -->
+  <!--   <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" /> -->
+  <!-- </ItemGroup> -->
+
+    <ItemGroup>
+        <!-- <PackageReference Include="Disruptor" /> -->
+        <PackageReference Include="Avalonia" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" />
+        <PackageReference Include="Avalonia.Controls.TreeDataGrid" />
+        <PackageReference Include="Avalonia.Fonts.Inter" />
+        <PackageReference Include="Avalonia.Themes.Fluent" />
+        <PackageReference Include="Avalonia.Desktop" />
+        <PackageReference Include="Avalonia.Diagnostics">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Avalonia.Skia" />
+        <PackageReference Include="Avalonia.Xaml.Behaviors" />
+        <PackageReference Include="CommunityToolkit.Mvvm" />
+        <PackageReference Include="Dock.Avalonia" />
+        <PackageReference Include="Dock.Model.Mvvm" />
+        <PackageReference Include="Dock.Serializer.Newtonsoft" />
+        <PackageReference Include="FluentFTP" />
+        <PackageReference Include="Google.Api.CommonProtos" />
+        <PackageReference Include="Google.Protobuf" />
+        <PackageReference Include="Grpc.Core.Api" />
+        <PackageReference Include="Grpc.Net.Client" />
+        <PackageReference Include="HotAvalonia" />
+        <PackageReference Include="LiteDB" />
+        <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" />
+        <PackageReference Include="Material.Icons.Avalonia" />
+        <PackageReference Include="MessageBox.Avalonia" />
+        <PackageReference Include="Microsoft.CSharp" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+        <PackageReference Include="Microsoft.Windows.Compatibility" />
+        <PackageReference Include="Newtonsoft.Json" />
+        <PackageReference Include="OpenFAST" />
+        <PackageReference Include="PusherClient" />
+        <PackageReference Include="QUIKSharp" />
+        <PackageReference Include="RangeSlider.Avalonia" />
+        <PackageReference Include="RestSharp" />
+        <PackageReference Include="System.CodeDom" />
+        <!-- <PackageReference Include="System.Runtime.CompilerServices.Unsafe" /> -->
+        <PackageReference Include="System.ServiceModel.Duplex" />
+        <PackageReference Include="System.ServiceModel.Federation" />
+        <PackageReference Include="System.ServiceModel.Http" />
+        <PackageReference Include="System.ServiceModel.NetTcp" />
+        <PackageReference Include="System.ServiceModel.Primitives" />
+        <PackageReference Include="System.ServiceModel.Security" />
+        <PackageReference Include="System.ServiceModel.Syndication" />
+        <PackageReference Include="System.Text.Encoding.CodePages" />
+        <PackageReference Include="System.Threading.Channels" />
+        <PackageReference Include="Tinkoff.InvestApi" />
+        <PackageReference Include="WebSocket4Net" />
+        <PackageReference Include="WebSocketSharp" />
+        <PackageReference Include="jayrock" />
+        <PackageReference Include="WTelegramClient" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="QUIKSharp">
+            <HintPath>bin\Debug\QuikSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="FinamApi">
+            <HintPath>bin\Debug\FinamApi.dll</HintPath>
+        </Reference>
+        <Reference Include="cgate_net64">
+            <HintPath>..dll\cgate_net64.dll</HintPath>
+        </Reference>
+        <Reference Include="LmaxClientLibrary">
+            <HintPath>..\dll\LmaxClientLibrary.dll</HintPath>
+        </Reference>
+        <Reference Include="qC">
+            <HintPath>..\dll\qC.dll</HintPath>
+        </Reference>
+        <Reference Update="System.Runtime.Serialization">
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="BytesRoad.Net.Ftp">
+            <HintPath>..\dll\BytesRoad.Net.Ftp.dll</HintPath>
+        </Reference>
+        <Reference Include="BytesRoad.Net.Sockets">
+            <HintPath>..\dll\BytesRoad.Net.Sockets.dll</HintPath>
+        </Reference>
+        <AppDesigner Include="Properties\" />
+    </ItemGroup>
+
+</Project>

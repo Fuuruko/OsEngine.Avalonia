@@ -1,0 +1,267 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Optimizer.OptimizerResultsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+    xmlns:vm="using:OsEngine.ViewModels.Optimizer"
+    x:DataType="vm:OptimizerViewModel">
+    <Grid Name="GridPrime">
+        <Grid>
+            <TabControl Name="TabControlResults" Margin="0,0,0,0">
+                <TabItem Name="TabControlResultsSeries" Header="Series and Results">
+                    <Grid>
+                        <!-- <WindowsFormsHost Name="WindowsFormsHostFazeNumOnTubResult"  Foreground="Black" Height="220" Margin="0,22,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="523"/> -->
+                        <DataGrid
+                            Margin="0,22"
+                            Width="523"
+                            ItemsSource="{Binding Phazes}"
+                            HorizontalAlignment="Left"
+                            IsReadOnly="True"
+                            CanUserSortColumns="False"
+                            VerticalAlignment="Top"
+                            Height="220"
+                            >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Step Num"
+                                    Binding="{Binding Num}"
+                                    Width="*"/>
+                                <DataGridTextColumn Header="Type"
+                                    Binding="{Binding Type}"
+                                    Width="*"/>
+                                <DataGridTextColumn Header="Start"
+                                    Binding="{Binding StartTime, StringFormat='{}{0:dd.MM.yyyy}'}"
+                                    Width="*"/>
+                                <DataGridTextColumn Header="End"
+                                    Binding="{Binding EndTime, StringFormat='{}{0:dd.MM.yyyy}'}"
+                                    Width="*"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                        <Label
+                            Name="LabelOptimSeries"
+                            Height="22"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Optimization series" />
+                        <!-- <WindowsFormsHost Name="WindowsFormsHostResults"  Foreground="Black" Margin="0,269,5,0"/> -->
+                        <DataGrid
+                            Margin="0,269,5,0"
+                            HorizontalAlignment="Left"
+                            IsReadOnly="True"
+                            VerticalAlignment="Top"
+                            Height="220"
+                            >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Bot Name"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="Deals"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="Profit"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="Avg. Profit"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="Profit Factor"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="MDD"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="Pay Off Ratio"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="Recovery"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="Sharp Ratio"
+                                    Width="Auto"/>
+                                <DataGridTextColumn Header="" Width="100" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Label
+                            Name="LabelTableResults"
+                            Height="22"
+                            Margin="0,246,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Result table" />
+                        <!-- <WindowsFormsHost Name="WindowsFormsHostResultsChart"  Foreground="Black" Height="220" Margin="527,22,5,0" VerticalAlignment="Top"/> -->
+                        <Label
+                            Name="LabelSeriesResultChart"
+                            Height="22"
+                            Margin="527,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Series results chart" />
+                    </Grid>
+                </TabItem>
+                <TabItem Name="TabControlResultsOutOfSampleResults" Header="Out of sample statistic">
+                    <Grid Name="PrimeGrid">
+                        <Grid
+                            Name="BottomGrid"
+                            Height="218"
+                            Margin="0,0,284,0"
+                            VerticalAlignment="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="47*" />
+                                <ColumnDefinition Width="63*" />
+                            </Grid.ColumnDefinitions>
+                            <!-- <WindowsFormsHost Name="HostTotalProfit"  Foreground="Black" Height="190" Margin="1,28,0,0" VerticalAlignment="Top" Grid.Column="1"/> -->
+                            <!-- <WindowsFormsHost Name="HostRobustness"  Foreground="Black" Height="190" VerticalAlignment="Top" Margin="0,28,0,0"/> -->
+                            <Label
+                                Name="LabelRobustnessMetric"
+                                Width="219"
+                                Height="23"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Robustness metric: " />
+                            <Label
+                                Name="LabelRobustnessMetricValue"
+                                Width="87"
+                                Height="23"
+                                Margin="224,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="value" />
+                            <Label
+                                Name="LabelTotalProfit"
+                                Grid.Column="1"
+                                Width="143"
+                                Height="23"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Total profit summ" />
+
+                            <RadioButton GroupName="Profit Type"
+                                Content="Absolute"
+                                Grid.Column="1"
+                                IsChecked="True"
+                                VerticalAlignment="Top"
+                                Margin="163,0,0,0"
+                                />
+                            <RadioButton GroupName="Profit Type"
+                                Content="Percent"
+                                Grid.Column="1"
+                                VerticalAlignment="Top"
+                                Margin="270,0,0,0"
+                                />
+                            <!-- <ComboBox -->
+                            <!--     Name="ComboBoxTotalProfit" -->
+                            <!--     Grid.Column="1" -->
+                            <!--     Width="155" -->
+                            <!--     Margin="163,0,0,0" -->
+                            <!--     HorizontalAlignment="Left" -->
+                            <!--     VerticalAlignment="Top" /> -->
+
+                        </Grid>
+                        <Grid
+                            Name="LeftGrid"
+                            Width="279"
+                            HorizontalAlignment="Right">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200*" />
+                                <RowDefinition Height="200*" />
+                            </Grid.RowDefinitions>
+                            <!-- <WindowsFormsHost Name="HostAverageProfit"  Foreground="Black" Margin="0,25,0,0"/> -->
+                            <Label
+                                Name="LabelAverageProfitPersent"
+                                Width="198"
+                                Height="23"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="P/L % 1 contract" />
+
+
+
+                            <!-- <WindowsFormsHost Name="HostProfitFactor"  Foreground="Black" Margin="0,33,0,0" Grid.Row="1"/> -->
+
+                            <Label
+                                Name="LabelAverageProfitFactor"
+                                Grid.Row="1"
+                                Width="149"
+                                Height="23"
+                                Margin="0,6,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Profit Factor" />
+                        </Grid>
+                        <!-- <WindowsFormsHost Name="HostStepsOfOptimizationTable"  Foreground="Black" Margin="0,37,287,229"/> -->
+                        <ComboBox
+                            Name="ComboBoxSortResultsType"
+                            Width="214"
+                            Height="22"
+                            Margin="182,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top" />
+                        <Label
+                            Name="LabelSortBy"
+                            Margin="28,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Sort by" />
+                        <ComboBox
+                            Name="ComboBoxSortResultsBotNumPercent"
+                            Width="67"
+                            Height="22"
+                            Margin="407,10,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <!-- <Rectangle -->
+        <!--     Grid.Row="1" -->
+        <!--     Width="20" -->
+        <!--     Height="174" -->
+        <!--     Margin="1,0,0,0" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Bottom" -->
+        <!--     Fill="#FCEE21" -->
+        <!--     RenderTransformOrigin="0.5,0.5" -->
+        <!--     Stroke="Black" -->
+        <!--     StrokeThickness="0"> -->
+        <!--     <Rectangle.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform AngleY="-44" /> -->
+        <!--             <RotateTransform /> -->
+        <!--             <TranslateTransform Y="-12.012" /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Rectangle.RenderTransform> -->
+        <!-- </Rectangle> -->
+        <!-- <Label -->
+        <!--     Name="LabelOsa" -->
+        <!--     Grid.Row="1" -->
+        <!--     Width="80" -->
+        <!--     Height="28" -->
+        <!--     Margin="-29,0,0,85" -->
+        <!--     HorizontalAlignment="Left" -->
+        <!--     VerticalAlignment="Bottom" -->
+        <!--     Content="O-S-A.NET" -->
+        <!--     FontSize="14" -->
+        <!--     FontWeight="Bold" -->
+        <!--     Foreground="Black" -->
+        <!--     RenderTransformOrigin="0.5,0.5"> -->
+        <!--     <Label.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform /> -->
+        <!--             <RotateTransform Angle="-90" /> -->
+        <!--             <TranslateTransform /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Label.RenderTransform> -->
+        <!-- </Label> -->
+        <Button
+            Name="ButtonLoadFromFile"
+            Width="142"
+            Margin="0,0,10,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Content="Load" />
+        <!--  Click="ButtonLoadFromFile_Click"  -->
+        <Button
+            Name="ButtonSaveInFile"
+            Width="142"
+            Margin="0,0,157,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Content="Save" />
+        <!-- Click="ButtonSaveInFile_Click" -->
+    </Grid>
+</UserControl>

@@ -1,0 +1,33 @@
+<UserControl
+    x:Class="OsEngine.Views.Terminal.Chart.ChartAreaView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+    xmlns:vm="using:OsEngine.ViewModels.Terminal"
+    x:DataType="vm:ChartViewModel">
+
+    <UserControl.DataContext>
+        <vm:ChartViewModel />
+    </UserControl.DataContext>
+
+    <Grid Name="ChartGrid">
+        <!-- <lvc:CartesianChart -->
+        <!--     Grid.Row="0" -->
+        <!--     Name="CartesianChart" -->
+        <!--     Series="{Binding MainArea.Series}" -->
+        <!--     XAxes="{Binding XAxes}" -->
+        <!--     YAxes="{Binding YAxes}" -->
+        <!--     TooltipPosition="Center" -->
+        <!--     FindingStrategy="ExactMatch" -->
+        <!--     ZoomMode="X"> -->
+        <!--     <lvc:CartesianChart.ContextMenu> -->
+        <!--         <ContextMenu> -->
+        <!--             <MenuItem Header="Drawing a chart" /> -->
+        <!--             <MenuItem Header="Create indicator" /> -->
+        <!--             <MenuItem Header="Edit indicator" /> -->
+        <!--             <MenuItem Header="Delete indicator" /> -->
+        <!--         </ContextMenu> -->
+        <!--     </lvc:CartesianChart.ContextMenu> -->
+        <!-- </lvc:CartesianChart> -->
+    </Grid>
+</UserControl>

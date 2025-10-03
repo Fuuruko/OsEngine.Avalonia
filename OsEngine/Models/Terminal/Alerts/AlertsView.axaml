@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Terminal.AlertsView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="2">
+        <Button Grid.Row="0"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            Content="Add Visual Alert" />
+
+        <Button Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            Content="Add Price Alert" />
+
+        <DataGrid Grid.Row="2">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Num"/>
+
+                <DataGridTextColumn Header="Type"/>
+
+                <DataGridTemplateColumn Header="Is Enabled">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

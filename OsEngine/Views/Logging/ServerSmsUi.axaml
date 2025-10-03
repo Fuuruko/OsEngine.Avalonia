@@ -1,0 +1,64 @@
+<Window
+    x:Class="OsEngine.Views.Logging.ServerSmsUi"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Title="Sms server"
+    Width="331"
+    Height="193"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button
+            Name="ButtonAccept"
+            Width="101"
+            Margin="0,0,5,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="buttonAccept_Click"
+            Content="Accept" />
+        <Rectangle Margin="5,5,5,37" />
+        <TextBox
+            Name="TextBoxMyLogin"
+            Height="23"
+            Margin="115,20,19,0"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <TextBox
+            Name="TextBoxPassword"
+            Height="23"
+            Margin="115,48,19,0"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <TextBox
+            Name="TextBoxFones"
+            Height="23"
+            Margin="115,76,19,0"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <Label
+            Name="Label15"
+            Width="81"
+            Margin="21,20,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Login" />
+        <Label
+            Name="Label12"
+            Width="67"
+            Margin="21,48,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Password" />
+        <Label
+            Name="Label14"
+            Width="94"
+            Margin="21,76,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Phone number" />
+
+    </Grid>
+</Window>

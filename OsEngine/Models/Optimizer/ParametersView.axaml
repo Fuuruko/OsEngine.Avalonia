@@ -1,0 +1,123 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Optimizer.OptimizerParametersView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:DataType="vm:OptimizerViewModel"
+    xmlns:vm="using:OsEngine.ViewModels.Optimizer">
+
+    <Grid Name="GridParametrs">
+        <DataGrid
+            Margin="10,38,10,26"
+            ItemsSource="{Binding Parameters}">
+            <DataGrid.Columns>
+
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    Header="Is Enabled">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox
+                                HorizontalAlignment="Center"
+                                IsChecked="{Binding IsEnabled, Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn
+                    Binding="{Binding Name}"
+                    IsReadOnly="True"
+                    Width="*"
+                    Header="Parameter Name" />
+
+                <DataGridTextColumn
+                    IsReadOnly="True"
+                    Binding="{Binding Type}"
+                    Header="Type" />
+
+                <DataGridTextColumn
+                    Binding="{Binding Default}"
+                    Header="Default" />
+
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    Header="Start">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <NumericUpDown
+                                ShowButtonSpinner="False"
+                                BorderThickness="0"
+                                CornerRadius="0"
+                                Value="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    Header="Increment">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <NumericUpDown
+                                ShowButtonSpinner="False"
+                                Minimum="0"
+                                BorderThickness="0"
+                                CornerRadius="0"
+                                Value="{Binding Increment, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn
+                    Width="Auto"
+                    Header="End">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <NumericUpDown
+                                ShowButtonSpinner="False"
+                                BorderThickness="0"
+                                CornerRadius="0"
+                                Value="{Binding End, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label
+            Name="Label17"
+            Margin="10,8,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Parameters table" />
+
+        <Label
+            Name="LabelIteartionCount"
+            Margin="0,10,122,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="Max count of bots: " />
+
+        <!-- <TextBlock -->
+        <!--     Name="LabelIteartionCountNumber" -->
+        <!--     Margin="0,10,56,0" -->
+        <!--     HorizontalAlignment="Right" -->
+        <!--     VerticalAlignment="Top" -->
+        <!--     Text="{Binding BotsNumber, Mode=OneWay}" /> -->
+
+        <Label
+            Name="LabelIteartionCountNumber"
+            Margin="0,10,56,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="{Binding BotsNumber, Mode=OneWay}" />
+
+        <Button
+            Width="260"
+            Margin="10,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Set Standard Parameters" />
+
+    </Grid>
+</UserControl>

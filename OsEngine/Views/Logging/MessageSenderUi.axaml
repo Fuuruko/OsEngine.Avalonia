@@ -1,0 +1,342 @@
+<Window
+    x:Class="OsEngine.Views.Logging.MessageSenderUi"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Title="Newsletter"
+    Width="650"
+    Height="450"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Rectangle
+            Grid.Row="0"
+            Grid.Column="0"
+            Width="315"
+            Margin="5,5,5,5"
+            HorizontalAlignment="Left" />
+        <Button
+            Name="ButtonAccept"
+            Grid.Row="3"
+            Grid.Column="1"
+            Width="142"
+            Margin="0,5,10,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="ButtonAccept_Click"
+            Content="Accept" />
+        <Rectangle
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="315"
+            Margin="5,5,5,5"
+            HorizontalAlignment="Left" />
+        <Label
+            Name="Label4"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Email"
+            FontSize="18"
+            FontWeight="ExtraBlack" />
+        <Label
+            Name="Label3"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="SMS"
+            FontSize="18"
+            FontWeight="ExtraBlack" />
+        <Label
+            Name="Label5"
+            Margin="45,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Regime" />
+        <ComboBox
+            Name="ComboBoxModeSms"
+            Width="155"
+            Margin="137,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <CheckBox
+            Name="CheckBoxSmsSignal"
+            Margin="45,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Signal" />
+        <CheckBox
+            Name="CheckBoxSmsTrade"
+            Margin="45,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Trade" />
+        <CheckBox
+            Name="CheckBoxSmsSystem"
+            Margin="206,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="System" />
+        <CheckBox
+            Name="CheckBoxSmsError"
+            Margin="45,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Error" />
+        <CheckBox
+            Name="CheckBoxSmsConnect"
+            Margin="206,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Connection" />
+        <Label
+            Name="Label52"
+            Grid.Column="1"
+            Margin="45,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Regime" />
+        <ComboBox
+            Name="ComboBoxModeMail"
+            Grid.Column="1"
+            Width="158"
+            Margin="137,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <CheckBox
+            Name="CheckBoxMailSignal"
+            Grid.Column="1"
+            Margin="45,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Signal" />
+        <CheckBox
+            Name="CheckBoxMailTrade"
+            Grid.Column="1"
+            Margin="45,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Trade" />
+        <CheckBox
+            Name="CheckBoxMailSystem"
+            Grid.Column="1"
+            Margin="206,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="System" />
+        <CheckBox
+            Name="CheckBoxMailError"
+            Grid.Column="1"
+            Margin="45,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Error" />
+        <CheckBox
+            Name="CheckBoxMailConnect"
+            Grid.Column="1"
+            Margin="206,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Connection" />
+        <Button
+            Name="ButtonMailGlobeSet"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="249"
+            Margin="45,150,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonMailGlobeSet_Click"
+            Content="Configure server" />
+        <Button
+            Name="ButtonSmsGlobeSet"
+            Width="256"
+            Margin="45,150,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonSmsGlobeSet_Click"
+            Content="Configure server" />
+        <Rectangle Grid.Row="1" Margin="5,5,5,5" />
+        <Label
+            Name="Label19"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Webhooks"
+            FontSize="18"
+            FontWeight="ExtraBlack" />
+        <Label
+            Name="Label53"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="45,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Regime" />
+        <ComboBox
+            Name="ComboBoxModeWebhook"
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="158"
+            Margin="137,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <CheckBox
+            Name="CheckBoxWebhookSignal"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="45,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Signal" />
+        <CheckBox
+            Name="CheckBoxWebhookTrade"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="45,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Trade" />
+        <CheckBox
+            Name="CheckBoxWebhookSystem"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="206,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="System" />
+        <CheckBox
+            Name="CheckBoxWebhookError"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="45,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Error" />
+        <CheckBox
+            Name="CheckBoxWebhookConnect"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="206,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Connection" />
+        <Button
+            Name="ButtonWebhookGlobeSet"
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="249"
+            Margin="45,150,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonWebhookGlobeSet_Click"
+            Content="Configure server" />
+
+        <Rectangle
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,5,5,5" />
+        <Label
+            Name="Label22"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Telegram"
+            FontSize="18"
+            FontWeight="ExtraBlack" />
+        <Label
+            Name="Label54"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="45,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Regime" />
+        <ComboBox
+            Name="ComboBoxModeTelegram"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="158"
+            Margin="137,40,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <CheckBox
+            Name="CheckBoxTelegramSignal"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="45,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Signal" />
+        <CheckBox
+            Name="CheckBoxTelegramUser"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="206,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="User" />
+        <CheckBox
+            Name="CheckBoxTelegramTrade"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="45,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Trade" />
+        <CheckBox
+            Name="CheckBoxTelegramSystem"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="206,90,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="System" />
+        <CheckBox
+            Name="CheckBoxTelegramError"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="45,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Error" />
+        <CheckBox
+            Name="CheckBoxTelegramConnect"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="206,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Connection" />
+        <Button
+            Name="ButtonTelegramGlobeSet"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="249"
+            Margin="45,150,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ButtonTelegramGlobeSet_Click"
+            Content="Configure server" />
+
+    </Grid>
+</Window>

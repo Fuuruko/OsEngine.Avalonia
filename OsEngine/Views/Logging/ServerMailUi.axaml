@@ -1,0 +1,75 @@
+<Window
+    x:Class="OsEngine.Views.Logging.ServerMailDeliveryUi"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Title="Email server"
+    Width="323"
+    Height="254"
+    Icon="/Assets/OsLogo.ico"
+    CanResize="False"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button
+            Name="ButtonAccept"
+            Width="101"
+            Margin="0,0,5,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="buttonAccept_Click"
+            Content="Accept" />
+        <Rectangle Margin="5,5,5,37" />
+        <TextBox
+            Name="TextBoxMyAdress"
+            Height="23"
+            Margin="105,18,19,0"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <TextBox
+            Name="TextBoxPassword"
+            Height="23"
+            Margin="105,46,19,0"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <!-- FIX: -->
+        <!-- Height="Auto" -->
+        <TextBox
+            Name="TextBoxAdress"
+            Margin="105,102,19,40"
+            TextWrapping="Wrap" />
+        <Label
+            Name="Label11"
+            Width="81"
+            Margin="19,18,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="My email" />
+        <Label
+            Name="Label12"
+            Width="67"
+            Margin="19,46,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Password" />
+        <Label
+            Name="Label14"
+            Width="81"
+            Margin="19,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Addressees" />
+        <Label
+            Name="Label13"
+            Width="81"
+            Margin="19,74,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Service" />
+        <ComboBox
+            Name="ComboBoxMyMaster"
+            Margin="105,74,19,0"
+            VerticalAlignment="Top" />
+
+    </Grid>
+</Window>

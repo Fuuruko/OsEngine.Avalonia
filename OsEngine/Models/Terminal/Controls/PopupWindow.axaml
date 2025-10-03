@@ -1,0 +1,47 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.UserControls.PopupWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    DataContext=""
+    xmlns:local="clr-namespace:YourNamespace">
+    <!--  <Popup  -->
+    <!--  x:Name="PopupControl"  -->
+    <!--  Placement="Bottom"  -->
+    <!--  StaysOpen="False">  -->
+    <!--  <Border  -->
+    <!--  Background="White"  -->
+    <!--  BorderBrush="Black"  -->
+    <!--  BorderThickness="2"  -->
+    <!--  CornerRadius="5">  -->
+    <!--         <ContentPresenter x:Name="ContentPresenter" /> -->
+    <!--     </Border> -->
+    <!-- </Popup> -->
+    <!--  Opened="FlyoutPopup_Opened"  -->
+    <!--  Closed ="FlyoutPopup_Closed"  -->
+    <!-- HorizontalOffset="{Binding $parent[UserControl].HorizontalOffset}" -->
+    <!-- HorizontalOffset="{Binding $parent[UserControl].HorizontalOffset}" -->
+    <!-- VerticalOffset="{Binding VerticalOffset, RelativeSource={RelativeSource AncestorType=UserControl}}" -->
+    <!-- HorizontalOffset="{Binding HorizontalOffset, RelativeSource={RelativeSource AncestorType=UserControl}}" -->
+    <Popup
+        Name="Popup"
+        Width="{Binding $parent[UserControl].Width}"
+        Height="{Binding $parent[UserControl].Height}"
+        HorizontalAlignment="{Binding $parent[UserControl].HorizontalAlignment}"
+        VerticalAlignment="{Binding $parent[UserControl].VerticalAlignment}"
+        IsOpen="False"
+        OverlayDismissEventPassThrough="True"
+        Placement="Left"
+        PlacementTarget="ButtonRiskManager"
+        ShouldUseOverlayLayer="True"
+        TakesFocusFromNativeControl="True">
+        <!--  IsLightDismissEnabled="True"  -->
+        <!--  StaysOpen="False"  -->
+        <Border
+            Background="{Binding $parent[UserControl].Background, TargetNullValue='Black'}"
+            BorderBrush="{Binding $parent[UserControl].BorderBrush, TargetNullValue='grey'}"
+            BorderThickness="{Binding $parent[UserControl].BorderThickness, TargetNullValue=2}"
+            CornerRadius="{Binding $parent[UserControl].CornerRadius, TargetNullValue=10}">
+            <ContentPresenter x:Name="ContentPresenter" />
+        </Border>
+    </Popup>
+</UserControl>

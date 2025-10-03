@@ -1,0 +1,213 @@
+<Window
+    x:Class="OsEngine.Views.Terminal.JournalWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:rs="using:RangeSlider.Avalonia.Controls"
+    xmlns:views="using:OsEngine.Views.Terminal"
+    Title="Journal"
+    Width="1350"
+    Height="800"
+    MinWidth="400"
+    MinHeight="300"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="Manual">
+    <SplitView
+        Name="JournalSplit"
+        DisplayMode="Inline"
+        IsPaneOpen="False"
+        OpenPaneLength="300"
+        PanePlacement="Left">
+        <SplitView.Pane>
+            <StackPanel>
+                <rs:RangeSlider MoveWholeRange="True" />
+            </StackPanel>
+
+        </SplitView.Pane>
+
+        <SplitView.Content>
+            <!-- <Button Content="TeST" ZIndex="5"/> -->
+            <!-- <Grid Name="GridTabPrime" Margin="5,26,0,0"> -->
+            <Grid Margin="10">
+                <Button
+                    VerticalAlignment="Bottom"
+                    Click="SplitPane_Toggle"
+                    Content="&gt;"
+                    ZIndex="1" />
+                <TabControl
+                    Name="TabControlPrime"
+                    HorizontalAlignment="Stretch"
+                    BorderThickness="0"
+                    TabStripPlacement="Bottom">
+                    <TabControl.Styles>
+                        <Style Selector="ItemsPresenter">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="15,0,0,0" />
+                        </Style>
+                    </TabControl.Styles>
+
+                    <TabItem
+                        Name="TabItem1"
+                        Width="140"
+                        Header="Equity">
+                        <Grid RowDefinitions="*,50">
+                            <!--  <WindowsFormsHost  -->
+                            <!--  Name="HostEquity"  -->
+                            <!--  Margin="10,5,5,47"  -->
+                            <!--  Foreground="Black" />  -->
+                            <!-- <views:EquityView /> -->
+
+                            <StackPanel
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal"
+                                Spacing="30">
+                                <StackPanel.Styles>
+                                    <Style Selector="Label">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        <Setter Property="FontWeight" Value="3" />
+                                        <Setter Property="Width" Value="100" />
+                                        <Setter Property="CornerRadius" Value="5" />
+                                    </Style>
+                                </StackPanel.Styles>
+
+                                <Label
+                                    Name="Label1"
+                                    Padding="7"
+                                    Background="White"
+                                    Content="Profit"
+                                    Foreground="Black" />
+
+                                <Label
+                                    Name="Label2"
+                                    Padding="7"
+                                    Background="DeepSkyBlue"
+                                    Content="Long"
+                                    Foreground="Black" />
+                                <!--  Height="30"  -->
+
+                                <!--  Height="30"  -->
+                                <Label
+                                    Name="Label3"
+                                    Padding="6"
+                                    Background="DarkOrange"
+                                    Content="Short"
+                                    Foreground="Black" />
+
+                                <ComboBox
+                                    Name="ComboBoxChartType"
+                                    Width="140"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" />
+
+                                <Label
+                                    Name="LabelEqutyCharteType"
+                                    Content="Chart Type"
+                                    FontWeight="1" />
+
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem
+                        Name="TabItem2"
+                        Width="140"
+                        Header="Statistics">
+                        <!-- <Grid> -->
+                        <!--  <WindowsFormsHost  -->
+                        <!--  Name="HostStatistics"  -->
+                        <!--  Margin="250,10"  -->
+                        <!--  Foreground="Black"  -->
+                        <!--  RenderTransformOrigin="0.5,0.5" />  -->
+
+                        <!-- </Grid> -->
+                        <!-- <DataGrid> -->
+                        <!--     <DataGrid.Columns> -->
+                        <!-- <DataGridRowHeader /> -->
+                        <!-- </DataGridRowHeader> -->
+                        <!--         <DataGridTextColumn Header="1"/> -->
+                        <!--         <DataGridTextColumn Header="2"/> -->
+                        <!--         <DataGridTextColumn Header="3" /> -->
+                        <!--     </DataGrid.Columns> -->
+                        <!-- </DataGrid> -->
+                        <views:StatisticsView />
+                        <!--  <Label Content="In Process"  -->
+                        <!--  FontSize="30"  -->
+                        <!--  HorizontalAlignment="Center"  -->
+                        <!--  VerticalAlignment="Center" />  -->
+                    </TabItem>
+                    <TabItem
+                        Name="TabItem3"
+                        Width="140"
+                        Header="Drawdown">
+                        <Grid>
+                            <!--  <WindowsFormsHost  -->
+                            <!--  Name="HostDrawdown"  -->
+                            <!--  Margin="10"  -->
+                            <!--  Foreground="Black" />  -->
+
+                        </Grid>
+                    </TabItem>
+                    <TabItem
+                        Name="TabItem4"
+                        Width="140"
+                        Header="Volume">
+                        <Grid>
+                            <!--  <WindowsFormsHost  -->
+                            <!--  Name="HostVolume"  -->
+                            <!--  Margin="10,10,10,42"  -->
+                            <!--  Foreground="Black" />  -->
+
+                            <Label
+                                Name="LabelVolumeShowNumbers"
+                                Width="93"
+                                Margin="412,0,0,10"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Content="Show" />
+
+                            <ComboBox
+                                Name="VolumeShowNumbers"
+                                Width="146"
+                                Margin="521,0,0,10"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom" />
+
+                        </Grid>
+                    </TabItem>
+                    <TabItem
+                        Name="TabItem5"
+                        Width="140"
+                        Header="Open positions">
+                        <!-- <Grid> -->
+                        <!--  <WindowsFormsHost  -->
+                        <!--  Name="HostOpenPosition"  -->
+                        <!--  Margin="10"  -->
+                        <!--  Foreground="Black" />  -->
+                        <!-- </Grid> -->
+
+                        <views:OpenPositionsView />
+                    </TabItem>
+                    <TabItem
+                        Name="TabItem6"
+                        Width="140"
+                        Header="Closed positions">
+                        <views:OpenPositionsView />
+                        <!-- <Grid> -->
+                        <!--  <WindowsFormsHost  -->
+                        <!--  Name="HostClosePosition"  -->
+                        <!--  Margin="10"  -->
+                        <!--  Foreground="Black" />  -->
+
+                        <!-- </Grid> -->
+                    </TabItem>
+                </TabControl>
+                <!-- </Grid> -->
+
+
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
+</Window>

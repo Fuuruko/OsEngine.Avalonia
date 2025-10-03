@@ -1,0 +1,269 @@
+<Window
+    x:Class="OsEngine.Views.Terminal.BotView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="using:OsEngine.Views.Terminal"
+    xmlns:vm="using:OsEngine.ViewModels.Terminal"
+    Title="Bot"
+    Width="800"
+    Height="600"
+    MinWidth="400"
+    MinHeight="300"
+    x:DataType="vm:BotViewModel"
+    Icon="/Assets/OsLogo.ico"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:BotViewModel />
+    </Window.DataContext>
+
+    <Grid Name="GridPrime" ColumnDefinitions="*,48">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="100" />
+            <RowDefinition Height="8" />
+            <RowDefinition Height="190" />
+        </Grid.RowDefinitions>
+
+        <SplitView
+            Name="Pane"
+            Grid.Row="0"
+            Grid.Column="0"
+            DisplayMode="Inline"
+            IsPaneOpen="False"
+            OpenPaneLength="300"
+            PanePlacement="Right">
+            <SplitView.Pane>
+
+                <ContentControl Content="{Binding SelectedViewModel}" />
+                <!-- <views:AlertsView/> -->
+            </SplitView.Pane>
+
+            <SplitView.Content>
+                <!--  Margin="28,0,315,0"  -->
+                <TabControl Name="TabControlBotsName" Padding="0" VerticalAlignment="Stretch">
+                    <TabItem Header="Empty">
+                        <!-- <Grid /> -->
+                        <views:ChartView />
+                    </TabItem>
+                </TabControl>
+                <!--  <views  -->
+
+            </SplitView.Content>
+        </SplitView>
+
+        <GridSplitter
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Background="White"
+            BorderThickness="4"
+            ResizeDirection="Rows" />
+
+        <Grid
+            Name="GreedPositionLogHost"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="25,20,10,10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TabControl
+                Name="TabControlPrime"
+                Margin="0,-23,0,0"
+                BorderThickness="0">
+                <TabItem
+                    Name="TabPosition"
+                    Width="140"
+                    Header="Open positions">
+                    <views:OpenPositionsView />
+                    <!-- <Grid Margin="-5,-5,-5,-5"> -->
+                    <!--  <WindowsFormsHost  -->
+                    <!--  Name="HostOpenPosition"  -->
+                    <!--  Margin="0,0,0,0"  -->
+                    <!--  Foreground="Black" />  -->
+                    <!-- </Grid> -->
+                </TabItem>
+                <TabItem
+                    Name="TabItemStopLimits"
+                    Width="140"
+                    Header="Stop limits">
+                    <views:OpenPositionsView />
+                    <!-- <Grid Margin="-5,-5,-5,-5"> -->
+                    <!-- <WindowsFormsHost Name="HostStopLimits" Foreground="Black" /> -->
+                    <!-- </Grid> -->
+                </TabItem>
+                <TabItem
+                    Name="TabItemClosedPos"
+                    Width="140"
+                    Header="Closed positions">
+                    <views:OpenPositionsView />
+                    <!-- <Grid Margin="-5,-5,-5,-5"> -->
+                    <!-- <WindowsFormsHost Name="HostClosePosition" Foreground="Black" /> -->
+                    <!-- </Grid> -->
+                </TabItem>
+
+                <TabItem
+                    Name="TabItemLogBot"
+                    Width="140"
+                    Header="Bot log">
+                    <Grid Margin="-5,-5,-5,-5">
+                        <!-- <WindowsFormsHost Name="HostBotLog" Foreground="Black" /> -->
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <!--  <Rectangle  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Width="20"  -->
+        <!--  Height="150"  -->
+        <!--  Margin="1,0,0,23.667"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  VerticalAlignment="Bottom"  -->
+        <!--  Fill="#FCEE21"  -->
+        <!--  RenderTransformOrigin="0.5,0.5"  -->
+        <!--  Stroke="Black"  -->
+        <!--  StrokeThickness="0">  -->
+        <!--     <Rectangle.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform AngleY="-44" /> -->
+        <!--             <RotateTransform /> -->
+        <!--             <TranslateTransform Y="-12.012" /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Rectangle.RenderTransform> -->
+        <!-- </Rectangle> -->
+        <!--  <Label  -->
+        <!--  Name="LabelOsa"  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Width="80"  -->
+        <!--  Height="28"  -->
+        <!--  Margin="-28,0,0,99.667"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  VerticalAlignment="Bottom"  -->
+        <!--  Content="O-S-A.NET"  -->
+        <!--  FontSize="14"  -->
+        <!--  FontWeight="Bold"  -->
+        <!--  Foreground="Black"  -->
+        <!--  RenderTransformOrigin="0.5,0.5">  -->
+        <!--     <Label.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform /> -->
+        <!--             <RotateTransform Angle="-90" /> -->
+        <!--             <TranslateTransform /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Label.RenderTransform> -->
+        <!-- </Label> -->
+        <!--  <Grid  -->
+        <!--  Name="GreedChartPanel"  -->
+        <!--  Grid.Row="0"  -->
+        <!--  Margin="0,26,308,10">  -->
+        <!--     <Rectangle Name="RectChart" /> -->
+        <!--     <Grid Name="GridChart"> -->
+        <!--  <Button  -->
+        <!--  Name="ButtonShowInformPanel"  -->
+        <!--  Width="22"  -->
+        <!--  Height="22"  -->
+        <!--  Margin="1,0,0,1"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  VerticalAlignment="Bottom"  -->
+        <!--  Content="&lt;"  -->
+        <!--  RenderTransformOrigin="0.5,0.5">  -->
+        <!--  Click="ButtonShowInformPanel_Click"  -->
+        <!--             <Button.RenderTransform> -->
+        <!--                 <TransformGroup> -->
+        <!--                     <ScaleTransform /> -->
+        <!--                     <SkewTransform /> -->
+        <!--                     <RotateTransform Angle="90" /> -->
+        <!--                     <TranslateTransform /> -->
+        <!--                 </TransformGroup> -->
+        <!--             </Button.RenderTransform> -->
+        <!--         </Button> -->
+        <!--     </Grid> -->
+        <!-- <WindowsFormsHost Name="ChartHostPanel" Margin="26,23,0,0" /> -->
+        <!--  <TabControl  -->
+        <!--  Name="TabControlBotTab"  -->
+        <!--  Width="28"  -->
+        <!--  Margin="0,33,0,25.667"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  TabStripPlacement="Left">  -->
+        <!--  <TabItem  -->
+        <!--  Margin="0,0,0,-5"  -->
+        <!--  VerticalAlignment="Top"  -->
+        <!--  Header=" 1">  -->
+        <!--         <Grid Background="#FFE5E5E5" /> -->
+        <!--     </TabItem> -->
+        <!-- </TabControl> -->
+        <!--  <Grid  -->
+        <!--  Name="GridChartControlPanel"  -->
+        <!--  Height="23"  -->
+        <!--  Margin="26,0,4,0"  -->
+        <!--  VerticalAlignment="Top" />  -->
+        <!-- </Grid> -->
+        <!--  <Button  -->
+        <!--  Name="ButtonHideInformPanel"  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Width="22"  -->
+        <!--  Height="22"  -->
+        <!--  Margin="1,0,0,1"  -->
+        <!--  HorizontalAlignment="Left"  -->
+        <!--  VerticalAlignment="Bottom"  -->
+        <!--  Content="&gt;"  -->
+        <!--  RenderTransformOrigin="0.5,0.5">  -->
+        <!--  Click="ButtonHideInformPanel_Click"  -->
+        <!--     <Button.RenderTransform> -->
+        <!--         <TransformGroup> -->
+        <!--             <ScaleTransform /> -->
+        <!--             <SkewTransform /> -->
+        <!--             <RotateTransform Angle="90" /> -->
+        <!--             <TranslateTransform /> -->
+        <!--         </TransformGroup> -->
+        <!--     </Button.RenderTransform> -->
+        <!-- </Button> -->
+        <!--  <Button  -->
+        <!--  Name="ButtonHideShowSettingsPanel"  -->
+        <!--  Width="22"  -->
+        <!--  Height="22"  -->
+        <!--  Margin="0,3,3,0"  -->
+        <!--  HorizontalAlignment="Right"  -->
+        <!--  VerticalAlignment="Top"  -->
+        <!--  Content="&gt;" />  -->
+        <!--  Click="ButtonHideShowSettingsPanel_Click"  -->
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <StackPanel.Styles>
+                <Style Selector="ToggleButton">
+                    <Setter Property="CornerRadius" Value="5" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <!-- <Setter Property="Height" Value="24" /> -->
+                    <!-- <Setter Property="HorizontalAlignment" Value="Stretch" /> -->
+                </Style>
+
+            </StackPanel.Styles>
+            <ToggleButton
+                Click="ToggleButton_Checked"
+                Command="{Binding MarketOfDepthSelectCommand}"
+                Content="M" />
+            <ToggleButton
+                Click="ToggleButton_Checked"
+                Command="{Binding AlertsSelectCommand}"
+                Content="A" />
+            <ToggleButton
+                Click="ToggleButton_Checked"
+                Command="{Binding GridSelectCommand}"
+                Content="G" />
+            <ToggleButton
+                Click="ToggleButton_Checked"
+                Command="{Binding ControlsSelectCommand}"
+                Content="C" />
+
+        </StackPanel>
+        <!-- <ListBox Grid.Column="1" Grid.Row="0"> -->
+        <!--     <ListBoxItem Content="MD" /> -->
+        <!--     <ListBoxItem Content="A" /> -->
+        <!--     <ListBoxItem Content="G" /> -->
+        <!--     <ListBoxItem Content="C" /> -->
+        <!-- </ListBox> -->
+    </Grid>
+</Window>

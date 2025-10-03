@@ -1,0 +1,106 @@
+﻿<UserControl
+    x:Class="OsEngine.Views.Optimizer.OptimizerFiltersView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:DataType="vm:OptimizerViewModel"
+    xmlns:vm="using:OsEngine.ViewModels.Optimizer">
+
+    <StackPanel>
+        <Label
+            Name="Label22"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0,0,0,50"
+            Content="If the test results do not pass under the conditions, the run will be excluded from the general results." />
+
+        <UniformGrid Rows="5" Columns="2" Width="450" Height="300">
+            <CheckBox
+                Name="CheckBoxFilterProfitIsOn"
+                HorizontalAlignment="Left"
+                IsChecked="{Binding IsMinimalProfitEnabled, Mode=TwoWay}"
+                VerticalAlignment="Top"
+                Content="Minimum Profit %" />
+
+            <NumericUpDown
+                Name="TextBoxFilterProfitValue"
+                Width="141"
+                Height="23"
+                Minimum="0"
+                Value="{Binding MinimalProfit, Mode=TwoWay,
+                 UpdateSourceTrigger=LostFocus}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" />
+
+            <CheckBox
+                Name="CheckBoxFilterMiddleProfitIsOn"
+                IsChecked="{Binding IsMinimalAverageProfitEnabled, Mode=TwoWay}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Minimum Average Profit %" />
+            <!-- Content="Average profit in % &gt;" /> -->
+
+            <NumericUpDown
+                Name="TextBoxFilterMiddleProfitValue"
+                Value="{Binding MinimalAverageProfit, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                Width="141"
+                Height="23"
+                Minimum="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                />
+
+            <CheckBox
+                Name="CheckBoxFilterProfitFactorIsOn"
+                IsChecked="{Binding IsMinimalProfitFactorEnabled, Mode=TwoWay}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Minimum Profit Factor" />
+
+            <NumericUpDown
+                Name="TextBoxFilterProfitFactorValue"
+                Value="{Binding MinimalProfitFactor, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                Width="141"
+                Height="23"
+                Minimum="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                />
+
+            <CheckBox
+                Name="CheckBoxFilterMaxDrowDownIsOn"
+                IsChecked="{Binding IsMaxDrowDownEnabled, Mode=TwoWay}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Maximum DrawDown %" />
+
+            <NumericUpDown
+                Name="TextBoxMaxDrowDownValue"
+                Value="{Binding MaxDrowDown, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                Width="141"
+                Height="23"
+                Maximum="0"
+                Minimum="-100"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                />
+
+            <CheckBox
+                Name="CheckBoxFilterDealsCount"
+                IsChecked="{Binding IsMinimalDealsEnabled, Mode=TwoWay}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Content="Minimum Deals Count" />
+
+            <NumericUpDown
+                Name="TextBoxFilterDealsCount"
+                Value="{Binding MinimalDeals, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                Width="141"
+                Height="23"
+                FormatString="0"
+                Minimum="1"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                />
+        </UniformGrid>
+    </StackPanel>
+</UserControl>
