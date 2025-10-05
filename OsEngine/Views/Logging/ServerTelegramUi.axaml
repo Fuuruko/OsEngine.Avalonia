@@ -6,7 +6,6 @@
     Title="Telegram server"
     Width="331"
     Height="193"
-    Icon="/Assets/OsLogo.ico"
     CanResize="False"
     Topmost="True"
     WindowStartupLocation="CenterScreen">

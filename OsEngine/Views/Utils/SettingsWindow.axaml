@@ -11,7 +11,6 @@
     Height="480"
     x:DataType="vm:SettingsViewModel"
     CanResize="False"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <!--  Style="{StaticResource WindowStyleNoResize}"  -->

@@ -6,7 +6,6 @@
     Title="Newsletter"
     Width="650"
     Height="450"
-    Icon="/Assets/OsLogo.ico"
     CanResize="False"
     Topmost="True"
     WindowStartupLocation="CenterScreen">

@@ -6,7 +6,6 @@
     Title="Emergency log"
     Width="770"
     Height="350"
-    Icon="/Assets/OsLogo.ico"
     Topmost="False"
     x:DataType="vm:LogViewModel"
     WindowStartupLocation="CenterScreen">

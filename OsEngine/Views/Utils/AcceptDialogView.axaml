@@ -5,7 +5,6 @@
     Title="Confirmation window"
     Width="500"
     Height="200"
-    Icon="/Assets/OsLogo.ico"
     CanResize="False"
     WindowStartupLocation="CenterScreen">
     <!-- Topmost="True" -->

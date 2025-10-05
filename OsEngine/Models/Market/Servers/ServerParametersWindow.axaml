@@ -9,7 +9,6 @@
     Height="640"
     x:DataType="vm:ServerParametersWindow"
     CanResize="False"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen">
 
     <Window.DataTemplates>

@@ -12,7 +12,6 @@
     Height="500"
     CanResize="False"
     x:DataType="vm:OsDataViewModel"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 

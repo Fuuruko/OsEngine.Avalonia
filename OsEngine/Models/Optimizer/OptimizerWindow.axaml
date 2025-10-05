@@ -11,7 +11,6 @@
     MinWidth="1110"
     MinHeight="500"
     x:DataType="vm:OptimizerViewModel"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen">
     <!--  DataContext="vm"  -->
     <Window.DataContext>

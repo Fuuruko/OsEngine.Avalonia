@@ -7,7 +7,6 @@
     Width="666.887"
     Height="254"
     CanResize="False"
-    Icon="/Assets/OsLogo.ico"
     Topmost="True"
     WindowStartupLocation="CenterScreen">
     <Grid>

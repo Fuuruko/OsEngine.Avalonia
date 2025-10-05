@@ -13,7 +13,6 @@
     MinWidth="1070"
     MinHeight="500"
     x:DataType="vm:OsDataViewModel"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 

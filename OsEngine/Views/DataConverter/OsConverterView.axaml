@@ -7,7 +7,6 @@
     Height="410"
     MinWidth="610"
     MinHeight="400"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen">
     <Grid Name="GridPrime">
 

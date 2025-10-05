@@ -10,7 +10,6 @@
     MinWidth="400"
     MinHeight="300"
     x:DataType="vm:BotViewModel"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>

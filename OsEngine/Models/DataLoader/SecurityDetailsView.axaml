@@ -8,7 +8,6 @@
     Title="Data Stream Detail"
     Width="540"
     Height="600"
-    Icon="/Assets/OsLogo.ico"
     CanResize="False"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

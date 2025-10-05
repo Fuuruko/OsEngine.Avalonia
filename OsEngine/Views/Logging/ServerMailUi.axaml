@@ -6,7 +6,6 @@
     Title="Email server"
     Width="323"
     Height="254"
-    Icon="/Assets/OsLogo.ico"
     CanResize="False"
     Topmost="True"
     WindowStartupLocation="CenterScreen">

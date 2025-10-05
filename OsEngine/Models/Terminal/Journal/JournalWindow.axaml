@@ -9,7 +9,6 @@
     Height="800"
     MinWidth="400"
     MinHeight="300"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="Manual">
     <SplitView
         Name="JournalSplit"

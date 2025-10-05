@@ -6,7 +6,6 @@
     Width="610"
     Height="390"
     CanResize="False"
-    Icon="/Assets/OsLogo.ico"
     WindowStartupLocation="CenterScreen">
 
     <Grid

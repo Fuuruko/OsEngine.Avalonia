@@ -10,7 +10,6 @@
     Width="417.961"
     Height="335.18"
     CanResize="False"
-    Icon="/Assets/OsLogo.ico"
     Topmost="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
