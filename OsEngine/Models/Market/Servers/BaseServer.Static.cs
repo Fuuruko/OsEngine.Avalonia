@@ -21,6 +21,7 @@ public partial class BaseServer
 
     public static Dictionary<Guid, BaseServer> Servers { get; private set; } = LoadServers();
 
+    // NOTE: Remove Server part from name
     public static BaseServer CreateServer(Type type)
     {
         BaseServer server = (BaseServer)Activator.CreateInstance(type);
@@ -29,6 +30,7 @@ public partial class BaseServer
         return server;
     }
 
+    // NOTE: Remove Server part from name
     public static void DeleteServer(BaseServer server)
     {
         // TODO: Disconnect and dispose before delete
@@ -129,43 +131,6 @@ public partial class BaseServer
             .Where(f => f.FieldType.IsAssignableTo(typeof(IBaseInput)))
             .Select(f => (IBaseInput)f.GetValue(this))
             .ToArray();
-
-
-        // FieldInfo[] baseFields = baseType.GetFields(BindingFlags.Public
-        //         | BindingFlags.NonPublic
-        //         | BindingFlags.Instance)
-        //     .Where(f => f.FieldType.IsAssignableTo(baseInput))
-        //     .ToArray();
-
-        // Console.WriteLine("baseFields");
-        // foreach (var df in baseFields)
-        // {
-        //     Console.WriteLine(df);
-        // }
-
-        Console.WriteLine("derivedFields");
-        foreach (var df in derivedInputs)
-        {
-            Console.WriteLine(df);
-            // Console.WriteLine(baseFields.Contains(df));
-        }
-
-        // var uniqueFields = derivedFields.Where(d =>
-        //         !baseFields.Any(b =>
-        //             !b.FieldType.IsAssignableTo(typeof(IBaseInput))
-        //             && b.Name == d.Name
-        //             && b.FieldType == d.FieldType))
-        //     .ToList();
-
-        // Console.WriteLine("uniqueFields");
-        // foreach (var df in uniqueFields)
-        // {
-        //     Console.WriteLine(df);
-        // }
-
-        // IBaseInput[] inputs = uniqueFields
-        //     .Select(f => (IBaseInput)f.GetValue(this))
-        //     .ToArray();
 
         Inputs.InsertRange(0, derivedInputs);
     }
