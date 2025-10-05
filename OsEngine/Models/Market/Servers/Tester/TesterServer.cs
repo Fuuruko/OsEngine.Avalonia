@@ -704,177 +704,172 @@ public partial class TesterServer : ObservableObject, IServer, ILog
 
     private CandleManager _candleManager;
 
-    private readonly Lock _starterLocker = new();
-
     private DateTime _lastStartSecurityTime;
 
     public CandleSeries StartThisSecurity(string securityName, TimeFrameBuilder timeFrameBuilder, string securityClass)
     {
-        lock (_starterLocker)
-        {
-            if (securityName == ""
+        if (securityName == ""
                 || ServerStatus != ServerConnectStatus.Connect
                 || _securities == null
                 || Portfolios == null)
+        {
+            return null;
+        }
+
+        Security security = null;
+
+        for (int i = 0; i < _securities.Count; i++)
+        {
+            if (_securities[i].Name == securityName)
             {
-                return null;
+                security = _securities[i];
+                break;
             }
+        }
 
-            Security security = null;
+        if (security == null)
+        {
+            return null;
+        }
 
-            for (int i = 0; i < _securities.Count; i++)
+        // find security / находим бумагу
+
+        if (TesterDataType.MarketDepth.HasFlag(TypeTesterData))
+        {
+            timeFrameBuilder.CandleMarketDataType = CandleMarketDataType.MarketDepth;
+        }
+
+        if (TesterDataType.Tick.HasFlag(TypeTesterData))
+        {
+            timeFrameBuilder.CandleMarketDataType = CandleMarketDataType.Tick;
+        }
+
+        CandleSeries series = new(timeFrameBuilder, security, StartProgram.IsTester);
+
+        // start security for unloading / запускаем бумагу на выгрузку
+
+        SecurityTester securityTester;
+        SecurityTester securityTester2;
+        if (TypeTesterData != TesterDataType.Candle)
+        {
+            SecurityTesterDataType securityTesterDataType;
+            if (timeFrameBuilder.CandleMarketDataType == CandleMarketDataType.Tick)
             {
-                if (_securities[i].Name == securityName)
-                {
-                    security = _securities[i];
-                    break;
-                }
-            }
-
-            if (security == null)
-            {
-                return null;
-            }
-
-            // find security / находим бумагу
-
-            if (TesterDataType.MarketDepth.HasFlag(TypeTesterData))
-            {
-                timeFrameBuilder.CandleMarketDataType = CandleMarketDataType.MarketDepth;
-            }
-
-            if (TesterDataType.Tick.HasFlag(TypeTesterData))
-            {
-                timeFrameBuilder.CandleMarketDataType = CandleMarketDataType.Tick;
-            }
-
-            CandleSeries series = new(timeFrameBuilder, security, StartProgram.IsTester);
-
-            // start security for unloading / запускаем бумагу на выгрузку
-            
-            SecurityTester securityTester;
-            SecurityTester securityTester2;
-            if (TypeTesterData != TesterDataType.Candle)
-            {
-                SecurityTesterDataType securityTesterDataType;
-                if (timeFrameBuilder.CandleMarketDataType == CandleMarketDataType.Tick)
-                {
-                    securityTesterDataType = SecurityTesterDataType.Tick;
-                }
-                else
-                {
-                    securityTesterDataType = SecurityTesterDataType.MarketDepth;
-                }
-                securityTester2 = _candleSeriesTesterActivate.Find(tester
-                        => tester.Security.Name == securityName
-                        && tester.DataType == securityTesterDataType);
-                if (securityTester2 == null)
-                {
-                    securityTester = SecuritiesTester.Find(tester
-                            => tester.Security.Name == securityName
-                            && tester.DataType == securityTesterDataType);
-                    if (securityTester == null)
-                    {
-                        return null;
-                    }
-                    _candleSeriesTesterActivate.Add(securityTester);
-
-                }
+                securityTesterDataType = SecurityTesterDataType.Tick;
             }
             else
             {
-                TimeSpan time = GetTimeFrameInSpan(timeFrameBuilder.TimeFrame);
-                securityTester2 = _candleSeriesTesterActivate.Find(tester
+                securityTesterDataType = SecurityTesterDataType.MarketDepth;
+            }
+            securityTester2 = _candleSeriesTesterActivate.Find(tester
+                    => tester.Security.Name == securityName
+                    && tester.DataType == securityTesterDataType);
+            if (securityTester2 == null)
+            {
+                securityTester = SecuritiesTester.Find(tester
+                        => tester.Security.Name == securityName
+                        && tester.DataType == securityTesterDataType);
+                if (securityTester == null)
+                {
+                    return null;
+                }
+                _candleSeriesTesterActivate.Add(securityTester);
+
+            }
+        }
+        else
+        {
+            TimeSpan time = GetTimeFrameInSpan(timeFrameBuilder.TimeFrame);
+            securityTester2 = _candleSeriesTesterActivate.Find(tester
+                    => tester.Security.Name == securityName
+                    && tester.DataType == SecurityTesterDataType.Candle
+                    && tester.TimeFrameSpan == time);
+            if (securityTester2 == null)
+            {
+                securityTester = SecuritiesTester.Find(tester
                         => tester.Security.Name == securityName
                         && tester.DataType == SecurityTesterDataType.Candle
                         && tester.TimeFrameSpan == time);
-                if (securityTester2 == null)
+                if (securityTester == null)
                 {
-                    securityTester = SecuritiesTester.Find(tester
-                            => tester.Security.Name == securityName
-                            && tester.DataType == SecurityTesterDataType.Candle
-                            && tester.TimeFrameSpan == time);
-                    if (securityTester == null)
-                    {
-                        return null;
-                    }
-                    _candleSeriesTesterActivate.Add(securityTester);
-
+                    return null;
                 }
-            }
+                _candleSeriesTesterActivate.Add(securityTester);
 
-            if (TypeTesterData != TesterDataType.Candle &&
+            }
+        }
+
+        if (TypeTesterData != TesterDataType.Candle &&
                 timeFrameBuilder.CandleMarketDataType == CandleMarketDataType.Tick)
+        {
+            if (_candleSeriesTesterActivate.Find(tester => tester.Security.Name == securityName &&
+                        tester.DataType == SecurityTesterDataType.Tick) == null)
             {
-                if (_candleSeriesTesterActivate.Find(tester => tester.Security.Name == securityName &&
-                                                     tester.DataType == SecurityTesterDataType.Tick) == null)
+                if (SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
+                            tester.DataType == SecurityTesterDataType.Tick) != null)
                 {
-                    if (SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
-                                              tester.DataType == SecurityTesterDataType.Tick) != null)
-                    {
-                        _candleSeriesTesterActivate.Add(
+                    _candleSeriesTesterActivate.Add(
                             SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
-                                                  tester.DataType == SecurityTesterDataType.Tick));
-                    }
-                    else
-                    { // there is nothing to run the series / нечем запускать серию
-                        return null;
-                    }
+                                tester.DataType == SecurityTesterDataType.Tick));
+                }
+                else
+                { // there is nothing to run the series / нечем запускать серию
+                    return null;
                 }
             }
+        }
 
-            else if (TypeTesterData != TesterDataType.Candle &&
-                     timeFrameBuilder.CandleMarketDataType == CandleMarketDataType.MarketDepth)
+        else if (TypeTesterData != TesterDataType.Candle &&
+                timeFrameBuilder.CandleMarketDataType == CandleMarketDataType.MarketDepth)
+        {
+            if (_candleSeriesTesterActivate.Find(tester => tester.Security.Name == securityName &&
+                        tester.DataType == SecurityTesterDataType.MarketDepth) == null)
             {
-                if (_candleSeriesTesterActivate.Find(tester => tester.Security.Name == securityName &&
-                                                     tester.DataType == SecurityTesterDataType.MarketDepth) == null)
+                if (SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
+                            tester.DataType == SecurityTesterDataType.MarketDepth) != null)
                 {
-                    if (SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
-                                                 tester.DataType == SecurityTesterDataType.MarketDepth) != null)
-                    {
-                        _candleSeriesTesterActivate.Add(
+                    _candleSeriesTesterActivate.Add(
                             SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
-                                                  tester.DataType == SecurityTesterDataType.MarketDepth));
-                    }
-                    else
-                    { // there is nothing to run the series / нечем запускать серию
-                        return null;
-                    }
+                                tester.DataType == SecurityTesterDataType.MarketDepth));
+                }
+                else
+                { // there is nothing to run the series / нечем запускать серию
+                    return null;
                 }
             }
-            else if (TypeTesterData == TesterDataType.Candle)
+        }
+        else if (TypeTesterData == TesterDataType.Candle)
+        {
+            TimeSpan time = GetTimeFrameInSpan(timeFrameBuilder.TimeFrame);
+            if (_candleSeriesTesterActivate.Find(tester => tester.Security.Name == securityName &&
+                        tester.DataType == SecurityTesterDataType.Candle &&
+                        tester.TimeFrameSpan == time) == null)
             {
-                TimeSpan time = GetTimeFrameInSpan(timeFrameBuilder.TimeFrame);
-                if (_candleSeriesTesterActivate.Find(tester => tester.Security.Name == securityName &&
+                if (SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
                             tester.DataType == SecurityTesterDataType.Candle &&
                             tester.TimeFrameSpan == time) == null)
                 {
-                    if (SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
-                                               tester.DataType == SecurityTesterDataType.Candle &&
-                                               tester.TimeFrameSpan == time) == null)
-                    {
-                        return null;
-                    }
-
-                    _candleSeriesTesterActivate.Add(
-                            SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
-                                tester.DataType == SecurityTesterDataType.Candle &&
-                            tester.TimeFrameSpan == time));
+                    return null;
                 }
+
+                _candleSeriesTesterActivate.Add(
+                        SecuritiesTester.Find(tester => tester.Security.Name == securityName &&
+                            tester.DataType == SecurityTesterDataType.Candle &&
+                            tester.TimeFrameSpan == time));
             }
-
-            _candleManager.StartSeries(series);
-
-            SendLogMessage(OsLocalization.Market.Message14 + series.Security.Name +
-                           OsLocalization.Market.Message15 + series.TimeFrame +
-                           OsLocalization.Market.Message16, LogMessageType.System);
-
-            _lastStartSecurityTime = DateTime.Now;
-
-            LoadSecurityEvent?.Invoke();
-
-            return series;
         }
+
+        _candleManager.StartSeries(series);
+
+        SendLogMessage(OsLocalization.Market.Message14 + series.Security.Name +
+                OsLocalization.Market.Message15 + series.TimeFrame +
+                OsLocalization.Market.Message16, LogMessageType.System);
+
+        _lastStartSecurityTime = DateTime.Now;
+
+        LoadSecurityEvent?.Invoke();
+
+        return series;
     }
 
     private TimeSpan GetTimeFrameInSpan(TimeFrame frame)
