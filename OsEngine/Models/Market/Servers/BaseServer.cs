@@ -340,8 +340,10 @@ public abstract partial class BaseServer : IServer, ILog
     /// </summary>
     private ConcurrentQueue<Order> _ordersToSend = new();
 
+    // TODO: Remove
     public bool TestValue_CanSendOrdersUp = true;
 
+    // TODO: Remove
     public bool TestValue_CanSendMyTradesUp = true;
 
     /// <summary>

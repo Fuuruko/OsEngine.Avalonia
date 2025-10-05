@@ -116,11 +116,12 @@ public partial class BaseServer
             _isUpdateOnlyNewPriceTrades,
             _needToUseFullMarketDepth2,
         ];
+        _namePostfix.ValueChanged += () => Name = ServerName + _namePostfix;
 
         if (this is IProxySupport)
         {
-            // Inputs.Add(new Input.String());
-            // Inputs.Add();
+            Inputs.Add(new Input.Options("Proxy type", ["None", "Auto", "Manual"]));
+            Inputs.Add(new Input.String("Proxy", ""));
         }
 
         Console.WriteLine(derivedType);

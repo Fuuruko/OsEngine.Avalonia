@@ -33,16 +33,6 @@ public partial class BaseServer
 
             field.AdditionalMarketDataEvent += ServerRealization_AdditionalMarketDataEvent;
 
-
-            _namePostfix.ValueChanged += () => Name = ServerName + _namePostfix.Value;
-
-            if (Permissions.SupportsProxyForMultipleServers)
-            {
-                Inputs.Add(new Input.Options("Proxy type", ["None", "Auto", "Manual"]));
-                Inputs.Add(new Input.String("Proxy", ""));
-            }
-
-
             _tradesStorage = new ServerTradesStorage(this)
             {
                 IsSaveTrades = _isKeepTrades,
