@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using OsEngine.Models.Candles;
@@ -15,14 +16,16 @@ namespace OsEngine.Models.Market.Servers;
 
 public abstract partial class BaseServer : IServer, ILog
 {
-    protected virtual string ServerName { get; }
+    protected string ServerName { get; }
     public string Name { get; set; }
+
     // NOTE: Maybe should not be public
     public Guid GUID = Guid.NewGuid();
 
     public BaseServer()
     {
         SetupInputs();
+        ServerName = GetType().GetCustomAttribute<NameAttribute>()?.Name ?? GetType().Name;
     }
 
     #region Start / Stop server - user direction

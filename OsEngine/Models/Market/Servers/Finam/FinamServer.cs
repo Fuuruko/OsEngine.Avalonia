@@ -22,8 +22,6 @@ namespace OsEngine.Models.Market.Servers.Finam;
 [Name("FINAM")]
 public partial class Finam : BaseServer, IHideParameters, IFeedServer
 {
-    protected override string ServerName => "FINAM";
-
     public Finam()
     {
         FinamServerRealization realization = new();
