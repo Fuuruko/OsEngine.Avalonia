@@ -27,7 +27,7 @@ public class TerminalViewModel : BaseViewModel
     {
         if (_testerWindow != null)
         {
-            _testerWindow.Focus();
+            _testerWindow.Activate();
             return;
         }
 

@@ -4,12 +4,8 @@
 */
 
 using System;
-using System.Media;
-using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using OsEngine.Language;
-using OsEngine.Models.Logging;
 using OsEngine.Models.Utils;
 
 namespace OsEngine.Views.Logging
@@ -31,12 +27,11 @@ namespace OsEngine.Views.Logging
             // Title = Title + " " + OsEngine.PrimeSettings.PrimeSettingsMaster.LabelInHeaderBotStation;
 
             Activate();
-            Focus();
 
             ButtonClear.Content = OsLocalization.Logging.ButtonClearExtraLog;
         }
 
-        public async static void ShowErrorLog()
+        public static void ShowErrorLog()
         {
             if (PrimeSettingsMaster.ErrorLogBeepIsActive) { Console.Beep(); }
 
@@ -45,19 +40,15 @@ namespace OsEngine.Views.Logging
             if (LastShow.AddSeconds(1) < DateTime.Now)
             {
                 LastShow = DateTime.Now;
-                if (_instance == null)
+                if (_instance != null)
                 {
-                    _instance = new();
-                    _instance.Closing += delegate { _instance = null; };
-                    _instance.Show();
+                    _instance.Activate();
+                    return;
                 }
-                // _instance.Show();
-                // TODO: Ask community.
-                // Without it may not focus on ErrorLog
-                await Task.Delay(20);
-                _instance.Activate();
-                _instance.Focus();
-                Console.WriteLine(_instance.IsActive);
+
+                _instance = new();
+                _instance.Closing += delegate { _instance = null; };
+                _instance.Show();
             }
         }
     }
