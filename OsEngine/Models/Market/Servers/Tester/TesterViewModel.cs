@@ -118,8 +118,7 @@ public partial class TesterViewModel : BaseViewModel
     {
         OrderClearing newClearing = new()
         {
-            Time = new DateTime(2000, 1, 1, 19, 0, 0),
-            Time_ = new TimeOnly(19, 0)
+            Time = new TimeSpan(19, 0, 0)
         };
         TesterServer.ClearingTimes.Add(newClearing);
         TesterServer.SaveClearingInfo();

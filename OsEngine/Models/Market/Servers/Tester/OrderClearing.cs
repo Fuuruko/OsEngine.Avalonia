@@ -16,8 +16,7 @@ namespace OsEngine.Models.Market.Servers.Tester;
 /// </summary>
 public class OrderClearing
 {
-    public TimeOnly Time_ { get; set; }
-    public DateTime Time { get; set; }
+    public TimeSpan Time { get; set; }
 
     public bool IsOn { get; set; }
 
@@ -25,7 +24,7 @@ public class OrderClearing
     {
         string result = "";
 
-        result += Time.ToString(CultureInfo.InvariantCulture) + "$";
+        result += Time.ToString() + "$";
         result += IsOn;
 
         return result;
@@ -35,7 +34,7 @@ public class OrderClearing
     {
         string[] strings = str.Split('$');
 
-        Time = Convert.ToDateTime(strings[0], CultureInfo.InvariantCulture);
+        Time = TimeSpan.Parse(strings[0]);
         IsOn = Convert.ToBoolean(strings[1]);
     }
 }

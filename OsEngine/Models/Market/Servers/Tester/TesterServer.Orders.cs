@@ -969,9 +969,9 @@ public partial class TesterServer
         {
             if (ClearingTimes[i].IsOn == false) { continue; }
 
-            if (_lastCheckSessionOrdersTime.TimeOfDay < ClearingTimes[i].Time.TimeOfDay
+            if (_lastCheckSessionOrdersTime.TimeOfDay < ClearingTimes[i].Time
                     &&
-                    timeOnMarket.TimeOfDay >= ClearingTimes[i].Time.TimeOfDay)
+                    timeOnMarket.TimeOfDay >= ClearingTimes[i].Time)
             {
                 Order[] ordersToCancel = orders.ToArray();
 
