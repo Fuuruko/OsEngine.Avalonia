@@ -794,8 +794,8 @@ public partial class TesterServer
                 continue;
             }
 
-            DateTime timeStart = NonTradePeriods[i].DateStart;
-            DateTime timeEnd = NonTradePeriods[i].DateEnd;
+            DateTime timeStart = NonTradePeriods[i].StartDate;
+            DateTime timeEnd = NonTradePeriods[i].EndDate;
 
             if (order.TimeCreate > timeStart
                     && order.TimeCreate < timeEnd)

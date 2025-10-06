@@ -15,23 +15,20 @@ namespace OsEngine.Models.Market.Servers.Tester;
 /// <summary>
 /// Period with NO new positions and NO new open orders in tester
 /// </summary>
-public partial class NonTradePeriod : ObservableObject
+public class NonTradePeriod
 {
-    [ObservableProperty]
-    private DateTime dateStart;
+    public DateTime StartDate { get; set; }
 
-    [ObservableProperty]
-    private DateTime dateEnd;
+    public DateTime EndDate { get; set; }
 
-    [ObservableProperty]
-    public bool isOn;
+    public bool IsOn { get; set; }
 
     public string GetSaveString()
     {
         string result = "";
 
-        result += DateStart.ToString(CultureInfo.InvariantCulture) + "$";
-        result += DateEnd.ToString(CultureInfo.InvariantCulture) + "$";
+        result += StartDate.ToString(CultureInfo.InvariantCulture) + "$";
+        result += EndDate.ToString(CultureInfo.InvariantCulture) + "$";
         result += IsOn;
 
         return result;
@@ -41,8 +38,8 @@ public partial class NonTradePeriod : ObservableObject
     {
         string[] strings = str.Split('$');
 
-        DateStart = Convert.ToDateTime(strings[0], CultureInfo.InvariantCulture);
-        DateEnd = Convert.ToDateTime(strings[1], CultureInfo.InvariantCulture);
+        StartDate = Convert.ToDateTime(strings[0], CultureInfo.InvariantCulture);
+        EndDate = Convert.ToDateTime(strings[1], CultureInfo.InvariantCulture);
         IsOn = Convert.ToBoolean(strings[2]);
     }
 }
