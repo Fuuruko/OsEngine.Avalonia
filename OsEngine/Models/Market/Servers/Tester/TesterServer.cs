@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using OsEngine.Language;
 // using OsEngine.Market.Connectors;
@@ -47,7 +48,7 @@ public partial class TesterServer : ObservableObject, IServer, ILog
 
         if (ActiveSet != null)
         {
-            _needToReloadSecurities = true;
+            Task.Run(LoadSecurities);
         }
 
         if (_worker == null)
@@ -290,13 +291,6 @@ public partial class TesterServer : ObservableObject, IServer, ILog
 
             try
             {
-                if (_needToReloadSecurities)
-                {
-                    _needToReloadSecurities = false;
-                    Regime = TesterRegime.NotActive;
-                    LoadSecurities();
-                }
-
                 if (Regime == TesterRegime.Pause ||
                     Regime == TesterRegime.NotActive)
                 {
@@ -341,8 +335,6 @@ public partial class TesterServer : ObservableObject, IServer, ILog
     private TimeSpan _timeInterval;
 
     private bool _dataIsActive;
-
-    private bool _needToReloadSecurities;
 
     public TesterRegime Regime
     {
@@ -661,7 +653,7 @@ public partial class TesterServer : ObservableObject, IServer, ILog
 
         // update / обновляем
 
-        _needToReloadSecurities = true;
+        Task.Run(LoadSecurities);
 
         NeedToReconnectEvent?.Invoke();
     }
