@@ -365,6 +365,7 @@ public partial class ConnectorCandles
     /// <summary>
     /// whether event feeding is enabled in the robot
     /// </summary>
+    // NOTE: Subscribe/Unsubscribe from events when turn on/off
     public bool EventsIsOn
     {
         get => _eventsIsOn;

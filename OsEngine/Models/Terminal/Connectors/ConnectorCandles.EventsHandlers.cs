@@ -285,30 +285,12 @@ public partial class ConnectorCandles
     /// </summary>
     private void ConnectorBot_NewTradeEvent(List<Trade> tradesList)
     {
-        try
+        if (_securityName == null
+            || tradesList == null
+            || tradesList.Count == 0
+            || tradesList[^1] == null
+            || tradesList[^1].SecurityNameCode != _securityName)
         {
-            if (_securityName == null
-                    || tradesList == null
-                    || tradesList.Count == 0)
-            {
-                return;
-            }
-            else
-            {
-                int count = tradesList.Count - 1;
-
-                if (tradesList[count] == null ||
-                        tradesList[count].SecurityNameCode != _securityName)
-                {
-                    return;
-                }
-            }
-        }
-        catch
-        {
-            // NOTE: LOL
-            // it's hard to catch the error here. Who will understand what is wrong - well done 
-            // ошибка здесь трудноуловимая. Кто понял что не так - молодец
             return;
         }
 
