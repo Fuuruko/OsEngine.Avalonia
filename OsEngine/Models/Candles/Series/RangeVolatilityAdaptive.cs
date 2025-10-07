@@ -11,7 +11,6 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("RangeVolatilityAdaptive")]
 [Name("Range Volatility Adaptive")]
 public class RangeVolatilityAdaptive : ACandlesSeriesRealization
 {

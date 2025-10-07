@@ -10,7 +10,6 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("Delta")]
 public class Delta : ACandlesSeriesRealization
 {
     private decimal _currentDelta;

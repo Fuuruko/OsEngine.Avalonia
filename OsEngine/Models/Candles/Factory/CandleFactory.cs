@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
 using System.Threading;
+using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Factory
 {
@@ -406,7 +407,6 @@ namespace OsEngine.Models.Candles.Factory
             // typeof(BotPanel).Assembly to be more direct.
             // Assembly assembly = typeof(BotPanel).Assembly;
             var baseType = typeof(ACandlesSeriesRealization);
-            var attributeType = typeof(CandleAttribute);
             Dictionary<string, Type> candles = [];
 
             var types = Assembly.GetExecutingAssembly().GetTypes()
@@ -415,14 +415,9 @@ namespace OsEngine.Models.Candles.Factory
             foreach (var type in types)
             {
                 // Get the attribute from the type
-                var attribute = (CandleAttribute)Attribute.GetCustomAttribute(type, attributeType);
-                if (attribute != null)
-                {
-                    // Use reflection to get the Name property
-                    string name = attribute.Name;
-                    // Add to dictionary with Name as the key and type as the value
-                    candles[attribute.Name] = type;
-                }
+                // var attribute = (CandleAttribute)Attribute.GetCustomAttribute(type, attributeType);
+                var name = type.GetCustomAttribute<NameAttribute>().Name ?? type.Name;
+                candles[name] = type;
             }
 
             // NOTE: Should be checked

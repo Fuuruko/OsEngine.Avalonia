@@ -11,7 +11,6 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("TickAdaptive")]
 [Name("Tick Adaptive")]
 public class TickAdaptive : ACandlesSeriesRealization
 {

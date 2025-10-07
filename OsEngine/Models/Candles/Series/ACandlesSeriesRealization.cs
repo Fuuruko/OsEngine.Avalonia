@@ -12,7 +12,8 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-// NOTE: Rename to ChartStyles
+// TODO: Rename to ChartStyle
+// NOTE: Should i separate look and processing? And how?
 public abstract partial class ACandlesSeriesRealization
 {
     public static List<Type> CandleTypes = GetDerivedClasses();
@@ -26,7 +27,6 @@ public abstract partial class ACandlesSeriesRealization
             .GetTypes()
             .Where(t => t.IsClass
                     && baseClass.IsAssignableFrom(t)
-                    && t.Namespace == "OsEngine.Models.Candles.Series"
                     && t != baseClass
                   )
             .ToList();
@@ -85,11 +85,11 @@ public abstract partial class ACandlesSeriesRealization
 
     public void Delete()
     {
-        CandlesAll.Clear();
-        CandlesAll.TrimExcess();
         CandleUpdated = null;
         CandleFinished = null;
         ParametersChangeByUser = null;
+        CandlesAll.Clear();
+        CandlesAll.TrimExcess();
     }
 
     private ICandleSeriesParameter LoadParameterValues(ICandleSeriesParameter newParameter)

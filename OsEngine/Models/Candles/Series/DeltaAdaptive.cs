@@ -10,7 +10,6 @@ using System;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("DeltaAdaptive")]
 [Name("Delta Adaptive")]
 public class DeltaAdaptive : ACandlesSeriesRealization
 {

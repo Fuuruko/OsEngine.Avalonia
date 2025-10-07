@@ -11,7 +11,6 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("Simple")] // Japan
 public class Simple : ACandlesSeriesRealization
 {
     public CandlesParameterString TimeFrameParameter;

@@ -11,7 +11,7 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("ReverseVolatilityAdaptive")]
+[Name("Reverse Voluatility Adaptive")]
 public class ReverseVolatilityAdaptive : ACandlesSeriesRealization
 {
     public CandlesParameterString ValueType;

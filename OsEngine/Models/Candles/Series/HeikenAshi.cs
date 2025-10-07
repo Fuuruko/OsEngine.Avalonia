@@ -11,7 +11,6 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("HeikenAshi")]
 [Name("Heiken Ashi")]
 public class HeikenAshi : ACandlesSeriesRealization
 {

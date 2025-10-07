@@ -10,7 +10,6 @@ using System;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("Range")]
 public class Range : ACandlesSeriesRealization
 {
     public CandlesParameterString ValueType;

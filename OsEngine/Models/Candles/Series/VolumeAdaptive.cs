@@ -10,7 +10,7 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("VolumeAdaptive")]
+[Name("Volume Adaptive")]
 public class VolumeAdaptive : ACandlesSeriesRealization
 {
     // [Parameter]

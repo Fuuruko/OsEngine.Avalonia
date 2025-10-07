@@ -10,7 +10,6 @@ using OsEngine.Models.Entity;
 
 namespace OsEngine.Models.Candles.Series;
 
-[Candle("Reverse")]
 public class Reverse : ACandlesSeriesRealization
 {
     public CandlesParameterString ValueType;

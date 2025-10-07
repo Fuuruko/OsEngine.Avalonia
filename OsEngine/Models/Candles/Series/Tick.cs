@@ -8,129 +8,127 @@ using OsEngine.Language;
 using OsEngine.Models.Candles.Factory;
 using OsEngine.Models.Entity;
 
-namespace OsEngine.Models.Candles.Series
+namespace OsEngine.Models.Candles.Series;
+
+public class Tick : ACandlesSeriesRealization
 {
-    [Candle("Tick")]
-    public class Tick : ACandlesSeriesRealization
+    public CandlesParameterInt TradeCount;
+
+    public override void OnStateChange(CandleSeriesState state)
     {
-        public CandlesParameterInt TradeCount;
-
-        public override void OnStateChange(CandleSeriesState state)
+        if (state == CandleSeriesState.Configure)
         {
-            if (state == CandleSeriesState.Configure)
-            {
-                TradeCount = CreateParameterInt("TradeCount", OsLocalization.Market.Label11, 1000);
-            }
-            else if (state == CandleSeriesState.ParametersChange)
-            {
-                CandlesAll.Clear();
-            }
+            TradeCount = CreateParameterInt("TradeCount", OsLocalization.Market.Label11, 1000);
+        }
+        else if (state == CandleSeriesState.ParametersChange)
+        {
+            CandlesAll.Clear();
+        }
+    }
+
+    private int _lastCandleTickCount;
+
+    public override void UpDateCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
+    {
+        if (CandlesAll.Count == 0)
+        {
+            PreUpdateCandle(time, price, volume, canPushUp, side);
+            return;
         }
 
-        private int _lastCandleTickCount;
+        // если пришли старые данные
+        if (CandlesAll[^1].Time > time) { return; }
 
-        public override void UpDateCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
+        if (_lastCandleTickCount >= TradeCount.ValueInt)
         {
-            if (CandlesAll.Count == 0)
-            {
-                PreUpdateCandle(time, price, volume, canPushUp, side);
-                return;
-            }
-
-            // если пришли старые данные
-            if (CandlesAll[^1].Time > time) { return; }
-
-            if (_lastCandleTickCount >= TradeCount.ValueInt)
-            {
-                // если пришли данные из новой свечки
-                FinishCandle(time, price, volume, canPushUp, side);
-                return;
-            }
-
-            if (_lastCandleTickCount < TradeCount.ValueInt)
-            {
-                // если пришли данные внутри свечи
-                _lastCandleTickCount++;
-
-                CandlesAll[^1].Volume += volume;
-                CandlesAll[^1].Close = price;
-
-                if (CandlesAll[^1].High < price)
-                {
-                    CandlesAll[^1].High = price;
-                }
-
-                if (CandlesAll[^1].Low > price)
-                {
-                    CandlesAll[^1].Low = price;
-                }
-
-                if (canPushUp)
-                {
-                    UpdateChangeCandle();
-                }
-            }
+            // если пришли данные из новой свечки
+            FinishCandle(time, price, volume, canPushUp, side);
+            return;
         }
 
-        protected override void PreUpdateCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
+        if (_lastCandleTickCount < TradeCount.ValueInt)
         {
-            Candle candle = new()
-            {
-                Close = price,
-                High = price,
-                Low = price,
-                Open = price,
-                Time = time.AddMilliseconds(-time.Millisecond),
-                Volume = volume
-            };
+            // если пришли данные внутри свечи
+            _lastCandleTickCount++;
 
-            CandlesAll.Add(candle);
+            CandlesAll[^1].Volume += volume;
+            CandlesAll[^1].Close = price;
+
+            if (CandlesAll[^1].High < price)
+            {
+                CandlesAll[^1].High = price;
+            }
+
+            if (CandlesAll[^1].Low > price)
+            {
+                CandlesAll[^1].Low = price;
+            }
 
             if (canPushUp)
             {
                 UpdateChangeCandle();
             }
+        }
+    }
 
-            _lastCandleTickCount = 1;
+    protected override void PreUpdateCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
+    {
+        Candle candle = new()
+        {
+            Close = price,
+            High = price,
+            Low = price,
+            Open = price,
+            Time = time.AddMilliseconds(-time.Millisecond),
+            Volume = volume
+        };
+
+        CandlesAll.Add(candle);
+
+        if (canPushUp)
+        {
+            UpdateChangeCandle();
         }
 
-        protected override void UpdateCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
+        _lastCandleTickCount = 1;
+    }
+
+    protected override void UpdateCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void FinishCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
+    {
+        if (CandlesAll[^1].State != CandleState.Finished)
         {
-            throw new NotImplementedException();
-        }
-
-        protected override void FinishCandle(DateTime time, decimal price, decimal volume, bool canPushUp, Side side)
-        {
-            if (CandlesAll[^1].State != CandleState.Finished)
-            {
-                // если последнюю свечку ещё не закрыли и не отправили
-                CandlesAll[^1].State = CandleState.Finished;
-
-                if (canPushUp)
-                {
-                    UpdateFinishCandle();
-                }
-            }
-
-            Candle newCandle = new()
-            {
-                Close = price,
-                High = price,
-                Low = price,
-                Open = price,
-                Time = time.AddMilliseconds(-time.Millisecond),
-                Volume = volume
-            };
-
-            CandlesAll.Add(newCandle);
+            // если последнюю свечку ещё не закрыли и не отправили
+            CandlesAll[^1].State = CandleState.Finished;
 
             if (canPushUp)
             {
-                UpdateChangeCandle();
+                UpdateFinishCandle();
             }
-
-            _lastCandleTickCount = 1;
-
         }
+
+        Candle newCandle = new()
+        {
+            Close = price,
+            High = price,
+            Low = price,
+            Open = price,
+            Time = time.AddMilliseconds(-time.Millisecond),
+            Volume = volume
+        };
+
+        CandlesAll.Add(newCandle);
+
+        if (canPushUp)
+        {
+            UpdateChangeCandle();
+        }
+
+        _lastCandleTickCount = 1;
+
     }
 }
