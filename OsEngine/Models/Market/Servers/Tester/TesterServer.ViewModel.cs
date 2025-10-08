@@ -89,8 +89,6 @@ public partial class TesterServer
     }
     private OrderExecutionType _orderExecutionType;
 
-    private OrderExecutionType _lastOrderExecutionTypeInFiftyFiftyType;
-
     public int SlippageToSimpleOrder
     {
         get { return _slippageToSimpleOrder; }

@@ -259,17 +259,7 @@ public partial class TesterServer
         if (order.Side == Side.Buy)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price > minPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.Touch && order.Price >= minPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Intersection &&
-                     order.Price > minPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch &&
-                     order.Price >= minPrice)
-               )
+                || (OrderExecutionType == OrderExecutionType.Touch && order.Price >= minPrice))
             {// execute / исполняем
 
                 decimal realPrice = order.Price;
@@ -312,32 +302,16 @@ public partial class TesterServer
                     }
                 }
 
-                if (OrderExecutionType == OrderExecutionType.FiftyFifty)
-                {
-                    if (_lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch)
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Intersection; }
-                    else
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Touch; }
-                }
-
                 return true;
             }
         }
 
         if (order.Side == Side.Sell)
         {
-            if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price < maxPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.Touch && order.Price <= maxPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Intersection &&
-                     order.Price < maxPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch &&
-                     order.Price <= maxPrice)
-               )
+            if ((OrderExecutionType == OrderExecutionType.Intersection
+                 && order.Price < maxPrice)
+                || (OrderExecutionType == OrderExecutionType.Touch
+                    && order.Price <= maxPrice))
             {
                 // execute / исполняем
                 decimal realPrice = order.Price;
@@ -376,14 +350,6 @@ public partial class TesterServer
                         _activeOrders.RemoveAt(i);
                         break;
                     }
-                }
-
-                if (OrderExecutionType == OrderExecutionType.FiftyFifty)
-                {
-                    if (_lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch)
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Intersection; }
-                    else
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Touch; }
                 }
 
                 return true;
@@ -472,17 +438,7 @@ public partial class TesterServer
         if (order.Side == Side.Buy)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price > lastTrade.Price)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.Touch && order.Price >= lastTrade.Price)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Intersection &&
-                     order.Price > lastTrade.Price)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch &&
-                     order.Price >= lastTrade.Price)
-               )
+                || (OrderExecutionType == OrderExecutionType.Touch && order.Price >= lastTrade.Price))
             {// execute/исполняем
                 int slippage = 0;
 
@@ -504,14 +460,6 @@ public partial class TesterServer
                         _activeOrders.RemoveAt(i);
                         break;
                     }
-                }
-
-                if (OrderExecutionType == OrderExecutionType.FiftyFifty)
-                {
-                    if (_lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch)
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Intersection; }
-                    else
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Touch; }
                 }
 
                 return true;
@@ -521,17 +469,7 @@ public partial class TesterServer
         if (order.Side == Side.Sell)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price < lastTrade.Price)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.Touch && order.Price <= lastTrade.Price)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Intersection &&
-                     order.Price < lastTrade.Price)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch &&
-                     order.Price <= lastTrade.Price)
-               )
+                || (OrderExecutionType == OrderExecutionType.Touch && order.Price <= lastTrade.Price))
             {// execute/исполняем
                 int slippage = 0;
 
@@ -553,14 +491,6 @@ public partial class TesterServer
                         _activeOrders.RemoveAt(i);
                         break;
                     }
-                }
-
-                if (OrderExecutionType == OrderExecutionType.FiftyFifty)
-                {
-                    if (_lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch)
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Intersection; }
-                    else
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Touch; }
                 }
 
                 return true;
@@ -662,17 +592,7 @@ public partial class TesterServer
         if (order.Side == Side.Buy)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price > sellBestPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.Touch && order.Price >= sellBestPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Intersection &&
-                     order.Price > sellBestPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch &&
-                     order.Price >= sellBestPrice)
-               )
+                 || (OrderExecutionType == OrderExecutionType.Touch && order.Price >= sellBestPrice))
             {
                 decimal realPrice = order.Price;
 
@@ -703,13 +623,6 @@ public partial class TesterServer
                     }
                 }
 
-                if (OrderExecutionType == OrderExecutionType.FiftyFifty)
-                {
-                    if (_lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch)
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Intersection; }
-                    else
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Touch; }
-                }
                 return true;
             }
         }
@@ -717,17 +630,7 @@ public partial class TesterServer
         if (order.Side == Side.Sell)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price < buyBestPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.Touch && order.Price <= buyBestPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Intersection &&
-                     order.Price < buyBestPrice)
-                    ||
-                    (OrderExecutionType == OrderExecutionType.FiftyFifty &&
-                     _lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch &&
-                     order.Price <= buyBestPrice)
-               )
+                 || (OrderExecutionType == OrderExecutionType.Touch && order.Price <= buyBestPrice))
             {
                 // execute / исполняем
                 decimal realPrice = order.Price;
@@ -759,13 +662,6 @@ public partial class TesterServer
                     }
                 }
 
-                if (OrderExecutionType == OrderExecutionType.FiftyFifty)
-                {
-                    if (_lastOrderExecutionTypeInFiftyFiftyType == OrderExecutionType.Touch)
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Intersection; }
-                    else
-                    { _lastOrderExecutionTypeInFiftyFiftyType = OrderExecutionType.Touch; }
-                }
                 return true;
             }
         }

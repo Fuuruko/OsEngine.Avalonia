@@ -85,6 +85,5 @@ public enum OrderExecutionType
 {
     Touch,
     Intersection,
-    FiftyFifty
 }
 
