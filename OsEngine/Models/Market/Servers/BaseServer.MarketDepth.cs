@@ -34,27 +34,6 @@ public partial class BaseServer
         }
 
         _marketDepthsToSend.Enqueue(newMarketDepth);
-
-        if (!_needToLoadBidAskInTrades2.Value) { return; }
-
-        bool isInArray = false;
-
-        for (int i = 0; i < _depths.Count; i++)
-        {
-            if (_depths[i].SecurityNameCode == newMarketDepth.SecurityNameCode)
-            {
-                _depths[i] = newMarketDepth;
-                isInArray = true;
-            }
-        }
-
-        if (isInArray == false)
-        {
-            lock (_depthsArrayLocker)
-            {
-                _depths.Add(newMarketDepth);
-            }
-        }
     }
 
     /// <summary>

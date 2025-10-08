@@ -846,43 +846,6 @@ public abstract partial class BaseServer : IServer, ILog
     }
 
     /// <summary>
-    /// upload trades by market depth data
-    /// </summary>
-    private void BathTradeMarketDepthData(Trade trade)
-    {
-        MarketDepth depth = null;
-
-        lock (_depthsArrayLocker)
-        {
-            for (int i = 0; i < _depths.Count; i++)
-            {
-                if (_depths[i].SecurityNameCode == trade.SecurityNameCode)
-                {
-                    depth = _depths[i];
-                    break;
-                }
-            }
-        }
-
-        if (depth == null) { return; }
-
-        if (depth.Asks != null &&
-                depth.Asks.Count > 0)
-        {
-            trade.Ask = depth.Asks[0].Price;
-        }
-
-        if (depth.Bids != null &&
-                depth.Bids.Count > 0)
-        {
-            trade.Bid = depth.Bids[0].Price;
-        }
-
-        trade.BidsVolume = depth.Bids.Sum(b => b.Bid);
-        trade.AsksVolume = depth.Asks.Sum(a => a.Ask);
-    }
-
-    /// <summary>
     /// new trade event
     /// </summary>
     public event Action<List<Trade>> NewTradeEvent;

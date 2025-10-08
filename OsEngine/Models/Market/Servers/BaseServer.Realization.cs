@@ -90,11 +90,6 @@ public partial class BaseServer
 
             ServerTime = trade.Time;
 
-            if (_needToLoadBidAskInTrades2)
-            {
-                BathTradeMarketDepthData(trade);
-            }
-
             lock (_newTradesLocker)
             {
                 // save / сохраняем

@@ -59,34 +59,6 @@ public class Trade
     // rather what contain List of Trades should contain it
     public TimeFrame TimeFrameInTester;
 
-    // a new part. This part of the final is not to be downloaded. It can be obtained from OsData, only from standard connectors
-
-    // NOTE: Not sure if Trade should contain these
-
-    /// <summary>
-    /// The best buy in the market depth when this trade came in.
-    /// </summary>
-    // TODO: Excessive, Price and Side more than enough
-    public decimal Bid;
-
-    /// <summary>
-    /// The best sale in a market depth when this trade came in.
-    /// </summary>
-    // TODO: Excessive, Price and Side more than enough
-    public decimal Ask;
-
-    /// <summary>
-    /// The total volume of buy in the market depth at the moment when this trade came in
-    /// </summary>
-    // TODO: Excessive, Volume and Side more than enough
-    public decimal BidsVolume;
-
-    /// <summary>
-    /// The total volume of sales in a market depth at the moment when this trade came in
-    /// </summary>
-    // TODO: Excessive, Volume and Side more than enough
-    public decimal AsksVolume;
-
     /// <summary>
     ///To take a line to save
     /// </summary>
@@ -106,20 +78,6 @@ public class Trade
         {
             result += ",";
             result += Id;
-        }
-        else
-        {
-            result += ",";
-        }
-
-        if (Bid != 0 && Ask != 0 &&
-            BidsVolume != 0 && AsksVolume != 0)
-        {
-            result += ",";
-            result += Bid.ToString(CultureInfo.InvariantCulture) + ",";
-            result += Ask.ToString(CultureInfo.InvariantCulture) + ",";
-            result += BidsVolume.ToString(CultureInfo.InvariantCulture) + ",";
-            result += AsksVolume.ToString(CultureInfo.InvariantCulture);
         }
 
         return result;
@@ -145,17 +103,12 @@ public class Trade
             Time = Convert.ToDateTime(sIn[0]);
             Price = sIn[1].ToDecimal();
             Volume = sIn[2].ToDecimal();
-            Bid = sIn[3].ToDecimal();
-            Ask = sIn[4].ToDecimal();
-            Side = GetSideIqFeed();
-
+            // Side = GetSideIqFeed();
             return;
         }
 
         Time = DateTimeParseHelper.ParseFromTwoStrings(sIn[0], sIn[1]);
-        
         Price = sIn[2].ToDecimal();
-
         Volume = sIn[3].ToDecimal();
 
         if (sIn.Length > 4)
@@ -172,36 +125,5 @@ public class Trade
         {
             Id = sIn[6];
         }
-
-        if (sIn.Length > 8)
-        {
-            Bid = sIn[7].ToDecimal();
-            Ask = sIn[8].ToDecimal();
-            BidsVolume = sIn[9].ToDecimal();
-            AsksVolume = sIn[10].ToDecimal();
-        }
-    }
-
-    // NOTE: Should not be here
-    private Random _rand = new();
-
-    /// <summary>
-    /// direction generation for transactions from IqFeed
-    /// </summary>
-    private Side GetSideIqFeed()
-    {
-
-        if (Bid != Ask)
-        {
-            //the deal was for sale / сделка была на продажу
-            if (Bid == Price) { return Side.Sell; }
-            // the deal was to buy / сделка была на покупку
-            if (Ask == Price) { return Side.Buy; }
-        }
-
-
-        // in other cases, we indicate a random direction/ в остальных случаях указываем случайное направление
-
-        return _rand.Next(2) == 0 ? Side.Buy : Side.Sell;
     }
 }
