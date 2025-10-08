@@ -194,13 +194,6 @@ public partial class TesterServer
 
         if (order.IsStopOrProfit)
         {
-            int slippage = 0;
-
-            if (_slippageToStopOrder > 0)
-            {
-                slippage = _slippageToStopOrder;
-            }
-
             decimal realPrice = order.Price;
 
             if (order.Side == Side.Buy)
@@ -218,7 +211,7 @@ public partial class TesterServer
                 }
             }
 
-            ExecuteOnBoardOrder(order, realPrice, time, slippage);
+            ExecuteOnBoardOrder(order, realPrice, time, _slippageToStopOrder);
 
             for (int i = 0; i < _activeOrders.Count; i++)
             {
@@ -275,13 +268,12 @@ public partial class TesterServer
                     realPrice = maxPrice;
                 }
 
-                int slippage = 0;
-
-                if (order.IsStopOrProfit && _slippageToStopOrder > 0)
+                int slippage;
+                if (order.IsStopOrProfit)
                 {
                     slippage = _slippageToStopOrder;
                 }
-                else if (order.IsStopOrProfit == false && _slippageToSimpleOrder > 0)
+                else
                 {
                     slippage = _slippageToSimpleOrder;
                 }
@@ -326,12 +318,12 @@ public partial class TesterServer
                     realPrice = minPrice;
                 }
 
-                int slippage = 0;
-                if (order.IsStopOrProfit && _slippageToStopOrder > 0)
+                int slippage;
+                if (order.IsStopOrProfit)
                 {
                     slippage = _slippageToStopOrder;
                 }
-                else if (order.IsStopOrProfit == false && _slippageToSimpleOrder > 0)
+                else
                 {
                     slippage = _slippageToSimpleOrder;
                 }
@@ -379,11 +371,6 @@ public partial class TesterServer
 
         if (order.IsStopOrProfit)
         {
-            int slippage = 0;
-            if (_slippageToStopOrder > 0)
-            {
-                slippage = _slippageToStopOrder;
-            }
             decimal realPrice = order.Price;
 
             if (isNewDay == true)
@@ -391,7 +378,7 @@ public partial class TesterServer
                 realPrice = lastTrade.Price;
             }
 
-            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, slippage);
+            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, _slippageToStopOrder);
 
             for (int i = 0; i < _activeOrders.Count; i++)
             {
@@ -407,20 +394,11 @@ public partial class TesterServer
 
         if (order.TypeOrder == OrderPriceType.Market)
         {
-            if (order.TimeCreate > lastTrade.Time)
-            {
-                return false;
-            }
-
-            int slippage = 0;
-            if (_slippageToSimpleOrder > 0)
-            {
-                slippage = _slippageToSimpleOrder;
-            }
+            if (order.TimeCreate > lastTrade.Time) { return false; }
 
             decimal realPrice = lastTrade.Price;
 
-            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, slippage);
+            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, _slippageToSimpleOrder);
 
             for (int i = 0; i < _activeOrders.Count; i++)
             {
@@ -440,13 +418,13 @@ public partial class TesterServer
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price > lastTrade.Price)
                 || (OrderExecutionType == OrderExecutionType.Touch && order.Price >= lastTrade.Price))
             {// execute/исполняем
-                int slippage = 0;
+                int slippage;
 
-                if (order.IsStopOrProfit && _slippageToStopOrder > 0)
+                if (order.IsStopOrProfit)
                 {
                     slippage = _slippageToStopOrder;
                 }
-                else if (order.IsStopOrProfit == false && _slippageToSimpleOrder > 0)
+                else
                 {
                     slippage = _slippageToSimpleOrder;
                 }
@@ -471,13 +449,13 @@ public partial class TesterServer
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price < lastTrade.Price)
                 || (OrderExecutionType == OrderExecutionType.Touch && order.Price <= lastTrade.Price))
             {// execute/исполняем
-                int slippage = 0;
+                int slippage;
 
-                if (order.IsStopOrProfit && _slippageToStopOrder > 0)
+                if (order.IsStopOrProfit)
                 {
                     slippage = _slippageToStopOrder;
                 }
-                else if (order.IsStopOrProfit == false && _slippageToSimpleOrder > 0)
+                else
                 {
                     slippage = _slippageToSimpleOrder;
                 }
@@ -529,14 +507,8 @@ public partial class TesterServer
 
         if (order.IsStopOrProfit)
         {
-            int slippage = 0;
-            if (_slippageToStopOrder > 0)
-            {
-                slippage = _slippageToStopOrder;
-            }
-
             decimal realPrice = order.Price;
-            ExecuteOnBoardOrder(order, realPrice, time, slippage);
+            ExecuteOnBoardOrder(order, realPrice, time, _slippageToStopOrder);
 
             for (int i = 0; i < _activeOrders.Count; i++)
             {
@@ -557,8 +529,7 @@ public partial class TesterServer
                 return false;
             }
 
-            decimal realPrice = 0;
-
+            decimal realPrice;
             if (order.Side == Side.Buy)
             {
                 realPrice = sellBestPrice;
@@ -568,13 +539,7 @@ public partial class TesterServer
                 realPrice = buyBestPrice;
             }
 
-            int slippage = 0;
-            if (_slippageToSimpleOrder > 0)
-            {
-                slippage = _slippageToSimpleOrder;
-            }
-
-            ExecuteOnBoardOrder(order, realPrice, lastMarketDepth.Time, slippage);
+            ExecuteOnBoardOrder(order, realPrice, lastMarketDepth.Time, _slippageToSimpleOrder);
 
             for (int i = 0; i < _activeOrders.Count; i++)
             {
@@ -603,11 +568,11 @@ public partial class TesterServer
 
                 int slippage = 0;
 
-                if (order.IsStopOrProfit && _slippageToStopOrder > 0)
+                if (order.IsStopOrProfit)
                 {
                     slippage = _slippageToStopOrder;
                 }
-                else if (order.IsStopOrProfit == false && _slippageToSimpleOrder > 0)
+                else
                 {
                     slippage = _slippageToSimpleOrder;
                 }
@@ -642,11 +607,11 @@ public partial class TesterServer
 
                 int slippage = 0;
 
-                if (order.IsStopOrProfit && _slippageToStopOrder > 0)
+                if (order.IsStopOrProfit)
                 {
                     slippage = _slippageToStopOrder;
                 }
-                else if (order.IsStopOrProfit == false && _slippageToSimpleOrder > 0)
+                else
                 {
                     slippage = _slippageToSimpleOrder;
                 }
