@@ -9,14 +9,9 @@ using Newtonsoft.Json;
 
 namespace OsEngine.Models.Entity;
 
-/// <summary>
-/// Tick
-/// </summary>
 // TODO: make it struct
 public class Trade
 {
-    // standard part
-
     /// <summary>
     /// Instrument code for which the transaction took place
     /// </summary>
@@ -42,21 +37,10 @@ public class Trade
     // NOTE: Why not use Id instead
     public long IdInTester;
 
-    public decimal Volume;
+    public DateTime Time { get; set; }
+    public decimal Price { get; set; }
+    public decimal Volume { get; set; }
 
-    /// <summary>
-    /// Transaction price
-    /// </summary>
-    public decimal Price;
-
-    /// <summary>
-    /// Deal time
-    /// </summary>
-    public DateTime Time;
-
-    /// <summary>
-    ///  Transaction direction
-    /// </summary>
     public Side Side;
 
     [JsonIgnore]
@@ -64,6 +48,8 @@ public class Trade
     [JsonIgnore]
     public bool IsSell => Side == Side.Sell;
 
+    // NOTE: i'm not sure it should be here
+    // And if it is why decimal instead long/ulong
     public decimal OpenInterest;
 
     /// <summary>
@@ -101,8 +87,6 @@ public class Trade
     // TODO: Excessive, Volume and Side more than enough
     public decimal AsksVolume;
 
-    // //saving / loading ticks
-    
     /// <summary>
     ///To take a line to save
     /// </summary>
@@ -150,10 +134,7 @@ public class Trade
         //20150401,100000,86160.000000000,2
         // либо 20150401,100000,86160.000000000,2, Buy/Sell
 
-        if(string.IsNullOrWhiteSpace(In))
-        {
-            return;
-        }
+        if (string.IsNullOrWhiteSpace(In)) { return; }
 
         string[] sIn = In.Split(',');
 
