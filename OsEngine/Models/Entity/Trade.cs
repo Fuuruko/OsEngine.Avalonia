@@ -54,9 +54,6 @@ public class Trade
     /// </summary>
     public DateTime Time;
 
-    // NOTE: Time can contain microseconds
-    public int MicroSeconds;
-
     /// <summary>
     ///  Transaction direction
     /// </summary>
@@ -119,7 +116,7 @@ public class Trade
         result += Price.ToString(CultureInfo.InvariantCulture) + ",";
         result += Volume.ToString(CultureInfo.InvariantCulture) + ",";
         result += Side + ",";
-        result += MicroSeconds;
+        result += Time.Microsecond;
 
         if (Id != null)
         {
@@ -187,7 +184,7 @@ public class Trade
 
         if (sIn.Length > 5)
         {
-            MicroSeconds = Convert.ToInt32(sIn[5]);
+            Time.AddMicroseconds(Convert.ToInt32(sIn[5]));
         }
 
         if (sIn.Length > 6)

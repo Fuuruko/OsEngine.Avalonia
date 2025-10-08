@@ -152,13 +152,14 @@ public class ServerTradesStorage
                     }
 
                     int lastSecond = allTrades[i1][tradeInfo.LastSaveIndex].Time.Second;
-                    int lastMillisecond = allTrades[i1][tradeInfo.LastSaveIndex].MicroSeconds;
+                    int lastMillisecond = allTrades[i1][tradeInfo.LastSaveIndex].Time.Microsecond;
 
+                    // NOTE: Why generate microseconds?
                     StreamWriter writer =
                         new(_pathName + @"\" + allTrades[i1][0].SecurityNameCode + ".txt", true);
                     for (int i = tradeInfo.LastSaveIndex; i < allTrades[i1].Count - 1; i++)
                     {
-                        if (allTrades[i1][i].MicroSeconds == 0)
+                        if (allTrades[i1][i].Time.Microsecond == 0)
                         { // for some time in microseconds if the connector did not issue them to us / генерим какое-то время микросекунд, если нам коннектор их не выдал
                             if (lastSecond != allTrades[i1][i].Time.Second)
                             {
@@ -166,7 +167,8 @@ public class ServerTradesStorage
                                 lastSecond = allTrades[i1][i].Time.Second;
                             }
 
-                            allTrades[i1][i].MicroSeconds = lastMillisecond += 10;
+                            lastMillisecond += 10;
+                            allTrades[i1][i].Time.AddMicroseconds(lastMillisecond);
                         }
 
                         writer.WriteLine(allTrades[i1][i].GetSaveString());
