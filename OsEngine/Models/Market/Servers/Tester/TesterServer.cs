@@ -24,6 +24,12 @@ using OsEngine.Models.Terminal;
 
 namespace OsEngine.Models.Market.Servers.Tester;
 
+// NOTE: Make one server for one robot
+// with common settings between them?
+// That will remove code for searching
+// like GetMySecurity or other part of code
+// where Find or loop used for search
+// But how then work with Screener or Pairs?
 public partial class TesterServer : ObservableObject, IServer, ILog
 {
     private static readonly CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
@@ -176,8 +182,8 @@ public partial class TesterServer : ObservableObject, IServer, ILog
                 return;
             }
 
-            // NOTE: Why not include seconds and ms?
-            _timeNow = new DateTime(_timeStart.Year, _timeStart.Month, _timeStart.Day, _timeStart.Hour, 0, 0);
+            _timeNow = _timeStart;
+            _lastCheckSessionOrdersTime = _timeStart;
 
             ProfitArray.Clear();
 
@@ -446,9 +452,11 @@ public partial class TesterServer : ObservableObject, IServer, ILog
 
     public event Action<MyTrade> NewMyTradeEvent;
 
-    public ObservableCollection<OrderClearing> ClearingTimes;
+    // NOTE: Make it Array
+    public List<OrderClearing> ClearingTimes;
 
-    public ObservableCollection<NonTradePeriod> NonTradePeriods;
+    // NOTE: Make it Array
+    public List<NonTradePeriod> NonTradePeriods;
 
     #region Profits and losses of exchange
 

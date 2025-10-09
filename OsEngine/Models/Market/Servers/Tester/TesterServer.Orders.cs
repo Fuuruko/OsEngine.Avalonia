@@ -9,11 +9,15 @@ namespace OsEngine.Models.Market.Servers.Tester;
 
 public partial class TesterServer
 {
-    private List<Order> _activeOrders = [];
+    // NOTE: ObservableDictonary?
+    private Dictionary<int, Order> _activeOrders = [];
+    private Queue<Order> _dayLifeOrders = [];
 
     private int _iteratorNumbersOrders;
 
     private int _iteratorNumbersMyTrades;
+
+    private DateTime _lastCheckSessionOrdersTime;
 
     public void ExecuteOrder(Order order)
     {
@@ -27,20 +31,12 @@ public partial class TesterServer
             return;
         }
 
-        for (int i = 0; i < _activeOrders.Count; i++)
+        if (_activeOrders.ContainsKey(order.NumberUser))
         {
-            if (_activeOrders[i].NumberUser == order.NumberUser)
-            {
-                SendLogMessage(OsLocalization.Market.Message39, LogMessageType.Error);
-                FailedOperationOrder(order);
-                return;
-            }
+            SendLogMessage(OsLocalization.Market.Message39, LogMessageType.Error);
+            FailedOperationOrder(order);
+            return;
         }
-        // if (_activeOrders.Any(o => o.NumberUser == order.NumberUser))
-        // {
-        //     SendLogMessage(OsLocalization.Market.Message39, LogMessageType.Error);
-        //     FailedOperationOrder(order);
-        // }
 
         if (ServerStatus == ServerConnectStatus.Disconnect)
         {
@@ -54,10 +50,12 @@ public partial class TesterServer
         {
             errorMessage = OsLocalization.Market.Message42 + order.Volume;
         }
+        // NOTE: Is it possible that it will not set?
         else if (string.IsNullOrWhiteSpace(order.PortfolioNumber))
         {
             errorMessage = OsLocalization.Market.Message43;
         }
+        // NOTE: Is it possible that it will not set?
         else if (string.IsNullOrWhiteSpace(order.SecurityNameCode))
         {
             errorMessage = OsLocalization.Market.Message44;
@@ -70,6 +68,7 @@ public partial class TesterServer
             return;
         }
 
+        // NOTE: why make copy?
         Order orderOnBoard = new()
         {
             NumberMarket = _iteratorNumbersOrders++.ToString(),
@@ -91,7 +90,11 @@ public partial class TesterServer
             OrderTypeTime = order.OrderTypeTime
         };
 
-        _activeOrders.Add(orderOnBoard);
+        _activeOrders.Add(orderOnBoard.NumberUser, orderOnBoard);
+        if (orderOnBoard.OrderTypeTime == OrderTypeTime.Day)
+        {
+            _dayLifeOrders.Enqueue(orderOnBoard);
+        }
 
         NewOrderIncomeEvent?.Invoke(orderOnBoard);
 
@@ -103,27 +106,27 @@ public partial class TesterServer
         { // testing with using candles / прогон на свечках
             if (CheckOrdersInCandleTest(orderOnBoard, security.LastCandle))
             {
-                _activeOrders.Remove(orderOnBoard);
+                _activeOrders.Remove(orderOnBoard.NumberUser);
             }
         }
         else if (security.DataType == SecurityTesterDataType.Tick)
         {
             if (CheckOrdersInTickTest(orderOnBoard, security.LastTrade, true, security.IsNewDayTrade))
             {
-                _activeOrders.Remove(orderOnBoard);
+                _activeOrders.Remove(orderOnBoard.NumberUser);
             }
         }
+        // NOTE: Why there is no else if for MarketDepth?
     }
 
     private void CheckOrders()
     {
         if (_activeOrders.Count == 0) { return; }
 
-        CheckRejectOrdersOnClearing(_activeOrders, ServerTime);
+        CheckRejectOrdersOnClearing(ServerTime);
 
-        for (int i = 0; i < _activeOrders.Count; i++)
+        foreach (Order order in _activeOrders.Values)
         {
-            Order order = _activeOrders[i];
             // check availability of securities on the market / проверяем наличие инструмента на рынке
 
             SecurityTester security = GetMySecurity(order);
@@ -139,7 +142,8 @@ public partial class TesterServer
                         && lastTrades.Count != 0
                         && CheckOrdersInTickTest(order, lastTrades[^1], false, security.IsNewDayTrade))
                 {
-                    i--;
+                    _activeOrders.Remove(order.NumberUser);
+                    // NOTE: Why break?
                     break;
                 }
             }
@@ -154,7 +158,7 @@ public partial class TesterServer
 
                 if (CheckOrdersInCandleTest(order, lastCandle))
                 {
-                    i--;
+                    _activeOrders.Remove(order.NumberUser);
                 }
             }
             else if (security.DataType == SecurityTesterDataType.MarketDepth)
@@ -164,7 +168,7 @@ public partial class TesterServer
 
                 if (CheckOrdersInMarketDepthTest(order, depth))
                 {
-                    i--;
+                    _activeOrders.Remove(order.NumberUser);
                 }
             }
         }
@@ -172,6 +176,7 @@ public partial class TesterServer
 
     private bool CheckOrdersInCandleTest(Order order, Candle lastCandle)
     {
+        // NOTE: Why minPrice is max and maxPrice is 0?
         decimal minPrice = decimal.MaxValue;
         decimal maxPrice = 0;
         decimal openPrice = 0;
@@ -195,154 +200,78 @@ public partial class TesterServer
         if (order.IsStopOrProfit)
         {
             decimal realPrice = order.Price;
+            int slippage;
 
             if (order.Side == Side.Buy)
             {
+                slippage = _slippageToStopOrder;
                 if (minPrice > realPrice)
                 {
                     realPrice = lastCandle.Open;
                 }
             }
-            if (order.Side == Side.Sell)
+            else
             {
+                slippage = -_slippageToStopOrder;
                 if (maxPrice < realPrice)
                 {
                     realPrice = lastCandle.Open;
                 }
             }
 
-            ExecuteOnBoardOrder(order, realPrice, time, _slippageToStopOrder);
-
-            for (int i = 0; i < _activeOrders.Count; i++)
-            {
-                if (_activeOrders[i].NumberUser == order.NumberUser)
-                {
-                    _activeOrders.RemoveAt(i);
-                    break;
-                }
-            }
+            ExecuteOnBoardOrder(order, realPrice, time, slippage);
 
             return true;
         }
 
-        if (order.TypeOrder == OrderPriceType.Market)
+        if (order.IsMarket)
         {
-            if (order.TimeCreate >= lastCandle.TimeStart)
-            {
-                return false;
-            }
+            if (order.TimeCreate >= lastCandle.TimeStart) { return false; }
 
             decimal realPrice = lastCandle.Open;
 
+            // NOTE: Why slippage is 0?
             ExecuteOnBoardOrder(order, realPrice, time, 0);
-
-            for (int i = 0; i < _activeOrders.Count; i++)
-            {
-                if (_activeOrders[i].NumberUser == order.NumberUser)
-                {
-                    _activeOrders.RemoveAt(i);
-                    break;
-                }
-            }
 
             return true;
         }
 
         // check whether the order passed / проверяем, прошёл ли ордер
-        if (order.Side == Side.Buy)
+        if (order.IsBuy)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price > minPrice)
                 || (OrderExecutionType == OrderExecutionType.Touch && order.Price >= minPrice))
-            {// execute / исполняем
+            {
 
                 decimal realPrice = order.Price;
 
-                if (realPrice > openPrice && order.IsStopOrProfit == false)
+                if (realPrice > openPrice)
                 {
                     // if order is not quotation and put into the market / если заявка не котировачная и выставлена в рынок
                     realPrice = openPrice;
                 }
-                else if (order.IsStopOrProfit
-                        && order.Price > maxPrice)
-                {
-                    realPrice = maxPrice;
-                }
 
-                int slippage;
-                if (order.IsStopOrProfit)
-                {
-                    slippage = _slippageToStopOrder;
-                }
-                else
-                {
-                    slippage = _slippageToSimpleOrder;
-                }
-
-                if (realPrice > maxPrice)
-                {
-                    realPrice = maxPrice;
-                }
-
-                ExecuteOnBoardOrder(order, realPrice, time, slippage);
-
-                for (int i = 0; i < _activeOrders.Count; i++)
-                {
-                    if (_activeOrders[i].NumberUser == order.NumberUser)
-                    {
-                        _activeOrders.RemoveAt(i);
-                        break;
-                    }
-                }
+                ExecuteOnBoardOrder(order, realPrice, time, _slippageToSimpleOrder);
 
                 return true;
             }
         }
-
-        if (order.Side == Side.Sell)
+        else
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection
                  && order.Price < maxPrice)
                 || (OrderExecutionType == OrderExecutionType.Touch
                     && order.Price <= maxPrice))
             {
-                // execute / исполняем
                 decimal realPrice = order.Price;
 
-                if (realPrice < openPrice && order.IsStopOrProfit == false)
+                if (realPrice < openPrice)
                 {
                     // if order is not quotation and put into the market / если заявка не котировачная и выставлена в рынок
                     realPrice = openPrice;
                 }
-                else if (order.IsStopOrProfit && order.Price < minPrice)
-                {
-                    realPrice = minPrice;
-                }
 
-                int slippage;
-                if (order.IsStopOrProfit)
-                {
-                    slippage = _slippageToStopOrder;
-                }
-                else
-                {
-                    slippage = _slippageToSimpleOrder;
-                }
-
-                if (realPrice < minPrice)
-                {
-                    realPrice = minPrice;
-                }
-
-                ExecuteOnBoardOrder(order, realPrice, time, slippage);
-
-                for (int i = 0; i < _activeOrders.Count; i++)
-                {
-                    if (_activeOrders[i].NumberUser == order.NumberUser)
-                    {
-                        _activeOrders.RemoveAt(i);
-                        break;
-                    }
-                }
+                ExecuteOnBoardOrder(order, realPrice, time, -_slippageToSimpleOrder);
 
                 return true;
             }
@@ -362,114 +291,63 @@ public partial class TesterServer
 
     private bool CheckOrdersInTickTest(Order order, Trade lastTrade, bool firstTime, bool isNewDay)
     {
-        SecurityTester security = SecuritiesTester.Find(tester => tester.Security.Name == order.SecurityNameCode);
-
-        if (security == null)
-        {
-            return false;
-        }
-
         if (order.IsStopOrProfit)
         {
+            int slippage = order.IsBuy ? _slippageToStopOrder : -_slippageToStopOrder;
             decimal realPrice = order.Price;
-
             if (isNewDay == true)
             {
                 realPrice = lastTrade.Price;
             }
 
-            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, _slippageToStopOrder);
-
-            for (int i = 0; i < _activeOrders.Count; i++)
-            {
-                if (_activeOrders[i].NumberUser == order.NumberUser)
-                {
-                    _activeOrders.RemoveAt(i);
-                    break;
-                }
-            }
+            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, slippage);
 
             return true;
         }
 
-        if (order.TypeOrder == OrderPriceType.Market)
+        if (order.IsMarket)
         {
             if (order.TimeCreate > lastTrade.Time) { return false; }
 
             decimal realPrice = lastTrade.Price;
+            int slippage = order.IsBuy ? _slippageToSimpleOrder : -_slippageToSimpleOrder;
 
-            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, _slippageToSimpleOrder);
-
-            for (int i = 0; i < _activeOrders.Count; i++)
-            {
-                if (_activeOrders[i].NumberUser == order.NumberUser)
-                {
-                    _activeOrders.RemoveAt(i);
-                    break;
-                }
-            }
+            ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, slippage);
 
             return true;
         }
 
         // check whether the order passed/проверяем, прошёл ли ордер
-        if (order.Side == Side.Buy)
+        if (order.IsBuy)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price > lastTrade.Price)
                 || (OrderExecutionType == OrderExecutionType.Touch && order.Price >= lastTrade.Price))
-            {// execute/исполняем
-                int slippage;
+            {
+                decimal realPrice = order.Price;
 
-                if (order.IsStopOrProfit)
+                if (isNewDay == true)
                 {
-                    slippage = _slippageToStopOrder;
-                }
-                else
-                {
-                    slippage = _slippageToSimpleOrder;
+                    realPrice = lastTrade.Price;
                 }
 
-                ExecuteOnBoardOrder(order, lastTrade.Price, ServerTime, slippage);
-
-                for (int i = 0; i < _activeOrders.Count; i++)
-                {
-                    if (_activeOrders[i].NumberUser == order.NumberUser)
-                    {
-                        _activeOrders.RemoveAt(i);
-                        break;
-                    }
-                }
+                ExecuteOnBoardOrder(order, realPrice, lastTrade.Time, _slippageToSimpleOrder);
 
                 return true;
             }
         }
-
-        if (order.Side == Side.Sell)
+        else
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price < lastTrade.Price)
                 || (OrderExecutionType == OrderExecutionType.Touch && order.Price <= lastTrade.Price))
             {// execute/исполняем
-                int slippage;
 
-                if (order.IsStopOrProfit)
+                decimal realPrice = order.Price;
+                if (isNewDay == true)
                 {
-                    slippage = _slippageToStopOrder;
-                }
-                else
-                {
-                    slippage = _slippageToSimpleOrder;
+                    realPrice = lastTrade.Price;
                 }
 
-                ExecuteOnBoardOrder(order, lastTrade.Price, ServerTime, slippage);
-
-                for (int i = 0; i < _activeOrders.Count; i++)
-                {
-                    if (_activeOrders[i].NumberUser == order.NumberUser)
-                    {
-                        _activeOrders.RemoveAt(i);
-                        break;
-                    }
-                }
+                ExecuteOnBoardOrder(order, realPrice, ServerTime, -_slippageToSimpleOrder);
 
                 return true;
             }
@@ -490,10 +368,8 @@ public partial class TesterServer
 
     private bool CheckOrdersInMarketDepthTest(Order order, MarketDepth lastMarketDepth)
     {
-        if (lastMarketDepth == null)
-        {
-            return false;
-        }
+        if (lastMarketDepth == null) { return false; }
+
         decimal sellBestPrice = lastMarketDepth.Asks[0].Price;
         decimal buyBestPrice = lastMarketDepth.Bids[0].Price;
 
@@ -507,125 +383,50 @@ public partial class TesterServer
 
         if (order.IsStopOrProfit)
         {
-            decimal realPrice = order.Price;
-            ExecuteOnBoardOrder(order, realPrice, time, _slippageToStopOrder);
-
-            for (int i = 0; i < _activeOrders.Count; i++)
-            {
-                if (_activeOrders[i].NumberUser == order.NumberUser)
-                {
-                    _activeOrders.RemoveAt(i);
-                    break;
-                }
-            }
-
+            int slippage = order.IsBuy ? _slippageToStopOrder : -_slippageToStopOrder;
+            ExecuteOnBoardOrder(order, order.Price, time, slippage);
             return true;
         }
 
-        if (order.TypeOrder == OrderPriceType.Market)
+        if (order.IsMarket)
         {
-            if (order.TimeCreate >= lastMarketDepth.Time)
-            {
-                return false;
-            }
+            if (order.TimeCreate >= lastMarketDepth.Time) { return false; }
 
             decimal realPrice;
-            if (order.Side == Side.Buy)
+            int slippage;
+            if (order.IsBuy)
             {
+                slippage = _slippageToStopOrder;
                 realPrice = sellBestPrice;
             }
             else //if(order.Side == Side.Sell)
             {
+                slippage = -_slippageToStopOrder;
                 realPrice = buyBestPrice;
             }
 
-            ExecuteOnBoardOrder(order, realPrice, lastMarketDepth.Time, _slippageToSimpleOrder);
-
-            for (int i = 0; i < _activeOrders.Count; i++)
-            {
-                if (_activeOrders[i].NumberUser == order.NumberUser)
-                {
-                    _activeOrders.RemoveAt(i);
-                    break;
-                }
-            }
+            ExecuteOnBoardOrder(order, realPrice, lastMarketDepth.Time, slippage);
 
             return true;
         }
 
         // check whether the order passed / проверяем, прошёл ли ордер
-        if (order.Side == Side.Buy)
+        if (order.IsBuy)
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price > sellBestPrice)
                  || (OrderExecutionType == OrderExecutionType.Touch && order.Price >= sellBestPrice))
             {
-                decimal realPrice = order.Price;
-
-                if (realPrice > sellBestPrice)
-                {
-                    realPrice = sellBestPrice;
-                }
-
-                int slippage = 0;
-
-                if (order.IsStopOrProfit)
-                {
-                    slippage = _slippageToStopOrder;
-                }
-                else
-                {
-                    slippage = _slippageToSimpleOrder;
-                }
-
-                ExecuteOnBoardOrder(order, realPrice, time, slippage);
-
-                for (int i = 0; i < _activeOrders.Count; i++)
-                {
-                    if (_activeOrders[i].NumberUser == order.NumberUser)
-                    {
-                        _activeOrders.RemoveAt(i);
-                        break;
-                    }
-                }
+                ExecuteOnBoardOrder(order, sellBestPrice, time, _slippageToSimpleOrder);
 
                 return true;
             }
         }
-
-        if (order.Side == Side.Sell)
+        else
         {
             if ((OrderExecutionType == OrderExecutionType.Intersection && order.Price < buyBestPrice)
                  || (OrderExecutionType == OrderExecutionType.Touch && order.Price <= buyBestPrice))
             {
-                // execute / исполняем
-                decimal realPrice = order.Price;
-
-                if (realPrice < buyBestPrice)
-                {
-                    realPrice = buyBestPrice;
-                }
-
-                int slippage = 0;
-
-                if (order.IsStopOrProfit)
-                {
-                    slippage = _slippageToStopOrder;
-                }
-                else
-                {
-                    slippage = _slippageToSimpleOrder;
-                }
-
-                ExecuteOnBoardOrder(order, realPrice, time, slippage);
-
-                for (int i = 0; i < _activeOrders.Count; i++)
-                {
-                    if (_activeOrders[i].NumberUser == order.NumberUser)
-                    {
-                        _activeOrders.RemoveAt(i);
-                        break;
-                    }
-                }
+                ExecuteOnBoardOrder(order, buyBestPrice, time, -_slippageToSimpleOrder);
 
                 return true;
             }
@@ -650,16 +451,10 @@ public partial class TesterServer
 
         for (int i = 0; i < NonTradePeriods.Count; i++)
         {
-            if (NonTradePeriods[i].IsOn == false)
-            {
-                continue;
-            }
-
             DateTime timeStart = NonTradePeriods[i].StartDate;
             DateTime timeEnd = NonTradePeriods[i].EndDate;
 
-            if (order.TimeCreate > timeStart
-                    && order.TimeCreate < timeEnd)
+            if (timeStart < order.TimeCreate && order.TimeCreate < timeEnd)
             {
                 return false;
             }
@@ -682,33 +477,13 @@ public partial class TesterServer
 
     private void CancelOnBoardOrder(Order order)
     {
-        Order orderToClose = null;
-
-        if (_activeOrders.Count != 0)
-        {
-            for (int i = 0; i < _activeOrders.Count; i++)
-            {
-                if (_activeOrders[i].NumberUser == order.NumberUser)
-                {
-                    orderToClose = _activeOrders[i];
-                }
-            }
-        }
+        _activeOrders.Remove(order.NumberUser, out Order orderToClose);
 
         if (orderToClose == null)
         {
             SendLogMessage(OsLocalization.Market.Message46, LogMessageType.Error);
             FailedOperationOrder(order);
             return;
-        }
-
-        for (int i = 0; i < _activeOrders.Count; i++)
-        {
-            if (_activeOrders[i].NumberUser == order.NumberUser)
-            {
-                _activeOrders.RemoveAt(i);
-                break;
-            }
         }
 
         orderToClose.State = OrderStateType.Cancel;
@@ -740,28 +515,20 @@ public partial class TesterServer
 
     private void ExecuteOnBoardOrder(Order order, decimal price, DateTime time, int slippage)
     {
-        decimal realPrice = price;
-
         if (order.Volume == order.VolumeExecute ||
                 order.State == OrderStateType.Done)
         {
             return;
         }
 
+        decimal realPrice = price;
 
         if (slippage != 0)
         {
             Security mySecurity = GetSecurityForName(order.SecurityNameCode, "");
             if (mySecurity != null && mySecurity.PriceStep != 0)
             {
-                if (order.Side == Side.Buy)
-                {
-                    realPrice += mySecurity.PriceStep * slippage;
-                }
-                else
-                {
-                    realPrice -= mySecurity.PriceStep * slippage;
-                }
+                realPrice += mySecurity.PriceStep * slippage;
             }
         }
 
@@ -789,84 +556,44 @@ public partial class TesterServer
         CheckWaitOrdersRegime();
     }
 
-    private DateTime _lastCheckSessionOrdersTime;
-
-    private DateTime _lastCheckDayOrdersTime;
-
-    private void CheckRejectOrdersOnClearing(List<Order> orders, DateTime timeOnMarket)
+    private void CheckRejectOrdersOnClearing(DateTime timeOnMarket)
     {
-        if (orders.Count == 0) { return; }
-
-        List<Order> dayLifeOrders = [];
-
-        for (int i = 0; i < orders.Count; i++)
-        {
-            if (orders[i].OrderTypeTime == OrderTypeTime.Day)
-            {
-                dayLifeOrders.Add(orders[i]);
-            }
-        }
-
-        if (ClearingTimes.Count != 0)
-        {
-            CheckOrderBySessionLife(dayLifeOrders, timeOnMarket);
-        }
-        else
-        {
-            CheckOrderByDayLife(dayLifeOrders, timeOnMarket);
-        }
-    }
-
-    private void CheckOrderBySessionLife(List<Order> orders, DateTime timeOnMarket)
-    {
-        if (ClearingTimes.Count == 0
-                || orders.Count == 0)
+        if (_dayLifeOrders.Count == 0)
         {
             _lastCheckSessionOrdersTime = timeOnMarket;
             return;
         }
 
-        for (int i = 0; i < ClearingTimes.Count; i++)
+        if (ClearingTimes.Count != 0
+                && CheckOrderBySessionLife(timeOnMarket.TimeOfDay)
+                || CheckOrderByDayLife(timeOnMarket))
         {
-            if (ClearingTimes[i].IsOn == false) { continue; }
-
-            if (_lastCheckSessionOrdersTime.TimeOfDay < ClearingTimes[i].Time
-                    &&
-                    timeOnMarket.TimeOfDay >= ClearingTimes[i].Time)
+            int count = _dayLifeOrders.Count;
+            for (int j = 0; j < count; j++)
             {
-                Order[] ordersToCancel = orders.ToArray();
-
-                for (int j = 0; j < ordersToCancel.Length; j++)
-                {
-                    CancelOnBoardOrder(ordersToCancel[j]);
-                }
-
-                _lastCheckSessionOrdersTime = timeOnMarket;
-                return;
+                CancelOnBoardOrder(_dayLifeOrders.Dequeue());
             }
         }
-
         _lastCheckSessionOrdersTime = timeOnMarket;
     }
 
-    private void CheckOrderByDayLife(List<Order> orders, DateTime timeOnMarket)
+    private bool CheckOrderBySessionLife(TimeSpan timeOnMarket)
     {
-        if (orders.Count == 0
-                || _lastCheckDayOrdersTime == DateTime.MinValue
-                || _lastCheckDayOrdersTime.Date == timeOnMarket.Date)
+        TimeSpan lastCheck = _lastCheckSessionOrdersTime.TimeOfDay;
+        for (int i = 0; i < ClearingTimes.Count; i++)
         {
-            _lastCheckDayOrdersTime = timeOnMarket;
-            return;
+            if (lastCheck < ClearingTimes[i].Time
+                && timeOnMarket >= ClearingTimes[i].Time)
+            {
+                return true;
+            }
         }
+        return false;
+    }
 
-        Order[] ordersToCancel = orders.ToArray();
-
-        for (int j = 0; j < ordersToCancel.Length; j++)
-        {
-            CancelOnBoardOrder(ordersToCancel[j]);
-        }
-
-        _lastCheckDayOrdersTime = timeOnMarket;
+    private bool CheckOrderByDayLife(DateTime timeOnMarket)
+    {
+        return _lastCheckSessionOrdersTime.Date != timeOnMarket.Date;
     }
 
     public event Action<Order> NewOrderIncomeEvent;
